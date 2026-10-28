@@ -102,6 +102,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.haze)
+    implementation(libs.haze.blur)
+    implementation(libs.haze.blur.materials)
+    implementation(libs.backdrop)
+    implementation(libs.lucide.icons)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

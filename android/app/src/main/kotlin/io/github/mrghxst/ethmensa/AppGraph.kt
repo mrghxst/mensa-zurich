@@ -9,6 +9,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import io.github.mrghxst.ethmensa.data.AppLanguage
+import io.github.mrghxst.ethmensa.data.ListSession
+import io.github.mrghxst.ethmensa.data.MensaStore
 import io.github.mrghxst.ethmensa.data.MensaLabels
 import io.github.mrghxst.ethmensa.data.MensaRepository
 import io.github.mrghxst.ethmensa.data.cache.WeeklyJsonCache
@@ -22,6 +24,9 @@ import io.github.mrghxst.ethmensa.data.prefs.SettingsRepository
 import io.github.mrghxst.ethmensa.data.zfv.OutletInfoRepository
 import io.github.mrghxst.ethmensa.data.zfv.ZfvApi
 import io.github.mrghxst.ethmensa.domain.zurichClock
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import okhttp3.OkHttpClient
 import java.time.Clock
 import java.util.Locale
@@ -35,6 +40,9 @@ private val Context.outletInfoStore: DataStore<Preferences> by preferencesDataSt
 class AppGraph(context: Context) {
     val appContext: Context = context.applicationContext
     val clock: Clock = zurichClock()
+
+    /** Lives as long as the process. */
+    val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     val httpClient: OkHttpClient by lazy { createHttpClient(appContext.cacheDir, BuildConfig.VERSION_NAME) }
 
@@ -71,6 +79,10 @@ class AppGraph(context: Context) {
             },
         )
     }
+
+    val mensaStore: MensaStore by lazy { MensaStore(mensaRepository, locator, appScope) }
+
+    val listSession: ListSession by lazy { ListSession(settings, appScope) }
 
     /** Resources in the current app language, also on API < 33 where the app context may lag behind. */
     fun localizedResources(): Resources {

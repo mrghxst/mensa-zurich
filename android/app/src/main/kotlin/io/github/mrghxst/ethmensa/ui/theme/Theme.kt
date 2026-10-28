@@ -46,6 +46,10 @@ private fun EthColors.toScheme(): ColorScheme {
         outlineVariant = border,
         error = closed,
         scrim = Color.Black.copy(alpha = 0.32f),
+        // Snackbars: inverted monochrome with the other mode's accent.
+        inverseSurface = textPrimary,
+        inverseOnSurface = background,
+        inversePrimary = if (isDark) LightEthColors.accent else DarkEthColors.accent,
     )
 }
 

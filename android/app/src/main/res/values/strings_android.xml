@@ -2,4 +2,22 @@
 <!-- Android-only strings, written by hand in en/de/fr/it. -->
 <resources>
     <string name="app_name" translatable="false">ETH Mensa</string>
+    <string name="offline_banner">Offline · showing saved menus</string>
+    <string name="update_failed">Couldn’t update %1$s menus</string>
+    <string name="slow_connection">Slow connection</string>
+    <string name="cancel">Cancel</string>
+    <string name="open_only_disabled_hint">Not available when a weekday is selected</string>
+    <string name="status">Status</string>
+    <string name="day">Day</string>
+    <string name="layout">Layout</string>
+    <string name="share">Share</string>
+    <string name="sort_smart">Smart</string>
+    <string name="sort_name">Name</string>
+    <string name="layout_minimal">Minimal</string>
+    <string name="layout_standard">Standard</string>
+    <string name="layout_large">Large</string>
+    <string name="a11y_open_now">%1$s, open now</string>
+    <string name="a11y_closed">%1$s, closed</string>
+    <string name="clear_search">Clear search</string>
+    <string name="filters_active">Filters active</string>
 </resources>

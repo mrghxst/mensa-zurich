@@ -44,7 +44,7 @@ val LightEthColors = EthColors(
     veg = Color(0xFF16A34A),
     fish = Color(0xFF2563EB),
     glassTint = Color(0xFFFFFFFF).copy(alpha = 0.70f),
-    glassStroke = Color(0xFF000000).copy(alpha = 0.06f),
+    glassStroke = Color(0xFF000000).copy(alpha = 0.09f),
     glassShadow = Color(0xFF000000).copy(alpha = 0.08f),
     isDark = false,
 )

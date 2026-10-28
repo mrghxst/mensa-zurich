@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android-only strings, written by hand in en/de/fr/it. -->
+<resources>
+    <string name="offline_banner">Offline · menu salvati</string>
+    <string name="update_failed">Impossibile aggiornare i menu %1$s</string>
+    <string name="slow_connection">Connessione lenta</string>
+    <string name="cancel">Annulla</string>
+    <string name="open_only_disabled_hint">Non disponibile quando è selezionato un giorno</string>
+    <string name="status">Stato</string>
+    <string name="day">Giorno</string>
+    <string name="layout">Layout</string>
+    <string name="share">Condividi</string>
+    <string name="sort_smart">Intelligente</string>
+    <string name="sort_name">Nome</string>
+    <string name="layout_minimal">Minimale</string>
+    <string name="layout_standard">Standard</string>
+    <string name="layout_large">Grande</string>
+    <string name="a11y_open_now">%1$s, aperto ora</string>
+    <string name="a11y_closed">%1$s, chiuso</string>
+    <string name="clear_search">Cancella ricerca</string>
+    <string name="filters_active">Filtri attivi</string>
+</resources>
