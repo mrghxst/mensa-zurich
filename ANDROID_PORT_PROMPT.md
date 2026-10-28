@@ -122,7 +122,7 @@ Read the Swift file when you port its feature. The table maps each file to its A
 
 All calls run on `Dispatchers.IO` through one OkHttp client: 15 s connect and read timeouts, the `User-Agent` `ETHMensa-Android/<versionName> (+https://github.com/mrghxst/ethmensa)`, and an HTTP disk cache of 10 MB. JSON settings: `ignoreUnknownKeys = true`, `explicitNulls = false`, `coerceInputValues = true`. **Every DTO field is nullable** except where noted. The APIs omit fields freely.
 
-**API language:** `lang = "de"` if the app's current locale language is German, otherwise `"en"`. The same rule applies to the ZFV `locale` header. French and Italian UIs get English menu data, as on iOS. The cache key includes the language.
+**API language:** `lang = "de"` if the app's current locale language is German, otherwise `"en"`. The same rule applies to the ZFV `locale` header. For ETH, French and Italian UIs get English menu data, as on iOS. For UZH, send the app language as-is (see §5.7 item 4). The cache key includes the language.
 
 ### 5.1 ETH directory (names, addresses, images)
 
@@ -222,6 +222,26 @@ Body: {"query": "<the exact query from ethmensa/Data/API/ZFV/ZFVAPI.swift, or br
 - `MensaRepository.observeMensas(): Flow<ProviderResult>` starts both providers concurrently. For each provider it **first emits the cached mensas (`isCached = true`) if available, then the fresh ones (`isCached = false`)**. A failed download falls back to the cache. ETH needs the directory: if the directory fails and has no cache, ETH yields an empty list.
 - The ViewModel merges per provider (ETH first, then UZH, keeping the previous provider list until the new one arrives) and tracks `allProvidersLoaded` and `allProvidersUpToDate`. Show the skeleton list only while nothing at all has arrived.
 - Pull-to-refresh, app resume (`ON_START`) and a locale change trigger a reload. Cancel the previous reload when a new one starts.
+
+### 5.7 Lessons from MensaZH (second reference app, checked 2026-10-28)
+
+[fflopsi/mensa-zh](https://github.com/fflopsi/mensa-zh) (MIT, about 5,000 lines of Kotlin/Compose, AGP 9.4, Navigation 3 1.2.0, `adaptive-navigation3` 1.3.0, Room, Ktor) is the live Android app that now publishes as `ch.famoser.mensa` on Play and F-Droid. It reads the same two APIs. Take **ideas** from it, not code (if you ever copy code, keep its MIT notice). These items were verified against live data on 2026-10-28:
+
+**Data fixes. Required, do them in Phase 2:**
+1. **Drop placeholder meals.** On 2026-10-28, 87 of 640 ETH meals this week had `name` or `description` = `novalue`, and the iOS app would show them as real dishes. Drop a meal if its name or description, case-insensitive, contains any of: `novalue`, `closed`, `geschlossen`, `no dinner`, `kein Abendessen`, `We look forward to serving you this menu again soon!`, `Dieses Menu servieren wir Ihnen gerne bald wieder!`. Apply the same filter to ZFV dishes. A meal time with no meals left disappears; a mensa with no meal times today counts as "no menu".
+2. **Normalize text.** Trim names (ETH sends values like `" Tofu Cashew Bowl"`) and collapse repeated whitespace in descriptions, after the iOS pipe rules from §5.2.
+3. **Nutrition values (new, Android-only feature).** ETH meals carry `energy`, `energy-outdated`, `protein`, `fat`, `saturated-fatty-acids`, `carbohydrates`, `sugar` and `salt` as strings, per 100 g (1,072 of 1,278 meals had some on 2026-10-28). For ZFV, extend the query with `dish { stats { energy { amount } fat { amount } carbohydrates { amount } sugar { amount } fibers { amount } protein { amount } salt { amount } } }`, which is per serving. Store them nullable on `Meal` with a `per100g` or `perServing` flag. UI: a collapsed "Nutrition" row in the meal card, or in the long-press sheet. Hide it when all values are null.
+4. **UZH menu language.** ZFV's `locale` header accepts `de`, `fr`, `it` and `en`, so UZH menus can follow the app language exactly. ETH stays `de`/`en` as in §5. Key the cache by the language actually requested.
+5. **Errors visible but not blocking.** Like MensaZH's `NoInternet`, `ApiError` and `SlowInternet` events: if a provider fails while cached data is shown, show a snackbar ("Couldn't update UZH menus · Retry"). If a request takes longer than 8 s, show "Slow connection" with Cancel. Never replace the list with an error when cached data exists.
+6. **UZH coverage.** The shared key already returns only the 26 "University Zurich" outlets. 10 of them aren't in the upstream `zfv_uzh_mapping.json` (Atrium, Uni Turm, Bar Irchel, ViCafe UZH Irchel, Café Complet, Restaurant Forum, ViCafe UZH Zentrum, Kafi Ö, Brunnenhof, UZH Retailstore). They get no hours or image, so they show UNKNOWN status. Keep iOS behavior; outlets without meals are skipped anyway. Optionally add a local `zfv_extra_hours.json` overlay later.
+
+**UX ideas. Optional, ask the user before Phase 9 and offer them there:**
+- **Favorites and hidden mensas** (long-press → Favorite / Hide; favorites pinned on top before smart sorting; manage both in Settings).
+- **"Expanded" list style:** a fourth cell style that shows today's meal titles and prices inline under each mensa, so you can scan without opening details. This is MensaZH's main screen (screenshot: `metadata/en-US/images/phoneScreenshots/list-light.png` in their repo).
+- **Serving hours in the row:** show today's hours (`11:00–14:00`) under the mensa name in STANDARD and LARGE cells. This one is cheap, so do it in Phase 3 if it looks clean.
+- **Next week:** ETH `valid-after` = next Monday; ZFV `calendar { week(week: "next") { … } }`. Add a "Next week" toggle in the detail day picker. Design the cache key to include the week from the start, so this is easy to add.
+- **Diet filter:** vegan / vegetarian chips in the filter sheet that hide non-matching meals and mensas without a matching meal.
+- **"Open website"** in the detail overflow, using the ETH directory `web` field.
 
 ---
 
@@ -379,6 +399,8 @@ Every row must be done by the end of Phase 8 unless it is marked optional. Keep 
 | 30 | Tablet split view | Navigation 3 list-detail scene: two panes at ≥ 600 dp |
 | 31 | Dark mode | First-class, plus a theme override setting |
 | 32 | Watch app | Optional Phase 9 (Wear OS) |
+| 32a | (Android extra) Nutrition values per meal | §5.7 item 3 |
+| 32b | (Android extra) Placeholder `novalue` and closed meals hidden | §5.7 item 1 |
 | 33 | Widget (only the Legi control on iOS) | Optional Phase 9: Glance widget "Today at {favorite mensa}" |
 | — | Not ported: App Clip, SharedWithYou, Handoff, "What's new" sheet, version gate, App Store review/share, ETH Video promo, WhatsApp/email support | Explain these in `PARITY.md` |
 
@@ -711,10 +733,10 @@ android/
 ### Phase 2: Data layer (headless, test-first)
 1. Record fixtures with `tools/capture_fixtures`: ETH directory (en, de), weekly rotas (en, de), the ZFV response (with the key from §5.3), and the mapping JSON.
 2. DTOs + mappers + `WeeklyJsonCache` + `OutletInfoRepository` + `MensaRepository` flow (§5).
-3. Domain rules (§6): opening state, allergens (including the `milk, lactose` fix and the German descs), price formatting, campus, the list pipeline, filters, smart sort.
+3. The §5.7 data fixes (placeholder filter, text normalization, nutrition fields, UZH locale), then the domain rules (§6): opening state, allergens (including the `milk, lactose` fix and the German descs), price formatting, campus, the list pipeline, filters, smart sort.
 4. `tools/geocode_mensas.py` → `assets/mensa_coordinates.json` for every ETH mensa and UZH outlet known from the mapping file. Check every point is within Zürich and commit the file.
 5. `SettingsRepository` (DataStore) with every §6.10 key and default, and `ClickCountStore`.
-6. Unit tests: parsing each fixture; mapping rules (description pipes, image URL suffix, price ordering with 1, 2 and 3 entries, vegan/vegetarian de-dup, allergen maps, rotas valid today, directory mensas without a rota still listed); `openingState` across the boundaries (before, at start, inside, at end, after, missing times, Sunday); the pipeline (each filter, combinations, smart vs name sort, hide-empty, search with umlauts such as "Hönggerberg" matching "honggerberg"); cache week and language validity; the repository emitting cached then fresh, and falling back on a 500 or timeout (MockWebServer).
+6. Unit tests: parsing each fixture; placeholder meals (`novalue` and closed notices) dropped; mapping rules (description pipes, image URL suffix, price ordering with 1, 2 and 3 entries, vegan/vegetarian de-dup, allergen maps, rotas valid today, directory mensas without a rota still listed); `openingState` across the boundaries (before, at start, inside, at end, after, missing times, Sunday); the pipeline (each filter, combinations, smart vs name sort, hide-empty, search with umlauts such as "Hönggerberg" matching "honggerberg"); cache week and language validity; the repository emitting cached then fresh, and falling back on a 500 or timeout (MockWebServer).
 
 **Done when:** `./gradlew :app:testDebugUnitTest` passes with meaningful coverage of `domain/` and `data/`, and a debug screen or log shows the real merged mensa list from the live APIs.
 
@@ -749,6 +771,7 @@ Channels per sound, the reminder scheduler and receivers, the permission flows, 
 **Done when:** the release APK runs on the emulator with no crashes in a full manual run-through, and lint and unit tests pass.
 
 ### Phase 9 (optional, ask the user first): extras
+- **MensaZH-inspired extras from §5.7:** favorites and hidden mensas, the expanded list style, next-week menus, the diet filter, and "Open website".
 - **Home-screen widget (Glance):** "Today at {most-clicked mensa}", showing the open state and the first 2–3 meals, refreshed every 3–6 h via WorkManager. Use the `glance-*` skills.
 - **Wear OS app** (`:wear` module, `wear-compose-m3` skill): the watchOS feature set (list of mensas with menus today, detail menu, filter, appearance settings). See `watchos/` for the screens.
 - **Material You icon variants, predictive back previews, baseline profile.**
