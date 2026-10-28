@@ -4,3 +4,22 @@ ethmensa.xcodeproj/project.xcworkspace/xcuserdata
 ethmensa.xcodeproj/xcuserdata
 xcschememanagement.plist
 Config/Secrets.xcconfig
+# Android (android/)
+android/local.properties
+android/.gradle/
+android/.kotlin/
+android/build/
+android/**/build/
+android/.idea/
+android/*.iml
+android/**/*.iml
+android/captures/
+android/app/release/
+*.keystore
+*.jks
+
+# Claude Code, machine-specific
+.claude/settings.local.json
+
+# Scratch emulator screenshots
+.screens/
