@@ -4,6 +4,7 @@
     <cloud-backup>
         <include domain="file" path="datastore/" />
         <exclude domain="file" path="datastore/geocache.preferences_pb" />
+        <exclude domain="file" path="datastore/outlet_info.preferences_pb" />
     </cloud-backup>
     <device-transfer>
         <include domain="file" path="datastore/" />

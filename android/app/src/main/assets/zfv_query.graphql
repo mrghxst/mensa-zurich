@@ -1,0 +1,68 @@
+query MensasQuery {
+  outlets(take: 100) {
+    externalId
+    name
+    location {
+      address {
+        addressLine1
+        zipCode
+        city
+      }
+    }
+    calendar {
+      week {
+        daily {
+          date {
+            dateLocal
+            weekdayNumber
+          }
+          menuCategories {
+            category {
+              name
+              slug
+            }
+            menuItems {
+              ... on OutletMenuItemDish {
+                dish {
+                  name(mode: SHORT)
+                  description
+                  media {
+                    media {
+                      url
+                    }
+                  }
+                  allergens {
+                    allergen {
+                      externalId
+                      name
+                    }
+                  }
+                  isVegan
+                  isVegetarian
+                  stats {
+                    energy { amount }
+                    fat { amount }
+                    carbohydrates { amount }
+                    sugar { amount }
+                    fibers { amount }
+                    protein { amount }
+                    salt { amount }
+                  }
+                }
+                category {
+                  name
+                }
+                prices {
+                  priceCategory {
+                    externalId
+                  }
+                  amount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

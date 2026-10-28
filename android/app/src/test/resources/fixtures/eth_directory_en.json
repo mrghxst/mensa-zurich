@@ -1,0 +1,1614 @@
+[
+ {
+  "cams": [],
+  "mensaId": 14,
+  "name": "Alumni quattro Lounge",
+  "openingTimes": "",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/hoenggerberg/alumni-quattro-lounge.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79068,
+      "title": "Ground Meat with Horn-Shaped Pasta",
+      "description": "Ground beef | Penne | Applesauce | Extra-hard cheese",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, celery",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79068/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79069,
+      "title": "Vegan Ground Meat with Horn-Shaped Pasta",
+      "description": "Soy mince | Penne | Applesauce | Vegan cheese",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, soya, celery",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79069/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79070,
+      "title": "Chicken Meatballs",
+      "description": "Mushroom Cream Sauce | Pilaf Rice | Carrots | Peas",
+      "price": {
+       "student": "9.90",
+       "staff": "11.90",
+       "extern": "15.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, mustard, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79070/image",
+      "highlightAllergene": false
+     }
+    ]
+   },
+   {
+    "type": "dinner",
+    "menus": [
+     {
+      "menuId": 79071,
+      "title": "Ground Meat with Horn-Shaped Pasta",
+      "description": "Ground beef | Penne | Applesauce | Extra-hard cheese",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, celery",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79071/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79072,
+      "title": "Vegan Ground Meat with Horn-Shaped Pasta",
+      "description": "Soy mince | Penne | Applesauce | Vegan cheese",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, soya, celery",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79072/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79073,
+      "title": "Chicken Meatballs",
+      "description": "Mushroom Cream Sauce | Pilaf Rice | Carrots | Peas",
+      "price": {
+       "student": "9.90",
+       "staff": "11.90",
+       "extern": "15.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, mustard, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79073/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_alumnilounge_02.jpg",
+  "address": "HIL D57.2\nStefano-​ Franscini-​Platz 5\n8093 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 8,
+  "name": "Archimedes",
+  "openingTimes": "11:00–14:00",
+  "mealTimes": "11:00–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/archimedes.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78516,
+      "title": "novalue",
+      "description": "novalue",
+      "price": {
+       "student": "7.90",
+       "staff": "10.90",
+       "extern": "13.90"
+      },
+      "allergene": "Contains gluten wheat, soya, milk, lactose, mustard, celery, sesame, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78516/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78517,
+      "title": "novalue",
+      "description": "novalue",
+      "price": {
+       "student": "8.90",
+       "staff": "11.90",
+       "extern": "14.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, eggs, celery",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78517/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78518,
+      "title": "novalue",
+      "description": "novalue",
+      "price": {
+       "student": "11.50",
+       "staff": "13.50",
+       "extern": "16.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains eggs, milk, lactose, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78518/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78519,
+      "title": "novalue",
+      "description": "novalue",
+      "price": {
+       "student": "10.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, eggs",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78519/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78520,
+      "title": "novalue",
+      "description": "novalue",
+      "price": {
+       "student": "9.50",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, soya, celery, sesame",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78520/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_archimedes_08.jpg",
+  "address": "GLC E\nGloriastrasse 37/39\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 15,
+  "name": "Bellavista",
+  "openingTimes": "11:15–13:30",
+  "mealTimes": "11:15–13:30",
+  "web": "https://bellavista-ethz.ch/",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ZFV_bellavista_010.jpg",
+  "address": "HGP E\nHönggerbergring 47\n8093 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 1,
+  "name": "bQm",
+  "openingTimes": "13:00–23:00",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/bqm.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_bQm_03.jpg",
+  "address": "MM C\nLeonhardstrasse 34\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 2,
+  "name": "CafeBar",
+  "openingTimes": "07:00–18:30",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/cafebar.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-cafebar_02.jpg",
+  "address": "HG E\nRämistrasse 101\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 3,
+  "name": "Clausiusbar",
+  "openingTimes": "11:00–14:00",
+  "mealTimes": "11:00–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/clausiusbar.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79922,
+      "title": "CRISPY BEEF",
+      "description": "Black Angus Beef Strips \nCabbage and Carrot Salad (spicy) \nJasmine Rice\n",
+      "price": {
+       "student": "13.20",
+       "staff": "14.20",
+       "extern": "16.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, soya, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79922/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79923,
+      "title": "CRISPY TOFU",
+      "description": "Organic Tofu \nCabbage and Carrot Salad (spicy) \nDiced Bell Peppers \nJasmine Rice\n",
+      "price": {
+       "student": "12.90",
+       "staff": "13.90",
+       "extern": "15.90"
+      },
+      "allergene": "Contains eggs, soya, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79923/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79924,
+      "title": "WEST NEPALESE THAKALI CURRY",
+      "description": "Turkey | \nBell pepper | Red onion | Cilantro | Cloves |\nPotato | Cabbage | Peas ",
+      "price": {
+       "student": "9.20",
+       "staff": "12.20",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains milk, lactose, lupin",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79924/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79925,
+      "title": "DELHI",
+      "description": "Vegetable Pakora |\nMint-Pomegranate Raita |\nBombay Potatoes | Leafy Green Salad\n",
+      "price": {
+       "student": "8.90",
+       "staff": "11.90",
+       "extern": "13.90"
+      },
+      "allergene": "Contains milk, lactose, mustard, celery, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79925/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-clausius_16.jpg",
+  "address": "CLA D\nTannenstrasse 3\n8006 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 5,
+  "name": "Dozentenfoyer",
+  "openingTimes": "09:00–14:30",
+  "mealTimes": "11:30–13:30",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/dozentenfoyer.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78969,
+      "title": "Gebratenes Planted. Steak",
+      "description": "Steinpilzcremesauce, Schupfnudeln, Muskatkürbis, Petersilie",
+      "price": {
+       "student": "19.50",
+       "staff": "19.50",
+       "extern": "19.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, soya, eggs, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78969/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78970,
+      "title": "Kabeljau",
+      "description": "Safransauce | Tomaten Tagliatelle | Blattspinat",
+      "price": {
+       "student": "3.20",
+       "staff": "3.20",
+       "extern": "3.20"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, celery, fish, sulfites",
+      "mealTypeId": 3,
+      "mealType": "Fish",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78970/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78971,
+      "title": "#4Vegan Day",
+      "description": "Seitan Tajin mit Peperoni und Kichererbsen, dazu Couscous und marokkanische Karotten mit Minze",
+      "price": {
+       "student": "14.90",
+       "staff": "14.90",
+       "extern": "14.90"
+      },
+      "allergene": "Contains gluten wheat, mustard, nuts",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78971/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_dozentenfoyer_12.jpg",
+  "address": "HG K30.5\nRämistrasse 101\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 6,
+  "name": "Einstein & Zweistein",
+  "openingTimes": "07:00–18:30",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/einstein-zweistein.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-einstein-zweistein.jpg",
+  "address": "MM C82\nLeonhardstrasse 34\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 12,
+  "name": "Eureka Take Away",
+  "openingTimes": "08:00–16:30",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/eureka-take-away.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_eureka_12.png",
+  "address": "GLC E\nGloriastrasse 37/39\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 28,
+  "name": "Flavour Kitchen",
+  "openingTimes": "08:30–15:00",
+  "mealTimes": "11:30–13:30",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/basel/flavour-kitchen.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78313,
+      "title": "PASTA CARBONARA",
+      "description": "Bacon / Cream Sauce / Chives / Bacon Chips",
+      "price": {
+       "student": "14.00",
+       "staff": "14.00",
+       "extern": "17.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78313/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78314,
+      "title": "BREWBEE CHILI",
+      "description": "Baked potato / black beans / tortilla chips /\nLa Fraîche / cilantro",
+      "price": {
+       "student": "14.00",
+       "staff": "14.00",
+       "extern": "17.50"
+      },
+      "allergene": "Contains gluten wheat, soya, nuts, sulfites",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78314/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78315,
+      "title": "MEXICAN CHICKEN BOWL",
+      "description": "Chicken / Nachos / Quinoa Rice / Bell Peppers / Guacamole / \nPico de Gallo / Beans / Salsa Blanca",
+      "price": {
+       "student": "14.00",
+       "staff": "14.00",
+       "extern": "17.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains nuts, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78315/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78316,
+      "title": "CORN CREAM SOUP",
+      "description": "Cream of Corn Soup / Quinoa / Parsley-Cilantro Salsa / Salsa Blanca",
+      "price": {
+       "student": "10.80",
+       "staff": "10.80",
+       "extern": "13.50"
+      },
+      "allergene": "Contains celery, sulfites",
+      "mealTypeId": 8,
+      "mealType": "Soup",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78316/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ethz-basel-flavour-kitchen-innenansicht.jpg",
+  "address": "BSS E32\nKlingelbergstrasse 48\n4056 Basel",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 7,
+  "name": "food&lab",
+  "openingTimes": "08:30–15:00",
+  "mealTimes": "11:30–13:30",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/food-lab.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79996,
+      "title": "Loades Fries",
+      "description": "Protaneo Hack, Sriracha Mayonnaise, gepickeltem Gemüse, Pommes Frites",
+      "price": {
+       "student": "8.90",
+       "staff": "10.90",
+       "extern": "12.90"
+      },
+      "allergene": "Contains gluten wheat, soya, mustard, sesame",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79996/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79997,
+      "title": "Berliner Currywurst",
+      "description": "mit Currsauce und Golden Country Fries ",
+      "price": {
+       "student": "9.90",
+       "staff": "11.90",
+       "extern": "13.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains eggs, milk, lactose, mustard",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79997/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79998,
+      "title": "PASTA PLAUSCH",
+      "description": "Tomaten Sauce | Carbonara Sauce | Basilikum Pesto |",
+      "price": {
+       "student": "7.90",
+       "staff": "9.90",
+       "extern": "11.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, milk, lactose, nuts",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79998/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_foodlab_03.jpg",
+  "address": "CAB H41\nUniversitätsstrasse 6\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 19,
+  "name": "food market",
+  "openingTimes": "11:15–13:45",
+  "mealTimes": "11:15–13:45",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/hoenggerberg/food-market-pizza-pasta.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78773,
+      "title": "Black Pepper Chicken",
+      "description": "Chicken Ragout | Bell Peppers | Onions | Black Pepper Sauce | Broccoli | Sesame | Jasmine Rice",
+      "price": {
+       "student": "8.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, soya, sesame",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78773/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78774,
+      "title": "The BLT Burger",
+      "description": "Swiss beef | Sesame bun | Lettuce | Tomatoes | Bacon | Cocktail sauce | Steakhouse fries",
+      "price": {
+       "student": "12.50",
+       "staff": "15.50",
+       "extern": "18.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, celery, sesame",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78774/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78775,
+      "title": "Dal made from yellow peas",
+      "description": "Spinach | Curry Sauce | Red Brown Rice | Cucumber Raita | Naan Bread",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, celery, nuts",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78775/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78776,
+      "title": "Choose 5",
+      "description": "Choose 5 hot or cold items",
+      "price": {
+       "student": "9.90",
+       "staff": "13.90",
+       "extern": "16.90"
+      },
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78776/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78777,
+      "title": "Pizza Margherita",
+      "description": "Salad or Lemonade\n\n",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, celery",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78777/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78778,
+      "title": "Capri Pizza",
+      "description": "Tomato sauce | Mozzarella | Arugula | Cherry tomatoes | Parmesan | Salad or lemonade",
+      "price": {
+       "student": "10.50",
+       "staff": "13.50",
+       "extern": "16.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, celery",
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78778/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78779,
+      "title": "Cajun Pasta with Shrimp",
+      "description": "Spaghetti | Tomatoes | Chili flakes | Hot peppers | Cayenne pepper | Grated cheese | Salad or lemonade",
+      "price": {
+       "student": "8.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, celery, crustaceans",
+      "mealTypeId": 3,
+      "mealType": "Fish",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78779/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78780,
+      "title": "Cappelletti with Mushroom Filling",
+      "description": "Pesto | Ratatouille | Grated cheese | Arugula | Salad or lemonade",
+      "price": {
+       "student": "9.50",
+       "staff": "13.50",
+       "extern": "16.50"
+      },
+      "allergene": "Contains gluten wheat, eggs, milk, lactose, celery, nuts",
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78780/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-foodmarket-pizzapasta_02.jpg",
+  "address": "HPR D70.1\nJoseph-​von-Deschwanden-Platz 1\n8093 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 20,
+  "name": "FUSION meal",
+  "openingTimes": "11:00–14:00",
+  "mealTimes": "11:00–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/hoenggerberg/fusion-meal.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79793,
+      "title": "Zürich-Style Sliced Pork",
+      "description": "Tagliatelle | Salad or Homemade Drink",
+      "price": {
+       "student": "8.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, milk, lactose, mustard, celery, lupin, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79793/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79794,
+      "title": "Alpine Macaroons ",
+      "description": "Fried onions | Applesauce or salad",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, eggs, mustard, celery, lupin, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79794/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79795,
+      "title": "Falafel Burger",
+      "description": "Sesame bun | Iceberg lettuce | Tomatoes | Cucumbers | Lemon sauce | Sweet potato fries",
+      "price": {
+       "student": "8.90",
+       "staff": "12.90",
+       "extern": "16.90"
+      },
+      "allergene": "Contains gluten wheat, soya, mustard, celery, lupin, sesame, sulfites",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79795/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79796,
+      "title": "Mexican Beef Burrito",
+      "description": "Ground beef | Beans | Corn | Smoked paprika rice | Sour cream",
+      "price": {
+       "student": "11.50",
+       "staff": "14.50",
+       "extern": "17.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, milk, lactose, mustard, celery, lupin, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79796/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79797,
+      "title": "Crispy Chicken",
+      "description": "Spicy Katsu Sauce | Jasmine Rice | Asian Vegetables",
+      "price": {
+       "student": "10.50",
+       "staff": "12.90",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, soya, mustard, celery, lupin, sesame, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79797/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79798,
+      "title": "Palak Paneer",
+      "description": "Jasmine Rice | Asian Vegetables",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "12.50"
+      },
+      "allergene": "Contains milk, lactose, mustard, celery, lupin, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79798/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79799,
+      "title": "Salad Buffet",
+      "description": "A selection of fresh salads featuring seasonal and regional specialties",
+      "price": {
+       "student": "2.50",
+       "staff": "2.90",
+       "extern": "3.40"
+      },
+      "mealTypeId": 7,
+      "mealType": "Salad",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79799/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79800,
+      "title": "Protein Buffet",
+      "description": "Create Your Own Protein Plate: Fresh, Balanced, and Filling",
+      "price": {
+       "student": "2.50",
+       "staff": "2.90",
+       "extern": "3.40"
+      },
+      "mealTypeId": 7,
+      "mealType": "Salad",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79800/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79801,
+      "title": "Hot Buffet",
+      "description": "All national and international classics featuring seasonal vegetables",
+      "price": {
+       "student": "2.50",
+       "staff": "2.90",
+       "extern": "3.40"
+      },
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79801/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_fusion-meal_05.jpg",
+  "address": "HCI E5\nVladimir-​Prelog-Weg 10 1\n8049 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 4,
+  "name": "Kiosk CLA",
+  "openingTimes": "08:00–16:00",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/kiosk-cla.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-kiosk-cla.jpg",
+  "address": "CLA D\nTannenstrasse 3\n8006 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 16,
+  "name": "Mendokoro",
+  "openingTimes": "07:30–15:00",
+  "mealTimes": "11:15–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/hoenggerberg/mendokoro.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/Mendokoro-Wandbild.jpg",
+  "address": "HPI E12.2\nWolfgang-​Pauli-Strasse 14\n8093 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 9,
+  "name": "Mensa Polyterrasse",
+  "openingTimes": "11:15–19:30",
+  "mealTimes": "11:15–13:30, 17:30–19:30",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/mensa-polyterrasse.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79103,
+      "title": "Meatloaf Cordon Bleu",
+      "description": "Rosemary Jus | Spätzli | Cauliflower Gratin | Leek Straws",
+      "price": {
+       "student": "10.50",
+       "staff": "12.50",
+       "extern": "16.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, eggs, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79103/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79104,
+      "title": "Cheese Bacon Burger",
+      "description": "Beef Burger or Veggie Burger | BBQ Sauce | Golden Bun | Caramelized Onions | Cheddar | Bacon | Lettuce | F...",
+      "price": {
+       "student": "12.50",
+       "staff": "14.50",
+       "extern": "18.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, eggs, milk, lactose, celery, sesame",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79104/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79105,
+      "title": "Penne alla Arrabbiata",
+      "description": "Spicy Tomato Sauce | Sliced Bell Peppers | Vegan Grated Cheese | Seasonal Salad",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, celery",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79105/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79106,
+      "title": "Quinoa Balls with Yogurt Filling",
+      "description": "Moroccan Lentil Stew | Bulgur | Sultanas | Almonds",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, nuts",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79106/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79107,
+      "title": "Sweet & Sour Chicken",
+      "description": "Chicken | Sweet-and-sour sauce | Pineapple | Bell peppers | Basmati rice | Mung bean sprouts | Edamame",
+      "price": {
+       "student": "8.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains soya, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79107/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79108,
+      "title": "Hot & Cold Buffet",
+      "description": "A generous salad bar plus hot dishes—healthy and delicious!",
+      "price": {
+       "student": "2.20",
+       "staff": "2.40",
+       "extern": "3.20"
+      },
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79108/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79667,
+      "title": "Dessert of the day",
+      "description": "Sweet delicacies every day\n",
+      "price": {
+       "student": "2.40",
+       "staff": "2.40",
+       "extern": "2.40"
+      },
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79667/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79911,
+      "title": "Pumpkin-Coconut Soup",
+      "description": "Try our homemade soup of the day!",
+      "price": {
+       "student": "4.90",
+       "staff": "4.90",
+       "extern": "5.40"
+      },
+      "allergene": "Contains celery",
+      "mealTypeId": 8,
+      "mealType": "Soup",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79911/image",
+      "highlightAllergene": false
+     }
+    ]
+   },
+   {
+    "type": "dinner",
+    "menus": [
+     {
+      "menuId": 79109,
+      "title": "Pasta Get-Together",
+      "description": "Pasta | Carbonara sauce or Bolognese sauce |\nGrated cheese | Leafy greens",
+      "price": {
+       "student": "8.50",
+       "staff": "10.50",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, celery, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79109/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79110,
+      "title": "Minced Meatballs",
+      "description": "Meatballs | Mushroom Sauce | Rösti | Cauliflower | Carrots | Green Beans",
+      "price": {
+       "student": "7.00",
+       "staff": "11.50",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, soya, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79110/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79111,
+      "title": "Beef Patties",
+      "description": "Mushroom Sauce | Rösti | Cauliflower | Carrots | Green Beans",
+      "price": {
+       "student": "8.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, celery, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79111/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79668,
+      "title": "Poly-Bowls",
+      "description": "Prepared fresh daily - with meat or vegetarian options.\nFresh, light and delicious!",
+      "price": {
+       "student": "9.50",
+       "staff": "11.50",
+       "extern": "13.50"
+      },
+      "mealTypeId": 7,
+      "mealType": "Salad",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79668/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_mensa-polyterasse_06.jpg",
+  "address": "MM B79\nLeonhardstrasse 34\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 23,
+  "name": "Octavo",
+  "openingTimes": "07:30–15:30",
+  "mealTimes": "11:30–13:30",
+  "web": "https://stagewcms.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/oerlikon/octavo.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78740,
+      "title": "Venison Pepper | Gnocchi",
+      "description": "Brussels sprouts | Bacon | Onions | Side salad",
+      "price": {
+       "student": "17.90",
+       "staff": "17.90",
+       "extern": "19.90"
+      },
+      "origin": "Fish/meat from Austria, Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, celery, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78740/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78741,
+      "title": "Olma Bratwurst | Onion Sauce",
+      "description": "Rösti | Carrots | Side Salad",
+      "price": {
+       "student": "12.90",
+       "staff": "12.90",
+       "extern": "14.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains milk, lactose, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78741/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78742,
+      "title": "Falafel | Beet Couscous",
+      "description": "Plant-Based Pomegranate Dip (Vegan) | Roasted Vegetables | Side Salad",
+      "price": {
+       "student": "12.90",
+       "staff": "12.90",
+       "extern": "14.90"
+      },
+      "allergene": "Contains gluten wheat, mustard, nuts",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78742/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78743,
+      "title": "Bowl4You",
+      "description": "\"Design your bowl exactly the way you like it.\"",
+      "price": {
+       "student": "3.20",
+       "staff": "3.20",
+       "extern": "3.80"
+      },
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78743/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78744,
+      "title": "Carrot Soup",
+      "description": "Soup of the Day (Chef's Choice)",
+      "price": {
+       "student": "3.50",
+       "staff": "3.50",
+       "extern": "4.50"
+      },
+      "allergene": "Contains sulfites",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78744/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78745,
+      "title": "TINYFISH @ Octavo",
+      "description": "Sushi starting at 10.50 CHF at the coffee bar ",
+      "price": {
+       "student": "10.50",
+       "staff": "10.50",
+       "extern": "10.50"
+      },
+      "mealTypeId": 1,
+      "mealType": "Other",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78745/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_Octavo_01.jpg",
+  "address": "OCT E\nBinzmühlestrasse 130\n8050 Oerlikon",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 10,
+  "name": "Polysnack",
+  "openingTimes": "09:00–15:00",
+  "mealTimes": "11:30–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/polysnack.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79678,
+      "title": "Pasta \"al salame piccante\"",
+      "description": "mit Artischocken, Oliven, Kapern und Reibkäse\nSaisonsalat",
+      "price": {
+       "student": "9.90",
+       "staff": "11.90",
+       "extern": "14.90"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79678/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79679,
+      "title": "Pizza con Prosciutto Crudo e Rucola",
+      "description": "mit hausgemachter Tomatensauce, Mozzarella,  Rohschinken, Rucola und Grana Padano\nSaisonsalat",
+      "price": {
+       "student": "11.90",
+       "staff": "13.90",
+       "extern": "16.90"
+      },
+      "origin": "Fish/meat from Italy",
+      "allergene": "Contains gluten wheat, milk, lactose",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79679/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79680,
+      "title": "VERDE",
+      "description": "mit Quinoa, Forellenfillets, Randen, Federkohl, Ricotta,\nNüssen und getrockneten Algenblättern",
+      "price": {
+       "student": "9.90",
+       "staff": "11.90",
+       "extern": "14.90"
+      },
+      "allergene": "Contains milk, lactose, mustard, nuts, fish",
+      "mealTypeId": 3,
+      "mealType": "Fish",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/79680/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-polysnack_01.jpg",
+  "address": "HG F32\nRämistrasse 101\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 22,
+  "name": "Rice Up!",
+  "openingTimes": "11:00–14:00",
+  "mealTimes": "11:00–14:00",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/hoenggerberg/rice-up.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 71794,
+      "title": "Rice Up! Bowl",
+      "description": "Jasmine Rice | Chicken Balls | Broccoli | Green Curry | Asian Pickles Slaw | Herb Salad | Season Toppings",
+      "price": {
+       "student": "8.90",
+       "staff": "13.90",
+       "extern": "14.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains soya, celery, crustaceans, nuts, fish",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/71794/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 71795,
+      "title": " Tofu Cashew Bowl",
+      "description": "Red rice | Marinated tofu | Seasonal vegetables | Satay sauce | Asian coleslaw | Herb salad | Seasonal topping",
+      "price": {
+       "student": "9.90",
+       "staff": "14.90",
+       "extern": "15.90"
+      },
+      "allergene": "Contains soya, peanuts",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/71795/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 71796,
+      "title": "Chicken Satay Bowl",
+      "description": "Rice Noodles |Grilled Chicken Satay |Green Beens |Red Curry |Asian Pickles Slaw |Herb Salad |Thai Chillies",
+      "price": {
+       "student": "10.90",
+       "staff": "15.90",
+       "extern": "16.90"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains soya, crustaceans, nuts, fish, molluscs, peanuts",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/71796/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 71797,
+      "title": "Planted Bowl",
+      "description": "Jasmine rice |Planted chicken Teriyaki |Sweet corn |Tamarind sauce| Asian Pickles Slaw |Herb salad |Peanuts",
+      "price": {
+       "student": "10.90",
+       "staff": "15.90",
+       "extern": "16.90"
+      },
+      "allergene": "Contains sesame, peanuts, sulfites",
+      "mealTypeId": 10,
+      "mealType": "Vegan",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/71797/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 71798,
+      "title": "Grilled shrimps Bowl",
+      "description": "Jasmine Rice | Grilled Shrimp | Broccoli | Red Curry | Asian Coleslaw | Herb Salad | Puffed Rice",
+      "price": {
+       "student": "11.90",
+       "staff": "16.90",
+       "extern": "17.90"
+      },
+      "allergene": "Contains soya, crustaceans, fish, molluscs",
+      "mealTypeId": 3,
+      "mealType": "Fish",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/71798/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/Rice_Up_01_Web.jpg",
+  "address": "HIT E31\nWolfgang-​Pauli-Strasse 27\n8053 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 27,
+  "name": "Science Lounge",
+  "openingTimes": "11:30–13:30",
+  "mealTimes": "11:30–13:30",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/basel/science-lounge.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 78038,
+      "title": "GRÖSTL",
+      "description": "Sautéed Potatoes / Vegetables / Beans / Apple Slices / Cottage Cheese / Scrambled Eggs",
+      "price": {
+       "student": "7.50",
+       "staff": "11.50",
+       "extern": "13.50"
+      },
+      "allergene": "Contains eggs, milk, lactose, celery, sulfites",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78038/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78039,
+      "title": "CHICKEN MEATBALLS",
+      "description": "Cranberry Cream Sauce / Tagliatelle / Beans",
+      "price": {
+       "student": "9.50",
+       "staff": "12.50",
+       "extern": "15.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, mustard, sulfites",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78039/image",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 78040,
+      "title": "Self-service salad buffet",
+      "description": "Changing selection of leafy,\nraw vegetables and dressed salads\nDressings, oil and vinegar\n",
+      "price": {
+       "student": "2.20",
+       "staff": "2.50",
+       "extern": "3.10"
+      },
+      "mealTypeId": 7,
+      "mealType": "Salad",
+      "imageUrl": "https://glyph.ethz.ch/eth-ws/mensas/meals/78040/image",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ethz-basel-science-lounge-innenansicht.jpg",
+  "address": "BSS K14\nKlingelbergstrasse 48\n4056 Basel",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 11,
+  "name": "Tannenbar",
+  "openingTimes": "",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/tannenbar.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "type": "lunch",
+    "menus": [
+     {
+      "menuId": 79656,
+      "title": "Al Pastor Burrito",
+      "description": "Wheat tortilla | Pulled pork | Pineapple | Corn | Green beans | Bell peppers | Cheddar | Nachos | Salsa ",
+      "price": {
+       "student": "9.90",
+       "staff": "9.90",
+       "extern": "14.50"
+      },
+      "origin": "Fish/meat from Switzerland",
+      "allergene": "Contains gluten wheat, milk, lactose, sesame",
+      "mealTypeId": 4,
+      "mealType": "Meat",
+      "highlightAllergene": false
+     },
+     {
+      "menuId": 79657,
+      "title": "Al Pastor Quesadilla",
+      "description": "Wheat tortilla | Pulled plant-based meat | Pineapple | Corn | Green beans | Bell peppers | Cheddar | Nachos | ",
+      "price": {
+       "student": "9.90",
+       "staff": "9.90",
+       "extern": "14.50"
+      },
+      "allergene": "Contains gluten wheat, milk, lactose, sesame",
+      "mealTypeId": 9,
+      "mealType": "Vegetarian",
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH-tannenbar_07.jpg",
+  "address": "ML E23\nTannenstrasse 7\n8092 Zürich",
+  "defaultMensa": true
+ },
+ {
+  "cams": [],
+  "mensaId": 13,
+  "name": "Zwei Grad Bistro",
+  "openingTimes": "08:30–16:30",
+  "mealTimes": "",
+  "web": "https://ethz.ch/en/campus/getting-to-know/cafes-restaurants-shops/gastronomy/restaurants-and-cafeterias/zentrum/zwei-grad-bistro.html",
+  "feedbackUrl": "https://www.ethz.ch/en/campus/erleben/gastronomie-und-einkaufen/gastronomie/gaeste-feedback.html",
+  "meals": [
+   {
+    "menus": [
+     {
+      "menuId": 0,
+      "price": {
+       "student": null,
+       "staff": null,
+       "extern": null
+      },
+      "mealTypeId": 0,
+      "highlightAllergene": false
+     }
+    ]
+   }
+  ],
+  "imageUrl": "https://glyph.ethz.ch/eth-ws/ETH_CHN-bistro_07-ohneText.jpg",
+  "address": "CHN D9\nUniversitätsstrasse 16\n8092 Zürich",
+  "defaultMensa": true
+ }
+]

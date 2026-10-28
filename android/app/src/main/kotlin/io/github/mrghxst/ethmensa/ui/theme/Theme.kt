@@ -15,8 +15,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-
-enum class ThemeMode { SYSTEM, LIGHT, DARK }
+import io.github.mrghxst.ethmensa.domain.model.ThemeMode
 
 private fun EthColors.toScheme(): ColorScheme {
     val base = if (isDark) darkColorScheme() else lightColorScheme()

@@ -3,4 +3,5 @@
 <full-backup-content>
     <include domain="file" path="datastore/" />
     <exclude domain="file" path="datastore/geocache.preferences_pb" />
+    <exclude domain="file" path="datastore/outlet_info.preferences_pb" />
 </full-backup-content>
