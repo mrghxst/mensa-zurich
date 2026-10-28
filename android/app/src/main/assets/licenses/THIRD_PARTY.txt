@@ -1,0 +1,30 @@
+ETH Mensa for Android uses these third-party works. Thank you.
+
+ETH Mensa for iOS
+  Alexandre Reol, GNU GPL v3. https://github.com/alexandrereol/ethmensa.
+  This app is a derivative work and is licensed under the GNU GPL v3 too.
+
+Geist and Geist Mono fonts
+  Vercel, SIL Open Font License 1.1. https://github.com/vercel/geist-font.
+
+Lucide icons
+  Lucide Contributors, ISC License. https://lucide.dev.
+  Permission to use, copy, modify, and/or distribute this software for any purpose
+  with or without fee is hereby granted, provided that the above copyright notice
+  and this permission notice appear in all copies.
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES.
+
+Mensa coordinates
+  Geocoded once with Nominatim. Data (c) OpenStreetMap contributors,
+  Open Database License (ODbL). https://www.openstreetmap.org/copyright.
+
+Apache License 2.0
+  AndroidX and Jetpack Compose (Google), Kotlin and kotlinx.coroutines and
+  kotlinx.serialization (JetBrains), OkHttp (Square), Coil (Coil Contributors),
+  Haze (Chris Banes), Backdrop (Kyant), telephoto (Saket Narayan),
+  Google Play services location (Google).
+  https://www.apache.org/licenses/LICENSE-2.0.
+
+Menu data
+  ETH Zurich (idapps.ethz.ch, glyph.ethz.ch) and ZFV (api.zfv.ch).
+  UZH outlet mapping from the ETH Mensa for iOS repository.

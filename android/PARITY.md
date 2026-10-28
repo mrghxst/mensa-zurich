@@ -25,16 +25,16 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 19 | Legi from Control Center | Quick Settings tile + app shortcut | [ ] |
 | 20 | Home-screen quick actions | Static launcher shortcuts | [ ] |
 | 21 | Siri, Shortcuts, Spotlight | Covered by app shortcuts | [ ] |
-| 22 | Onboarding welcome | `OnboardingScreen` | [ ] |
-| 23 | Settings | Settings screens | [~] `SettingsRepository` |
-| 24 | In-app language en/de/fr/it | Per-app language + picker | [~] strings generated, `locales_config.xml` |
-| 25 | Allergen settings | Settings > Allergens | [~] allergen rules |
+| 22 | Onboarding welcome | `OnboardingScreen`, shown once, two panes on tablets | [x] |
+| 23 | Settings | Settings screens on DataStore, reset actions with confirmation | [x] notifications row wired in Phase 7 |
+| 24 | In-app language en/de/fr/it | Per-app language (AppCompat) + picker, `locales_config.xml` | [x] |
+| 25 | Allergen settings | Settings > Allergens, allergen-friendly chip | [x] |
 | 26 | Notifications | Alarm reminder + geofences | [ ] |
 | 27 | Opening the app clears delivered reminders | `cancelAll` on resume | [ ] |
 | 28 | Offline state | Banner + full-screen state | [x] |
-| 29 | Settings sync over iCloud | Android Auto Backup | [~] backup rules |
+| 29 | Settings sync over iCloud | Android Auto Backup of DataStore (caches excluded) | [x] |
 | 30 | Tablet split view | Navigation 3 list-detail scene | [x] |
-| 31 | Dark mode | Theme + override setting | [~] theme |
+| 31 | Dark mode | Theme + System/Light/Dark setting, optional wallpaper colors | [x] |
 | 32 | Watch app | Optional Phase 9 | — |
 | 32a | (Android extra) Nutrition values | `Nutrition` on `Meal`, collapsible row in the meal card | [x] |
 | 32b | (Android extra) Placeholder meals hidden | `MealText.isPlaceholder` | [x] |
