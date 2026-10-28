@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Auto Backup (API 29-30): keep DataStore settings, skip caches. -->
+<full-backup-content>
+    <include domain="file" path="datastore/" />
+    <exclude domain="file" path="datastore/geocache.preferences_pb" />
+</full-backup-content>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android-only strings, written by hand in en/de/fr/it. -->
+<resources>
+    <string name="app_name" translatable="false">ETH Mensa</string>
+</resources>
