@@ -44,7 +44,6 @@ The iOS app is **GPLv3** (`LICENSE`). The Android port is a derivative work and 
 2. **Order:** do the phases in order (§13). Each phase ends with its **acceptance checks**, which you run yourself: build, unit tests, then install on the emulator and take a screenshot. Don't start the next phase with a red build.
 3. **Verify visually:** after any UI change, run the app on the emulator, take a screenshot (`android screen capture`, see §14), **look at the image**, and fix what is off before moving on. Check light and dark mode at the end of each UI phase.
 4. **Stop and ask the user** only at these points:
-   - Phase 0: whether they have a `ZFV_API_KEY` (UZH menus). If not, continue without it. The app must work ETH-only and show the UZH mensas as soon as a key is added.
    - Before deleting or rewriting anything outside `android/` other than `CLAUDE.md`, `.gitignore` or this file.
    - At the end: the summary (§16), plus how to install the APK on their phone.
 5. **Use the project skills** in `.claude/skills/` (index in `.claude/skills/README.md`). Load the relevant skill **before** writing code in its area:
@@ -192,9 +191,14 @@ Headers: Content-Type: application/json
 Body: {"query": "<the exact query from ethmensa/Data/API/ZFV/ZFVAPI.swift, or bruno/ZFV/Mensas Query.bru>"}
 ```
 
+- **API key: use this shared public key** (the user emailed ZFV on 2026-10-28, and ZFV replied with this key, which is the general public key also used by famoser's Mensa app; it is not a personal key):
+  ```
+  ZFV_API_KEY=Y203MHVwaXU0OWFyeXM2MHRscWUyZncwcTpTQTJRRy83eXE5NmEzczNyRS91TjhBaysrYWl4aCs5SGhRUE9xOTk3ZzdDa1ZpdFVvQkJhK3hHN0Yyd1lLaTNu
+  ```
+  Verified on 2026-10-28: it returns 26 outlets with weekly menus and `weekdayNumber` values 1–7. The planning session already wrote it to `android/local.properties`. Read it from there into `BuildConfig.ZFV_API_KEY`, **and** use this value as the default in `build.gradle.kts` when the property is missing, so a fresh clone builds with UZH menus. Because the key is shared, ZFV may rotate it. If UZH comes back empty with a key set, log it and keep showing the cached menus.
 - **Without a valid key the API returns HTTP 200 with `{"data":{"outlets":[]}}`** (verified). Treat "no key configured" as "provider disabled", not as an error. Don't show a UZH error to the user. If a key is set but `errors[]` is non-empty, log it and fall back to the cache.
 - Response: `data.outlets[]` → `externalId`, `name`, `location.address{addressLine1, zipCode, city}`, `calendar.week.daily[] { date.weekdayNumber, menuCategories[] { category{name, slug}, menuItems[] { dish{ name, description, media[].media.url, allergens[].allergen{externalId,name}, isVegan, isVegetarian }, category{name}, prices[]{ priceCategory.externalId, amount: String } } } }`.
-- `weekdayNumber`: assumed to be 1=Mon … 7=Sun like ETH. **Check this against a real response as soon as a key is available** and write a test for it.
+- `weekdayNumber`: values 1–7 (verified), assumed 1=Mon … 7=Sun like ETH. Confirm the Monday mapping against today's date in a live response and write a test for it.
 - Mapping (from `ZFVConverter.swift`):
   - Outlet → Mensa: `provider = UZH`, `facilityId = info.uzhID ?? externalId.toInt()`, `name = info.name ?? outlet.name`. Location = `"addressLine1\nzip city"`, or `info.address` if empty. `imageUrl = "https://ziuzhnowweb.uzh.ch/v3/mensa/{uzhID}/image"` when there is a `uzhID`. Skip outlets with an invalid `externalId` **or with no meal times at all**.
   - Categories per day are sorted lunch → other → dinner. Service time comes from the slug: it contains `abend` or `dinner` → dinner, `mittag` or `lunch` → lunch, otherwise unknown. `type` = localized "Lunch" or "Dinner", else the category name. Start and end come from the mapping-file hours for that service time (null if unknown).
@@ -689,7 +693,7 @@ android/
 ### Phase 0: Preflight and decisions (≈ 15 min)
 1. Run the §3 checks. Create branch `android-port`.
 2. Re-check the §11 versions on Google Maven / Maven Central (and AGP ↔ Gradle ↔ Kotlin compatibility). Update the table in this file if they changed.
-3. **Ask the user** whether they have a `ZFV_API_KEY`. If yes, write it to `android/local.properties`. Never commit it.
+3. Check that `android/local.properties` contains `ZFV_API_KEY` (§5.3) and `sdk.dir`. The app must still behave correctly if a key ever returns no outlets.
 4. Boot `Pixel_API_37` (`android emulator start Pixel_API_37`, run in the background; add `--headless` if no window is needed) and wait until `adb shell getprop sys.boot_completed` prints `1`. The planning session checked this on 2026-10-28: it booted with WHPX, and `android screen capture --output=<file>.png` worked. Leave it running for later phases.
 
 **Done when:** tools respond, the emulator boots, and the versions are confirmed.
@@ -705,7 +709,7 @@ android/
 **Done when:** `./gradlew :app:assembleDebug` passes, the app installs and launches on the emulator showing the themed empty screen and the right icon, and a screenshot has been reviewed.
 
 ### Phase 2: Data layer (headless, test-first)
-1. Record fixtures with `tools/capture_fixtures`: ETH directory (en, de), weekly rotas (en, de), the ZFV response (if there's a key; otherwise hand-write a small realistic fixture from the DTO shape and the `.bru` query), and the mapping JSON.
+1. Record fixtures with `tools/capture_fixtures`: ETH directory (en, de), weekly rotas (en, de), the ZFV response (with the key from §5.3), and the mapping JSON.
 2. DTOs + mappers + `WeeklyJsonCache` + `OutletInfoRepository` + `MensaRepository` flow (§5).
 3. Domain rules (§6): opening state, allergens (including the `milk, lactose` fix and the German descs), price formatting, campus, the list pipeline, filters, smart sort.
 4. `tools/geocode_mensas.py` → `assets/mensa_coordinates.json` for every ETH mensa and UZH outlet known from the mapping file. Check every point is within Zürich and commit the file.
@@ -794,5 +798,5 @@ adb logcat -d -s AndroidRuntime:E  # crash check
 When finished (or blocked), report in plain language:
 - What works, with the parity table summary (done / not ported and why).
 - How to install it on their phone: enable developer options + USB debugging, then `adb install -r android/app/build/outputs/apk/release/app-release.apk`, or copy the APK and sideload it. Include the one-time "Open by default" step for `ethmensa.ch` links and the notification and location permission notes.
-- Where the screenshots are, what still needs a `ZFV_API_KEY` to verify, and any deviations from this prompt with reasons.
+- Where the screenshots are, and any deviations from this prompt with reasons.
 - The open optional items (Phase 9).

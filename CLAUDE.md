@@ -19,6 +19,6 @@ The Android port lives in `android/` and follows `ANDROID_PORT_PROMPT.md`. Read 
 ## Android conventions
 
 - Gradle project root is `android/`. Run `./gradlew` from there (`gradlew.bat` in PowerShell).
-- Secrets go in `android/local.properties` (git-ignored), never in the repo. `ZFV_API_KEY` enables the UZH mensas.
+- Secrets go in `android/local.properties` (git-ignored), never in the repo. `ZFV_API_KEY` (the shared public ZFV key, also listed in `ANDROID_PORT_PROMPT.md` §5.3) enables the UZH mensas.
 - Verify UI on the emulator with `android run` / `./gradlew installDebug`, then `android screen capture` and read the PNG.
 - Project skills for Android, Compose and Kotlin are in `.claude/skills/` (see its README).
