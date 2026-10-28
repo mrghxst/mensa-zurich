@@ -49,6 +49,19 @@ import io.github.mrghxst.ethmensa.ui.image.ImageViewerScreen
 import io.github.mrghxst.ethmensa.ui.list.MensaListScreen
 import io.github.mrghxst.ethmensa.ui.list.MensaListViewModel
 import kotlinx.serialization.Serializable
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import io.github.mrghxst.ethmensa.domain.AppLink
+import io.github.mrghxst.ethmensa.domain.ListFilters
+import io.github.mrghxst.ethmensa.domain.model.MensaShowType
+import io.github.mrghxst.ethmensa.ui.legi.LegiScreen
+import io.github.mrghxst.ethmensa.ui.theme.Eth
+import kotlinx.coroutines.flow.first
 
 @Serializable
 data object ListRoute : NavKey
@@ -68,8 +81,16 @@ data object AllergensRoute : NavKey
 @Serializable
 data class TextRoute(val asset: String, val title: String) : NavKey
 
+@Serializable
+data object LegiRoute : NavKey
+
 @OptIn(ExperimentalSharedTransitionApi::class)
 val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope?> { null }
+
+/** Back to the list, closing everything on top of it. */
+fun NavBackStack<NavKey>.popToList() {
+    while (size > 1) removeLastOrNull()
+}
 
 /** Opens a mensa, replacing any open detail so the back stack stays List → Detail. */
 fun NavBackStack<NavKey>.openMensa(id: String) {
@@ -79,7 +100,7 @@ fun NavBackStack<NavKey>.openMensa(id: String) {
 
 @OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun EthMensaApp() {
+fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
     val graph = LocalAppGraph.current
     val settings by graph.settings.settings.collectAsStateWithLifecycle(initialValue = null)
     val scope = rememberCoroutineScope()
@@ -98,6 +119,38 @@ fun EthMensaApp() {
     }
     val listDetail = rememberListDetailSceneStrategy<NavKey>(directive = directive)
     val twoPane = LocalConfiguration.current.screenWidthDp >= 600
+    var linkNotFound by rememberSaveable { mutableStateOf(false) }
+
+    // Links, app shortcuts and the Quick Settings tile (§8, §10.8).
+    LaunchedEffect(pendingLink) {
+        when (val link = pendingLink ?: return@LaunchedEffect) {
+            is AppLink.OpenMensa -> {
+                backStack.popToList()
+                // Unknown ids only count as "not found" once every provider is up to date (iOS initializeLinkHandlers).
+                val state = graph.mensaStore.state.first { it.mensa(link.mensaId) != null || it.allProvidersUpToDate }
+                if (state.mensa(link.mensaId) != null) backStack.openMensa(link.mensaId) else linkNotFound = true
+            }
+            AppLink.Legi -> if (backStack.lastOrNull() != LegiRoute) backStack.add(LegiRoute)
+            AppLink.CurrentlyOpen -> {
+                backStack.popToList()
+                graph.listSession.apply(ListFilters(showType = MensaShowType.OPEN))
+            }
+            is AppLink.ShowCampus -> {
+                backStack.popToList()
+                graph.listSession.apply(ListFilters(campus = link.campus))
+            }
+        }
+        onLinkHandled()
+    }
+    if (linkNotFound) {
+        AlertDialog(
+            onDismissRequest = { linkNotFound = false },
+            title = { Text(stringResource(R.string.universal_link_no_mensa), style = Eth.type.screenTitle) },
+            text = { Text(stringResource(R.string.universal_link_no_mensa_message), style = Eth.type.body, color = Eth.colors.textSecondary) },
+            confirmButton = { TextButton(onClick = { linkNotFound = false }) { Text(stringResource(R.string.close), color = Eth.colors.accent) } },
+            containerColor = Eth.colors.surface,
+        )
+    }
 
     SharedTransitionLayout(Modifier.fillMaxSize()) {
         CompositionLocalProvider(LocalSharedTransitionScope provides this) {
@@ -118,7 +171,7 @@ fun EthMensaApp() {
                             viewModel = vm,
                             onOpenMensa = { backStack.openMensa(it.id) },
                             onOpenSettings = { backStack.add(SettingsRoute) },
-                            onOpenLegi = {},
+                            onOpenLegi = { backStack.add(LegiRoute) },
                             imageModifier = { mensa -> if (twoPane) Modifier else sharedImage(mensa.id) },
                         )
                     }
@@ -151,6 +204,9 @@ fun EthMensaApp() {
                     }
                     entry<TextRoute> { route ->
                         TextScreen(route.asset, route.title, onBack = { backStack.removeLastOrNull() })
+                    }
+                    entry<LegiRoute> {
+                        LegiScreen(onClose = { backStack.removeLastOrNull() })
                     }
                 },
             )

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Static launcher shortcuts (§10.8). Each opens ethmensa://action/{id}, handled in MainActivity.
+     Launchers often show only four, so the Legi card comes first. -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_legi"
+        android:shortcutId="legi"
+        android:shortcutShortLabel="@string/legi_card">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="ethmensa://action/legi"
+            android:targetClass="io.github.mrghxst.ethmensa.MainActivity"
+            android:targetPackage="io.github.mrghxst.ethmensa" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_currently_open"
+        android:shortcutId="currently_open"
+        android:shortcutShortLabel="@string/currently_open">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="ethmensa://action/currently_open"
+            android:targetClass="io.github.mrghxst.ethmensa.MainActivity"
+            android:targetPackage="io.github.mrghxst.ethmensa" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_zentrum"
+        android:shortcutId="zentrum"
+        android:shortcutShortLabel="@string/zentrum">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="ethmensa://action/zentrum"
+            android:targetClass="io.github.mrghxst.ethmensa.MainActivity"
+            android:targetPackage="io.github.mrghxst.ethmensa" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_hongg"
+        android:shortcutId="hongg"
+        android:shortcutShortLabel="@string/honggerberg">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="ethmensa://action/hongg"
+            android:targetClass="io.github.mrghxst.ethmensa.MainActivity"
+            android:targetPackage="io.github.mrghxst.ethmensa" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_irchel"
+        android:shortcutId="irchel"
+        android:shortcutShortLabel="@string/irchel">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="ethmensa://action/irchel"
+            android:targetClass="io.github.mrghxst.ethmensa.MainActivity"
+            android:targetPackage="io.github.mrghxst.ethmensa" />
+    </shortcut>
+</shortcuts>

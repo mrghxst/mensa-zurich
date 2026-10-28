@@ -20,11 +20,11 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 14 | Long-press a meal: Copy, Share | Bottom sheet (Copy, Share) | [x] |
 | 15 | No-menu and no-allergen-friendly-meal states | Empty states in the detail | [x] |
 | 16 | Share mensa link | Sharesheet | [x] |
-| 17 | Open shared links | Intent filters + `ethmensa://` | [ ] |
-| 18 | Legi card | `LegiScreen` | [ ] |
-| 19 | Legi from Control Center | Quick Settings tile + app shortcut | [ ] |
-| 20 | Home-screen quick actions | Static launcher shortcuts | [ ] |
-| 21 | Siri, Shortcuts, Spotlight | Covered by app shortcuts | [ ] |
+| 17 | Open shared links | `AppLink` parser, https filter (user opt-in) + `ethmensa://`, not-found dialog | [x] |
+| 18 | Legi card | `LegiScreen` WebView, CSS on the card page only, brightness 1.0 + keep screen on | [x] card page itself not seen (needs a login) |
+| 19 | Legi from Control Center | `LegiTileService` + `legi` app shortcut | [x] |
+| 20 | Home-screen quick actions | `res/xml/shortcuts.xml` (Legi first: Pixel Launcher shows four) | [x] |
+| 21 | Siri, Shortcuts, Spotlight | Covered by app shortcuts | [x] |
 | 22 | Onboarding welcome | `OnboardingScreen`, shown once, two panes on tablets | [x] |
 | 23 | Settings | Settings screens on DataStore, reset actions with confirmation | [x] notifications row wired in Phase 7 |
 | 24 | In-app language en/de/fr/it | Per-app language (AppCompat) + picker, `locales_config.xml` | [x] |
@@ -46,6 +46,10 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 - The filter sheet uses an opaque background instead of glass: a `ModalBottomSheet` draws in its own window, so neither Haze nor Backdrop can sample the list behind it.
 
 - The map thumbnail is the §9.6 fallback: MapLibre Compose 0.20.0 crashed on Android with `UnsatisfiedLinkError: jniMaplibreNativeC`, so the tile shows a pin and opens a maps app at the bundled coordinates. No map tiles are downloaded.
+
+- Legi: the ETH login (Keycloak) lives on `eduapp.ethz.ch/keycloak/`, the same host as the card. Our CSS applies only outside `/keycloak/`, and non-card pages get a white WebView background, so the login form stays readable in dark mode.
+
+- Shortcuts: Android allows more, but the Pixel Launcher shows four static shortcuts. The Legi card is first, so Irchel is the one hidden there.
 
 ## Not ported
 

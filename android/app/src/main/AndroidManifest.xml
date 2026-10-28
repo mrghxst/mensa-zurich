@@ -20,13 +20,49 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.EthMensa.Splash"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Shared mensa links. Not autoVerify: we don't control ethmensa.ch's assetlinks.json,
+                 so the user enables it once under Open by default (§8). -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="ethmensa.ch" />
+                <data android:host="www.ethmensa.ch" />
+                <data android:pathPrefix="/s/" />
+            </intent-filter>
+            <!-- ethmensa://s/{provider}/{id}, ethmensa://legi, ethmensa://action/{id}. Parsed by AppLink only. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="ethmensa" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
+
+        <service
+            android:name=".legi.LegiTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_tile_legi"
+            android:label="@string/legi_card"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="false" />
+        </service>
 
         <!-- Stores the per-app language on API < 33 (AppCompat backport). -->
         <service

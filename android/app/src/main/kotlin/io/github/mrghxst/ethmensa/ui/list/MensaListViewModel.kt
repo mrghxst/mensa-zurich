@@ -192,11 +192,7 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
     }
 
     private fun applyFilters(filters: ListFilters) {
-        graph.listSession.setWeekdayOverride(filters.weekdayOverride)
-        graph.listSession.setAllergenFriendly(filters.allergenFriendly)
-        viewModelScope.launch {
-            graph.settings.update { it.copy(mensaShowType = filters.showType, campus = filters.campus, sortBy = filters.sortBy) }
-        }
+        viewModelScope.launch { graph.listSession.apply(filters) }
     }
 
 }
