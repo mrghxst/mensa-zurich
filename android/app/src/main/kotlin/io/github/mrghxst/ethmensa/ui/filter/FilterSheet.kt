@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package io.github.mrghxst.ethmensa.ui.filter
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,11 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.ModalBottomSheet
@@ -28,8 +22,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.ToggleButton
-import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,8 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.mrghxst.ethmensa.R
 import io.github.mrghxst.ethmensa.domain.model.Campus
@@ -49,9 +39,8 @@ import io.github.mrghxst.ethmensa.ui.components.BorderedCard
 import io.github.mrghxst.ethmensa.ui.components.SectionLabel
 import io.github.mrghxst.ethmensa.ui.list.MensaListUiState
 import io.github.mrghxst.ethmensa.ui.list.campusLabel
-import io.github.mrghxst.ethmensa.ui.list.weekdayName
+import io.github.mrghxst.ethmensa.ui.components.WeekdayGroup
 import io.github.mrghxst.ethmensa.ui.theme.Eth
-import java.time.format.TextStyle
 
 @Composable
 fun FilterSheet(
@@ -136,54 +125,12 @@ fun FilterSheet(
             }
 
             Section(stringResource(R.string.day)) {
-                val selectedDay = filters.weekdayOverride ?: state.today
-                Row(
-                    Modifier.fillMaxWidth().padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
-                ) {
-                    (1..7).forEach { day ->
-                        val label = weekdayName(day, TextStyle.SHORT).take(2)
-                        val full = weekdayName(day, TextStyle.FULL)
-                        val todayLabel = stringResource(R.string.today)
-                        ToggleButton(
-                            checked = day == selectedDay,
-                            onCheckedChange = {
-                                haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
-                                onWeekday(day)
-                            },
-                            shapes = when (day) {
-                                1 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
-                                7 -> ButtonGroupDefaults.connectedTrailingButtonShapes()
-                                else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
-                            },
-                            colors = ToggleButtonDefaults.colors(
-                                containerColor = Eth.colors.surfaceMuted,
-                                contentColor = Eth.colors.textPrimary,
-                                checkedContainerColor = Eth.colors.accent,
-                                checkedContentColor = Eth.colors.onAccent,
-                            ),
-                            contentPadding = PaddingValues(0.dp),
-                            modifier = Modifier
-                                .weight(1f)
-                                .heightIn(min = 48.dp)
-                                .semantics { contentDescription = if (day == state.today) "$full, $todayLabel" else full },
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(label, style = Eth.type.label)
-                                Box(
-                                    Modifier.padding(top = 2.dp).size(4.dp).background(
-                                        if (day == state.today) {
-                                            if (day == selectedDay) Eth.colors.onAccent else Eth.colors.accent
-                                        } else {
-                                            androidx.compose.ui.graphics.Color.Transparent
-                                        },
-                                        CircleShape,
-                                    ),
-                                )
-                            }
-                        }
-                    }
-                }
+                WeekdayGroup(
+                    selected = filters.weekdayOverride ?: state.today,
+                    today = state.today,
+                    onSelect = onWeekday,
+                    modifier = Modifier.padding(12.dp),
+                )
             }
 
             if (state.userHasAllergens) {

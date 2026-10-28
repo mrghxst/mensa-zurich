@@ -79,6 +79,7 @@ import io.github.mrghxst.ethmensa.ui.components.ProvideGlass
 import io.github.mrghxst.ethmensa.ui.components.SkeletonRow
 import io.github.mrghxst.ethmensa.ui.components.frostedGlassSource
 import io.github.mrghxst.ethmensa.ui.components.glass
+import io.github.mrghxst.ethmensa.ui.components.weekdayName
 import io.github.mrghxst.ethmensa.ui.components.liquidGlassSource
 import io.github.mrghxst.ethmensa.ui.components.rememberGlassSources
 import io.github.mrghxst.ethmensa.ui.components.rememberShimmerBrush
@@ -87,9 +88,7 @@ import io.github.mrghxst.ethmensa.ui.shareMensa
 import io.github.mrghxst.ethmensa.ui.theme.Eth
 import io.github.mrghxst.ethmensa.ui.theme.EthShapes
 import io.github.mrghxst.ethmensa.ui.theme.Spacing
-import java.time.DayOfWeek
 import java.time.format.TextStyle
-import java.util.Locale
 
 private val TopBarHeight = 56.dp
 private val DockHeight = 56.dp
@@ -371,12 +370,6 @@ fun campusLabel(campus: Campus): String = stringResource(
         Campus.IRCHEL -> R.string.irchel
     },
 )
-
-@Composable
-fun weekdayName(weekday: Int, style: TextStyle): String {
-    val locale = LocalConfiguration.current.locales[0] ?: Locale.getDefault()
-    return DayOfWeek.of(weekday).getDisplayName(style, locale).replaceFirstChar { it.titlecase(locale) }
-}
 
 @Composable
 private fun OfflineBanner(modifier: Modifier) {

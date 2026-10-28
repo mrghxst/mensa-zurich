@@ -90,7 +90,7 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MensaListUiState())
 
     init {
-        if (store.state.value.results.isEmpty() && !store.state.value.loading) store.refresh()
+        // The screen reloads on every ON_START, including the first one.
         viewModelScope.launch {
             store.state.collect { if (!it.loading) userRefreshing.value = false }
         }
