@@ -108,7 +108,6 @@
     <string name="widget_description">Die heutigen Menüs deiner Lieblingsmensa oder der am häufigsten geöffneten</string>
     <string name="widget_open">Geöffnet</string>
     <string name="widget_closed">Geschlossen</string>
-    <string name="widget_more">+%1$d weitere</string>
     <string name="widget_loading">Menüs werden geladen…</string>
     <string name="open_website">Webseite öffnen</string>
     <string name="this_week">Diese Woche</string>
@@ -125,4 +124,8 @@
     <string name="background_location_message">Damit du nur auf dem Campus Benachrichtigungen bekommst, braucht Android immer Zugriff auf den Standort. Wähle im nächsten Bildschirm „Immer zulassen“.</string>
     <string name="notification_time_footer_android">Erinnerungen kommen an Wochentagen innerhalb von zehn Minuten nach dieser Zeit.</string>
     <string name="locations_based_notifications_footer_android">Benachrichtigungen nur in der Nähe von ETH Zentrum, Hönggerberg oder Irchel. Android meldet der App nur, wenn du einen Campus betrittst oder verlässt (Geofencing). Das läuft auf deinem Gerät, dein Standort verlässt es nie.</string>
+    <plurals name="widget_more">
+        <item quantity="one">+%1$d weitere</item>
+        <item quantity="other">+%1$d weitere</item>
+    </plurals>
 </resources>

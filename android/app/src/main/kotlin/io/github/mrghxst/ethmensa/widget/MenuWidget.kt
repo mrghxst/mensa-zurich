@@ -142,7 +142,7 @@ private fun WidgetContent(data: WidgetData?) {
         }
         val more = data.meals.size - shown.size
         if (more > 0) {
-            Text(context.getString(R.string.widget_more, more), style = TextStyle(color = TextTertiary, fontSize = 12.sp))
+            Text(context.resources.getQuantityString(R.plurals.widget_more, more, more), style = TextStyle(color = TextTertiary, fontSize = 12.sp))
         }
     }
 }

@@ -108,7 +108,6 @@
     <string name="widget_description">Les menus du jour de ta mensa favorite ou la plus consultée</string>
     <string name="widget_open">Ouvert</string>
     <string name="widget_closed">Fermé</string>
-    <string name="widget_more">+%1$d de plus</string>
     <string name="widget_loading">Chargement des menus…</string>
     <string name="open_website">Ouvrir le site web</string>
     <string name="this_week">Cette semaine</string>
@@ -125,4 +124,9 @@
     <string name="background_location_message">Pour te notifier seulement sur le campus, Android doit accéder à ta position en permanence. À l’écran suivant, choisis « Toujours autoriser ».</string>
     <string name="notification_time_footer_android">Les rappels arrivent en semaine dans les dix minutes suivant cette heure.</string>
     <string name="locations_based_notifications_footer_android">Notifications seulement près d’ETH Zentrum, Hönggerberg ou Irchel. Android prévient l’app uniquement quand tu entres sur un campus ou le quittes (geofencing). Tout se passe sur ton appareil, ta position ne le quitte jamais.</string>
+    <plurals name="widget_more">
+        <item quantity="one">+%1$d de plus</item>
+        <item quantity="many">+%1$d de plus</item>
+        <item quantity="other">+%1$d de plus</item>
+    </plurals>
 </resources>

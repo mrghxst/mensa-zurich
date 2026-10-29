@@ -128,7 +128,6 @@ STRINGS = {
     "widget_description": ("Today’s meals at your favorite or most-opened mensa", "Die heutigen Menüs deiner Lieblingsmensa oder der am häufigsten geöffneten", "Les menus du jour de ta mensa favorite ou la plus consultée", "I menu di oggi della tua mensa preferita o più aperta"),
     "widget_open": ("Open", "Geöffnet", "Ouvert", "Aperto"),
     "widget_closed": ("Closed", "Geschlossen", "Fermé", "Chiuso"),
-    "widget_more": ("+%1$d more", "+%1$d weitere", "+%1$d de plus", "+%1$d altri"),
     "widget_loading": ("Loading menus…", "Menüs werden geladen…", "Chargement des menus…", "Caricamento dei menu…"),
     "open_website": ("Open website", "Webseite öffnen", "Ouvrir le site web", "Apri il sito web"),
     "this_week": ("This week", "Diese Woche", "Cette semaine", "Questa settimana"),
@@ -148,6 +147,15 @@ STRINGS = {
     "locations_based_notifications_footer_android": ("Only get notifications near ETH Zentrum, Hönggerberg or Irchel. Android tells the app only when you enter or leave a campus (geofencing). This runs on your device, and your location never leaves it.", "Benachrichtigungen nur in der Nähe von ETH Zentrum, Hönggerberg oder Irchel. Android meldet der App nur, wenn du einen Campus betrittst oder verlässt (Geofencing). Das läuft auf deinem Gerät, dein Standort verlässt es nie.", "Notifications seulement près d’ETH Zentrum, Hönggerberg ou Irchel. Android prévient l’app uniquement quand tu entres sur un campus ou le quittes (geofencing). Tout se passe sur ton appareil, ta position ne le quitte jamais.", "Notifiche solo vicino a ETH Zentrum, Hönggerberg o Irchel. Android avvisa l’app solo quando entri o esci da un campus (geofencing). Tutto avviene sul tuo dispositivo, la tua posizione non lo lascia mai."),
 }
 
+# key: {quantity: (en, de, fr, it)}. fr and it also need "many".
+PLURALS = {
+    "widget_more": {
+        "one": ("+%1$d more", "+%1$d weitere", "+%1$d de plus", "+%1$d altro"),
+        "many": ("+%1$d more", "+%1$d weitere", "+%1$d de plus", "+%1$d altri"),
+        "other": ("+%1$d more", "+%1$d weitere", "+%1$d de plus", "+%1$d altri"),
+    },
+}
+
 NON_TRANSLATABLE = {
     "app_name": "ETH Mensa",
 }
@@ -165,6 +173,14 @@ def main() -> None:
                 lines.append(f'    <string name="{key}" translatable="false">{escape(value)}</string>')
         for key, values in STRINGS.items():
             lines.append(f'    <string name="{key}">{escape(values[index])}</string>')
+        for key, quantities in PLURALS.items():
+            lines.append(f'    <plurals name="{key}">')
+            for quantity, values in quantities.items():
+                # "many" exists only in French and Italian.
+                if quantity == "many" and folder not in ("values-fr", "values-it"):
+                    continue
+                lines.append(f'        <item quantity="{quantity}">{escape(values[index])}</item>')
+            lines.append("    </plurals>")
         lines.append("</resources>")
         (RES / folder / "strings_android.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"wrote {len(STRINGS)} strings in {len(FOLDERS)} locales")

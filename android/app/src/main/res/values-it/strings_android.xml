@@ -108,7 +108,6 @@
     <string name="widget_description">I menu di oggi della tua mensa preferita o più aperta</string>
     <string name="widget_open">Aperto</string>
     <string name="widget_closed">Chiuso</string>
-    <string name="widget_more">+%1$d altri</string>
     <string name="widget_loading">Caricamento dei menu…</string>
     <string name="open_website">Apri il sito web</string>
     <string name="this_week">Questa settimana</string>
@@ -125,4 +124,9 @@
     <string name="background_location_message">Per avvisarti solo al campus, Android ha bisogno dell’accesso alla posizione sempre. Nella schermata successiva scegli «Consenti sempre».</string>
     <string name="notification_time_footer_android">I promemoria arrivano nei giorni feriali entro dieci minuti da quest’ora.</string>
     <string name="locations_based_notifications_footer_android">Notifiche solo vicino a ETH Zentrum, Hönggerberg o Irchel. Android avvisa l’app solo quando entri o esci da un campus (geofencing). Tutto avviene sul tuo dispositivo, la tua posizione non lo lascia mai.</string>
+    <plurals name="widget_more">
+        <item quantity="one">+%1$d altro</item>
+        <item quantity="many">+%1$d altri</item>
+        <item quantity="other">+%1$d altri</item>
+    </plurals>
 </resources>
