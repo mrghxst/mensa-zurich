@@ -2,6 +2,7 @@
 package io.github.mrghxst.ethmensa.domain
 
 import io.github.mrghxst.ethmensa.domain.model.Campus
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import io.github.mrghxst.ethmensa.domain.model.MensaShowType
 import io.github.mrghxst.ethmensa.domain.model.SortBy
 
@@ -13,6 +14,7 @@ data class ListFilters(
     val weekdayOverride: Int? = null,
     val allergenFriendly: Boolean = false,
     val sortBy: SortBy = SortBy.SMART,
+    val diet: DietFilter = DietFilter.NONE,
 ) {
     /** "Open only" applies only while there is no weekday override. */
     val openOnly: Boolean get() = showType == MensaShowType.OPEN && weekdayOverride == null
@@ -23,6 +25,7 @@ data class ListFilters(
             if (campus != null) add(ActiveFilter.CampusFilter(campus))
             if (weekdayOverride != null) add(ActiveFilter.Weekday(weekdayOverride))
             if (allergenFriendly) add(ActiveFilter.AllergenFriendly)
+            if (diet != DietFilter.NONE) add(ActiveFilter.Diet(diet))
             if (sortBy != SortBy.SMART) add(ActiveFilter.Sorting(sortBy))
         }
 
@@ -33,6 +36,7 @@ data class ListFilters(
         is ActiveFilter.CampusFilter -> copy(campus = null)
         is ActiveFilter.Weekday -> copy(weekdayOverride = null)
         ActiveFilter.AllergenFriendly -> copy(allergenFriendly = false)
+        is ActiveFilter.Diet -> copy(diet = DietFilter.NONE)
         is ActiveFilter.Sorting -> copy(sortBy = SortBy.SMART)
     }
 
@@ -61,6 +65,10 @@ sealed interface ActiveFilter {
 
     data object AllergenFriendly : ActiveFilter {
         override val key = "allergen"
+    }
+
+    data class Diet(val diet: DietFilter) : ActiveFilter {
+        override val key = "diet"
     }
 
     data class Sorting(val sortBy: SortBy) : ActiveFilter {

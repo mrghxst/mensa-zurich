@@ -2,6 +2,8 @@
 package io.github.mrghxst.ethmensa.ui.detail
 
 import androidx.compose.runtime.Immutable
+import io.github.mrghxst.ethmensa.domain.fits
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.mrghxst.ethmensa.AppGraph
@@ -20,7 +22,13 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @Immutable
-data class MealSection(val title: String?, val meals: List<Meal>, val hiddenByAllergens: Boolean)
+data class MealSection(
+    val title: String?,
+    val meals: List<Meal>,
+    val hiddenByAllergens: Boolean,
+    /** Every allergen-friendly meal was left out by the diet filter. */
+    val hiddenByDiet: Boolean = false,
+)
 
 @Immutable
 data class MensaDetailUiState(
@@ -32,6 +40,7 @@ data class MensaDetailUiState(
     /** The list has a weekday override, so the picker is locked (iOS behavior). */
     val weekdayLocked: Boolean = false,
     val allergenFriendly: Boolean = false,
+    val diet: DietFilter = DietFilter.NONE,
     val hours: String = "",
     val sections: List<MealSection> = emptyList(),
     val location: LatLng? = null,
@@ -66,10 +75,17 @@ class MensaDetailViewModel(private val graph: AppGraph, private val mensaId: Str
             selectedWeekday = weekday,
             weekdayLocked = session.weekdayOverride != null,
             allergenFriendly = friendly,
+            diet = settings.diet,
             hours = openingHoursText(mealTimes),
             sections = mealTimes.map { mt ->
-                val meals = if (friendly) allergenCompatibleMeals(mt, settings.allergens) else mt.meals
-                MealSection(mt.type, meals, hiddenByAllergens = friendly && meals.isEmpty())
+                val safe = if (friendly) allergenCompatibleMeals(mt, settings.allergens) else mt.meals
+                val meals = safe.filter { it.fits(settings.diet) }
+                MealSection(
+                    mt.type,
+                    meals,
+                    hiddenByAllergens = friendly && safe.isEmpty(),
+                    hiddenByDiet = safe.isNotEmpty() && meals.isEmpty(),
+                )
             },
             location = point,
             priceType = settings.priceType,

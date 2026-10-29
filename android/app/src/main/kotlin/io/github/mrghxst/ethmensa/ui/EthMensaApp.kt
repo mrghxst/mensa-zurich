@@ -59,6 +59,7 @@ import io.github.mrghxst.ethmensa.domain.AppLink
 import io.github.mrghxst.ethmensa.domain.ListFilters
 import io.github.mrghxst.ethmensa.domain.model.MensaShowType
 import io.github.mrghxst.ethmensa.ui.legi.LegiScreen
+import io.github.mrghxst.ethmensa.ui.settings.MyMensasScreen
 import io.github.mrghxst.ethmensa.ui.settings.NotificationsScreen
 import io.github.mrghxst.ethmensa.ui.theme.Eth
 import kotlinx.coroutines.flow.first
@@ -86,6 +87,9 @@ data object LegiRoute : NavKey
 
 @Serializable
 data object NotificationsRoute : NavKey
+
+@Serializable
+data object MyMensasRoute : NavKey
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope?> { null }
@@ -203,6 +207,7 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                             viewModel = settingsViewModel(graph),
                             onBack = { backStack.removeLastOrNull() },
                             onOpenAllergens = { backStack.add(AllergensRoute) },
+                            onOpenMyMensas = { backStack.add(MyMensasRoute) },
                             onOpenNotifications = { backStack.add(NotificationsRoute) },
                             onOpenText = { asset, title -> backStack.add(TextRoute(asset, title)) },
                         )
@@ -212,6 +217,9 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                     }
                     entry<TextRoute> { route ->
                         TextScreen(route.asset, route.title, onBack = { backStack.removeLastOrNull() })
+                    }
+                    entry<MyMensasRoute> {
+                        MyMensasScreen(settingsViewModel(graph), onBack = { backStack.removeLastOrNull() })
                     }
                     entry<NotificationsRoute> {
                         NotificationsScreen(settingsViewModel(graph), onBack = { backStack.removeLastOrNull() })

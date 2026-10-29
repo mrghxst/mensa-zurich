@@ -35,6 +35,8 @@ import io.github.mrghxst.ethmensa.domain.model.Campus
 import io.github.mrghxst.ethmensa.domain.model.MensaCellType
 import io.github.mrghxst.ethmensa.domain.model.MensaShowType
 import io.github.mrghxst.ethmensa.domain.model.SortBy
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
+import io.github.mrghxst.ethmensa.ui.list.dietLabel
 import io.github.mrghxst.ethmensa.ui.components.BorderedCard
 import io.github.mrghxst.ethmensa.ui.components.SectionLabel
 import io.github.mrghxst.ethmensa.ui.list.MensaListUiState
@@ -52,6 +54,7 @@ fun FilterSheet(
     onWeekday: (Int) -> Unit,
     onAllergenFriendly: (Boolean) -> Unit,
     onSort: (SortBy) -> Unit,
+    onDiet: (DietFilter) -> Unit,
     onCellType: (MensaCellType) -> Unit,
     onReset: () -> Unit,
 ) {
@@ -148,6 +151,17 @@ fun FilterSheet(
                 }
             }
 
+            Section(stringResource(R.string.diet)) {
+                Segmented(
+                    options = DietFilter.entries.map { it to dietLabel(it) },
+                    selected = filters.diet,
+                    onSelect = {
+                        haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
+                        onDiet(it)
+                    },
+                )
+            }
+
             Section(stringResource(R.string.sort_by)) {
                 Segmented(
                     options = listOf(SortBy.SMART to stringResource(R.string.sort_smart), SortBy.NAME to stringResource(R.string.sort_name)),
@@ -164,6 +178,7 @@ fun FilterSheet(
                     add(MensaCellType.MINIMAL to stringResource(R.string.layout_minimal))
                     add(MensaCellType.STANDARD to stringResource(R.string.layout_standard))
                     if (showLarge) add(MensaCellType.LARGE to stringResource(R.string.layout_large))
+                    add(MensaCellType.EXPANDED to stringResource(R.string.layout_expanded))
                 }
                 val selected = if (!showLarge && state.cellType == MensaCellType.LARGE) MensaCellType.STANDARD else state.cellType
                 Segmented(options, selected) {

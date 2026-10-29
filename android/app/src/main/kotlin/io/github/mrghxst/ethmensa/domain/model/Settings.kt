@@ -4,7 +4,8 @@ package io.github.mrghxst.ethmensa.domain.model
 import androidx.compose.runtime.Immutable
 import java.time.LocalTime
 
-enum class MensaCellType { MINIMAL, STANDARD, LARGE }
+/** EXPANDED (Android extra, from MensaZH) lists the day's meals under each mensa. */
+enum class MensaCellType { MINIMAL, STANDARD, LARGE, EXPANDED }
 
 enum class PriceType { ALL, STUDENT, STAFF, EXTERNAL }
 
@@ -13,6 +14,9 @@ enum class SortBy { SMART, NAME }
 enum class MensaShowType { ALL, OPEN }
 
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
+
+/** Android extra (from MensaZH): only mensas and meals that fit the diet. */
+enum class DietFilter { NONE, VEGETARIAN, VEGAN }
 
 /** iOS ids: `default-apple` = SYSTEM, `default` = DEFAULT, `click` = CLICK. */
 enum class NotificationSound(val id: String) {
@@ -45,4 +49,9 @@ data class Settings(
     val allergens: Set<KnownAllergen> = emptySet(),
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val dynamicColor: Boolean = false,
+    val diet: DietFilter = DietFilter.NONE,
+    /** Mensa ids pinned to the top of the list (Android extra). */
+    val favorites: Set<String> = emptySet(),
+    /** Mensa ids left out of the list (Android extra). */
+    val hidden: Set<String> = emptySet(),
 )

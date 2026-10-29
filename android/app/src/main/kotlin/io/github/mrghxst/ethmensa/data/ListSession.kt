@@ -37,6 +37,6 @@ class ListSession(private val settings: SettingsRepository, scope: CoroutineScop
     /** Applies list filters: the session parts here, the persisted parts in the settings. */
     suspend fun apply(filters: ListFilters) {
         _state.update { SessionFilters(filters.weekdayOverride, filters.allergenFriendly) }
-        settings.update { it.copy(mensaShowType = filters.showType, campus = filters.campus, sortBy = filters.sortBy) }
+        settings.update { it.copy(mensaShowType = filters.showType, campus = filters.campus, sortBy = filters.sortBy, diet = filters.diet) }
     }
 }

@@ -38,6 +38,9 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 32 | Watch app | Optional Phase 9 | — |
 | 32a | (Android extra) Nutrition values | `Nutrition` on `Meal`, collapsible row in the meal card | [x] |
 | 32b | (Android extra) Placeholder meals hidden | `MealText.isPlaceholder` | [x] |
+| 32c | (Android extra, Phase 9) Favorites and hidden mensas | Long-press menu, favorites pinned on top, Settings > Favorites and hidden | [x] |
+| 32d | (Android extra, Phase 9) Diet filter | Vegetarian / vegan in the filter sheet, applied to the list and the detail | [x] |
+| 32e | (Android extra, Phase 9) "Menus" list style | Fourth cell style with the day's meals and prices under each mensa | [x] |
 | 33 | Widget | Optional Phase 9 | — |
 | — | Not ported | See below | |
 

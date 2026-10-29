@@ -55,6 +55,7 @@ fun SettingsScreen(
     viewModel: SettingsViewModel,
     onBack: () -> Unit,
     onOpenAllergens: () -> Unit,
+    onOpenMyMensas: () -> Unit,
     onOpenNotifications: () -> Unit,
     onOpenText: (asset: String, title: String) -> Unit,
 ) {
@@ -84,6 +85,13 @@ fun SettingsScreen(
                     pluralStringResource(R.plurals.lld_allergens_selected, settings.allergens.size, settings.allergens.size)
                 },
                 onClick = onOpenAllergens,
+            )
+            RowDivider()
+            SettingsRow(
+                title = stringResource(R.string.my_mensas),
+                icon = Icons.star,
+                value = (settings.favorites.size + settings.hidden.size).takeIf { it > 0 }?.toString(),
+                onClick = onOpenMyMensas,
             )
             RowDivider()
             SettingsRow(

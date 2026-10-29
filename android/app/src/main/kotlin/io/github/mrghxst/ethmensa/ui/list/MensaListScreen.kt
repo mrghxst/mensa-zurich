@@ -61,6 +61,9 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.Lifecycle
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
 import io.github.mrghxst.ethmensa.ui.isWideWindow
 import io.github.mrghxst.ethmensa.data.StoreEvent
 import io.github.mrghxst.ethmensa.domain.ActiveFilter
@@ -114,6 +117,9 @@ fun MensaListScreen(
 
     LifecycleEventEffect(Lifecycle.Event.ON_START) { viewModel.refresh() }
 
+    val scope = rememberCoroutineScope()
+    val hiddenText = stringResource(R.string.hidden_snackbar, "%s")
+    val undo = stringResource(R.string.undo)
     val updateFailed = stringResource(R.string.update_failed, "%s")
     val retry = stringResource(R.string.retry)
     LaunchedEffect(viewModel) {
@@ -174,6 +180,14 @@ fun MensaListScreen(
                                 contentPadding = PaddingValues(top = statusTop + TopBarHeight, bottom = navBottom + DockHeight + 32.dp),
                                 onOpenMensa = onOpenMensa,
                                 onShare = { shareMensa(context, it) },
+                                onToggleFavorite = { viewModel.toggleFavorite(it.id) },
+                                onHide = { mensa ->
+                                    viewModel.setHidden(mensa.id, true)
+                                    scope.launch {
+                                        val result = snackbar.showSnackbar(hiddenText.format(mensa.name), undo, duration = SnackbarDuration.Short)
+                                        if (result == SnackbarResult.ActionPerformed) viewModel.setHidden(mensa.id, false)
+                                    }
+                                },
                                 onRemoveFilter = viewModel::removeFilter,
                                 onReset = viewModel::resetFiltersAndSearch,
                                 imageModifier = imageModifier,
@@ -218,6 +232,7 @@ fun MensaListScreen(
             onWeekday = viewModel::setWeekday,
             onAllergenFriendly = viewModel::setAllergenFriendly,
             onSort = viewModel::setSortBy,
+            onDiet = viewModel::setDiet,
             onCellType = viewModel::setCellType,
             onReset = viewModel::resetFilters,
         )
@@ -261,6 +276,8 @@ private fun MensaList(
     contentPadding: PaddingValues,
     onOpenMensa: (Mensa) -> Unit,
     onShare: (Mensa) -> Unit,
+    onToggleFavorite: (Mensa) -> Unit,
+    onHide: (Mensa) -> Unit,
     onRemoveFilter: (ActiveFilter) -> Unit,
     onReset: () -> Unit,
     imageModifier: @Composable (Mensa) -> Modifier,
@@ -316,6 +333,10 @@ private fun MensaList(
                     onShare = { onShare(row.mensa) },
                     modifier = Modifier.animateItem().padding(horizontal = gutter),
                     imageModifier = imageModifier(row.mensa),
+                    favorite = row.favorite,
+                    meals = row.meals,
+                    onToggleFavorite = { onToggleFavorite(row.mensa) },
+                    onHide = { onHide(row.mensa) },
                 )
             }
         }
@@ -356,6 +377,7 @@ fun chipLabel(chip: ActiveFilter): String = when (chip) {
     is ActiveFilter.CampusFilter -> campusLabel(chip.campus)
     is ActiveFilter.Weekday -> weekdayName(chip.weekday, TextStyle.FULL)
     ActiveFilter.AllergenFriendly -> stringResource(R.string.allergen_friendly)
+    is ActiveFilter.Diet -> dietLabel(chip.diet)
     is ActiveFilter.Sorting -> when (chip.sortBy) {
         SortBy.NAME -> stringResource(R.string.sorting_by_name)
         SortBy.SMART -> stringResource(R.string.smart_sorting)
@@ -402,3 +424,11 @@ private fun Unavailable(onRetry: () -> Unit, top: Dp) {
     }
 }
 
+@Composable
+fun dietLabel(diet: DietFilter): String = stringResource(
+    when (diet) {
+        DietFilter.NONE -> R.string.diet_all
+        DietFilter.VEGETARIAN -> R.string.diet_vegetarian
+        DietFilter.VEGAN -> R.string.diet_vegan
+    },
+)

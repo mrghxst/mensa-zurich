@@ -25,6 +25,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -62,15 +66,27 @@ fun MensaRow(
     onShare: () -> Unit,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
+    favorite: Boolean = false,
+    meals: List<MealLine> = emptyList(),
+    onToggleFavorite: () -> Unit = {},
+    onHide: () -> Unit = {},
 ) {
     val haptics = LocalHapticFeedback.current
     var menuOpen by remember { mutableStateOf(false) }
-    val label = when (state) {
+    val stateLabel = when (state) {
         OpeningState.OPEN -> stringResource(R.string.a11y_open_now, mensa.name)
         OpeningState.CLOSED -> stringResource(R.string.a11y_closed, mensa.name)
         else -> mensa.name
     }
+    val favoriteLabel = stringResource(R.string.favorite_a11y)
+    val label = listOfNotNull(
+        stateLabel,
+        favoriteLabel.takeIf { favorite },
+        meals.joinToString(", ") { listOfNotNull(it.name, it.price).joinToString(" ") }.ifEmpty { null },
+    ).joinToString(", ")
     val shareLabel = stringResource(R.string.share)
+    val favoriteActionLabel = stringResource(if (favorite) R.string.unfavorite else R.string.favorite)
+    val hideLabel = stringResource(R.string.hide_mensa)
     val type = if (cellType == MensaCellType.LARGE && mensa.imageUrl == null) MensaCellType.MINIMAL else cellType
     Box(modifier) {
         BorderedCard(
@@ -88,13 +104,17 @@ fun MensaRow(
                     contentDescription = label
                     role = Role.Button
                     onLongClick(shareLabel) { menuOpen = true; true }
+                    customActions = listOf(
+                        CustomAccessibilityAction(favoriteActionLabel) { onToggleFavorite(); true },
+                        CustomAccessibilityAction(hideLabel) { onHide(); true },
+                    )
                 },
         ) {
             when (type) {
                 MensaCellType.MINIMAL -> Row(
                     Modifier.fillMaxWidth().heightIn(min = 56.dp).padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                ) { RowText(mensa.name, hoursToday = null, state = state, modifier = Modifier.weight(1f)) }
+                ) { RowText(mensa.name, hoursToday = null, state = state, favorite = favorite, modifier = Modifier.weight(1f)) }
 
                 MensaCellType.STANDARD -> Row(
                     Modifier.fillMaxWidth().padding(10.dp),
@@ -102,7 +122,21 @@ fun MensaRow(
                 ) {
                     Thumbnail(mensa.imageUrl, imageModifier.size(60.dp))
                     Spacer(Modifier.width(14.dp))
-                    RowText(mensa.name, hoursToday, state, Modifier.weight(1f).padding(end = 6.dp))
+                    RowText(mensa.name, hoursToday, state, favorite, Modifier.weight(1f).padding(end = 6.dp))
+                }
+
+                MensaCellType.EXPANDED -> Column(Modifier.fillMaxWidth()) {
+                    Row(Modifier.fillMaxWidth().padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Thumbnail(mensa.imageUrl, imageModifier.size(60.dp))
+                        Spacer(Modifier.width(14.dp))
+                        RowText(mensa.name, hoursToday, state, favorite, Modifier.weight(1f).padding(end = 6.dp))
+                    }
+                    if (meals.isNotEmpty()) {
+                        HorizontalDivider(Modifier.padding(horizontal = 16.dp), thickness = 1.dp, color = Eth.colors.border)
+                        Column(Modifier.padding(horizontal = 16.dp, vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            meals.forEach { line -> MealLineRow(line) }
+                        }
+                    }
                 }
 
                 MensaCellType.LARGE -> Column(Modifier.fillMaxWidth()) {
@@ -115,7 +149,7 @@ fun MensaRow(
                     Row(
                         Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                    ) { RowText(mensa.name, hoursToday, state, Modifier.weight(1f)) }
+                    ) { RowText(mensa.name, hoursToday, state, favorite, Modifier.weight(1f)) }
                 }
             }
         }
@@ -130,18 +164,32 @@ fun MensaRow(
                 leadingIcon = { LucideIcon(Icons.share, null, size = 18.dp) },
                 onClick = { menuOpen = false; onShare() },
             )
+            DropdownMenuItem(
+                text = { Text(favoriteActionLabel) },
+                leadingIcon = { LucideIcon(Icons.star, null, size = 18.dp) },
+                onClick = { menuOpen = false; onToggleFavorite() },
+            )
+            DropdownMenuItem(
+                text = { Text(hideLabel) },
+                leadingIcon = { LucideIcon(Icons.eyeOff, null, size = 18.dp) },
+                onClick = { menuOpen = false; onHide() },
+            )
         }
     }
 }
 
 @Composable
-private fun RowText(name: String, hoursToday: String?, state: OpeningState?, modifier: Modifier) {
+private fun RowText(name: String, hoursToday: String?, state: OpeningState?, favorite: Boolean, modifier: Modifier) {
     Column(modifier, verticalArrangement = Arrangement.Center) {
         Text(name, style = Eth.type.rowTitle, color = Eth.colors.textPrimary, maxLines = 2, overflow = TextOverflow.Ellipsis)
         if (!hoursToday.isNullOrEmpty()) {
             Spacer(Modifier.height(2.dp))
             Text(hoursToday, style = Eth.type.mono, color = Eth.colors.textTertiary, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
+    }
+    if (favorite) {
+        LucideIcon(Icons.star, null, tint = Eth.colors.accent, size = 16.dp)
+        Spacer(Modifier.width(10.dp))
     }
     StatusDot(state)
     Spacer(Modifier.width(10.dp))
@@ -171,7 +219,7 @@ fun SkeletonRow(cellType: MensaCellType, shimmer: Brush, modifier: Modifier = Mo
             MensaCellType.MINIMAL -> Row(Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.width(160.dp).height(14.dp).clip(EthShapes.pill).background(shimmer))
             }
-            MensaCellType.STANDARD -> Row(Modifier.fillMaxWidth().padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+            MensaCellType.STANDARD, MensaCellType.EXPANDED -> Row(Modifier.fillMaxWidth().padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(60.dp).clip(EthShapes.thumbnail).background(shimmer))
                 Spacer(Modifier.width(14.dp))
                 Column {
@@ -188,3 +236,17 @@ fun SkeletonRow(cellType: MensaCellType, shimmer: Brush, modifier: Modifier = Mo
     }
 }
 
+@Composable
+private fun MealLineRow(line: MealLine) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(line.name, style = Eth.type.body, color = Eth.colors.textSecondary, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
+        if (line.price != null) {
+            Spacer(Modifier.width(12.dp))
+            Text(line.price, style = Eth.type.mono, color = Eth.colors.textTertiary, maxLines = 1)
+        }
+    }
+}
+
+/** One meal in an EXPANDED row: dish name (or station) and the formatted price. */
+@Immutable
+data class MealLine(val name: String, val price: String?)

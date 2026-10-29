@@ -2,9 +2,11 @@
 package io.github.mrghxst.ethmensa.domain
 
 import io.github.mrghxst.ethmensa.domain.model.Campus
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import io.github.mrghxst.ethmensa.domain.model.KnownAllergen
 import io.github.mrghxst.ethmensa.domain.model.Meal
 import io.github.mrghxst.ethmensa.domain.model.MealTime
+import io.github.mrghxst.ethmensa.domain.model.MealType
 import io.github.mrghxst.ethmensa.domain.model.Mensa
 import io.github.mrghxst.ethmensa.domain.model.SortBy
 import java.text.Collator
@@ -24,6 +26,8 @@ data class PipelineInput(
     /** Campus per mensa id. Null while campus resolution hasn't finished. */
     val campuses: Map<String, Campus?>? = emptyMap(),
     val now: LocalDateTime,
+    val favorites: Set<String> = emptySet(),
+    val hidden: Set<String> = emptySet(),
 )
 
 private val nameCollator: Collator = Collator.getInstance(Locale.forLanguageTag("de-CH")).apply {
@@ -41,11 +45,22 @@ fun hasAllergenFriendlyMeal(mensa: Mensa, weekday: Int, userAllergens: Set<Known
     return mealTimes.any { allergenCompatibleMeals(it, userAllergens).isNotEmpty() }
 }
 
+/** Vegan meals are vegetarian too (meal types carry only VEGAN then, see normalizeMealTypes). */
+fun Meal.fits(diet: DietFilter): Boolean = when (diet) {
+    DietFilter.NONE -> true
+    DietFilter.VEGETARIAN -> MealType.VEGETARIAN in mealTypes || MealType.VEGAN in mealTypes
+    DietFilter.VEGAN -> MealType.VEGAN in mealTypes
+}
+
+/** True if some meal on [weekday] fits [diet]. */
+fun hasDietMeal(mensa: Mensa, weekday: Int, diet: DietFilter): Boolean =
+    mensa.mealTimesOn(weekday).any { mealTime -> mealTime.meals.any { it.fits(diet) } }
+
 /** True if the mensa has at least one meal on [weekday]. */
 fun hasMenuOn(mensa: Mensa, weekday: Int): Boolean = mensa.mealTimesOn(weekday).any { it.meals.isNotEmpty() }
 
 /**
- * Hide empty → search → filters → sort (§6.7). Returns null for "still loading" (skeleton):
+ * Hidden → hide empty → search → filters → sort → favorites first (§6.7 plus the Android extras). Returns null for "still loading" (skeleton):
  * while nothing has loaded, while the campus filter waits for campus resolution, or while the
  * result is empty but some provider hasn't finished.
  */
@@ -54,7 +69,7 @@ fun mensaList(input: PipelineInput): List<Mensa>? {
     val filters = input.filters
     val weekday = filters.weekdayOverride ?: input.now.dayOfWeek.value
 
-    var result = mensas.asSequence()
+    var result = mensas.asSequence().filter { it.id !in input.hidden }
     if (input.hideMensaWithNoMenus) {
         result = result.filter { it.mealTimes.isNotEmpty() && hasMenuOn(it, weekday) }
     }
@@ -64,6 +79,9 @@ fun mensaList(input: PipelineInput): List<Mensa>? {
     }
     if (filters.allergenFriendly) {
         result = result.filter { hasAllergenFriendlyMeal(it, weekday, input.userAllergens) }
+    }
+    if (filters.diet != DietFilter.NONE) {
+        result = result.filter { hasDietMeal(it, weekday, filters.diet) }
     }
     if (filters.openOnly) {
         result = result.filter { openingState(it, input.now) == OpeningState.OPEN }
@@ -78,5 +96,6 @@ fun mensaList(input: PipelineInput): List<Mensa>? {
         SortBy.NAME -> list.sortedWith { a, b -> nameCollator.compare(a.name, b.name) }
     }
     if (sorted.isEmpty() && !input.allProvidersLoaded) return null
-    return sorted
+    // Favorites first, each group keeping the chosen order (stable sort).
+    return sorted.sortedByDescending { it.id in input.favorites }
 }

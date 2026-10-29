@@ -50,6 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.ui.list.dietLabel
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import io.github.mrghxst.ethmensa.ui.isWideWindow
 import io.github.mrghxst.ethmensa.domain.model.Mensa
 import io.github.mrghxst.ethmensa.ui.components.BorderedCard
@@ -158,12 +160,20 @@ fun MensaDetailScreen(
                                         modifier = Modifier.padding(horizontal = gutter),
                                     )
                                 }
-                                if (state.allergenFriendly) {
+                                if (state.allergenFriendly || state.diet != DietFilter.NONE) {
                                     item(key = "friendly") {
                                         Row(Modifier.padding(horizontal = gutter), verticalAlignment = Alignment.CenterVertically) {
-                                            LucideIcon(Icons.shieldCheck, null, tint = Eth.colors.accent, size = 16.dp)
-                                            Spacer(Modifier.width(6.dp))
-                                            Text(stringResource(R.string.allergen_friendly), style = Eth.type.label, color = Eth.colors.accent)
+                                            if (state.allergenFriendly) {
+                                                LucideIcon(Icons.shieldCheck, null, tint = Eth.colors.accent, size = 16.dp)
+                                                Spacer(Modifier.width(6.dp))
+                                                Text(stringResource(R.string.allergen_friendly), style = Eth.type.label, color = Eth.colors.accent)
+                                                Spacer(Modifier.width(16.dp))
+                                            }
+                                            if (state.diet != DietFilter.NONE) {
+                                                LucideIcon(Icons.leaf, null, tint = Eth.colors.veg, size = 16.dp)
+                                                Spacer(Modifier.width(6.dp))
+                                                Text(dietLabel(state.diet), style = Eth.type.label, color = Eth.colors.veg)
+                                            }
                                         }
                                     }
                                 }
@@ -278,6 +288,9 @@ private fun LazyListScope.meals(
         sections.isEmpty() -> item(key = "nomenu") {
             EmptyState(Icons.cookingPot, stringResource(R.string.no_menu), stringResource(R.string.no_menu_on_this_day))
         }
+        sections.all { it.hiddenByDiet || it.hiddenByAllergens } && sections.any { it.hiddenByDiet } -> item(key = "nodiet") {
+            EmptyState(Icons.leaf, stringResource(R.string.no_diet_meal), stringResource(R.string.no_diet_meal_message))
+        }
         sections.all { it.hiddenByAllergens } -> item(key = "nofriendly") {
             EmptyState(
                 Icons.shieldCheck,
@@ -289,10 +302,10 @@ private fun LazyListScope.meals(
             item(key = "label$index") {
                 SectionLabel(section.title.orEmpty(), Modifier.padding(horizontal = gutter).padding(top = 12.dp))
             }
-            if (section.hiddenByAllergens) {
+            if (section.hiddenByAllergens || section.hiddenByDiet) {
                 item(key = "hidden$index") {
                     Text(
-                        stringResource(R.string.no_allergen_friendly_meal),
+                        stringResource(if (section.hiddenByDiet) R.string.no_diet_meal else R.string.no_allergen_friendly_meal),
                         style = Eth.type.caption,
                         color = Eth.colors.textTertiary,
                         modifier = Modifier.padding(horizontal = gutter),

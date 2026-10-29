@@ -59,6 +59,9 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
         val ALLERGENS = stringSetPreferencesKey("allergens")
         val THEME_MODE = stringPreferencesKey("themeMode")
         val DYNAMIC_COLOR = booleanPreferencesKey("dynamicColor")
+        val DIET = stringPreferencesKey("diet")
+        val FAVORITES = stringSetPreferencesKey("favorites")
+        val HIDDEN = stringSetPreferencesKey("hidden")
 
         inline fun <reified E : Enum<E>> Preferences.enumValue(key: Preferences.Key<String>, default: E): E =
             this[key]?.let { name -> enumValues<E>().firstOrNull { it.name == name } } ?: default
@@ -83,6 +86,9 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
                 allergens = this[ALLERGENS].orEmpty().mapNotNull { KnownAllergen.fromId(it) }.toSet(),
                 themeMode = enumValue(THEME_MODE, defaults.themeMode),
                 dynamicColor = this[DYNAMIC_COLOR] ?: defaults.dynamicColor,
+                diet = enumValue(DIET, defaults.diet),
+                favorites = this[FAVORITES].orEmpty(),
+                hidden = this[HIDDEN].orEmpty(),
             )
         }
 
@@ -102,6 +108,9 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
             this[ALLERGENS] = s.allergens.map { it.id }.toSet()
             this[THEME_MODE] = s.themeMode.name
             this[DYNAMIC_COLOR] = s.dynamicColor
+            this[DIET] = s.diet.name
+            this[FAVORITES] = s.favorites
+            this[HIDDEN] = s.hidden
         }
     }
 }

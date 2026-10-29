@@ -18,6 +18,11 @@ import io.github.mrghxst.ethmensa.domain.openingState
 import io.github.mrghxst.ethmensa.domain.model.Campus
 import io.github.mrghxst.ethmensa.domain.model.Mensa
 import io.github.mrghxst.ethmensa.domain.model.MensaCellType
+import io.github.mrghxst.ethmensa.ui.components.MealLine
+import io.github.mrghxst.ethmensa.domain.MealText
+import io.github.mrghxst.ethmensa.domain.formatPrice
+import io.github.mrghxst.ethmensa.domain.fits
+import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import io.github.mrghxst.ethmensa.domain.model.MensaShowType
 import io.github.mrghxst.ethmensa.domain.model.Settings
 import io.github.mrghxst.ethmensa.domain.model.SortBy
@@ -36,7 +41,15 @@ import java.time.LocalDateTime
 import kotlinx.coroutines.Dispatchers
 
 @Immutable
-data class MensaRowUi(val mensa: Mensa, val state: OpeningState?, val hoursToday: String?)
+data class MensaRowUi(
+    val mensa: Mensa,
+    val state: OpeningState?,
+    val hoursToday: String?,
+    val favorite: Boolean = false,
+    /** The day's meals, filled only for the EXPANDED cell style. */
+    val meals: List<MealLine> = emptyList(),
+)
+
 
 @Immutable
 data class MensaListUiState(
@@ -113,6 +126,7 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
             weekdayOverride = session.weekdayOverride,
             allergenFriendly = session.allergenFriendly && settings.allergens.isNotEmpty(),
             sortBy = settings.sortBy,
+            diet = settings.diet,
         )
         val list = mensaList(
             PipelineInput(
@@ -125,6 +139,8 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
                 clickCounts = clicks,
                 campuses = load.campuses,
                 now = now,
+                favorites = settings.favorites,
+                hidden = settings.hidden,
             ),
         )
         val weekday = now.dayOfWeek.value
@@ -134,6 +150,8 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
                 mensa = mensa,
                 state = if (load.allProvidersLoaded || mensa.mealTimes.isNotEmpty()) openingState(mensa, now) else null,
                 hoursToday = openingHoursText(mensa.mealTimesOn(listWeekday)).ifEmpty { null },
+                favorite = mensa.id in settings.favorites,
+                meals = if (settings.mensaCellType == MensaCellType.EXPANDED) mealLines(mensa, listWeekday, settings) else emptyList(),
             )
         }
         val hasData = !load.mensas.isNullOrEmpty()
@@ -187,6 +205,20 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
 
     fun setSortBy(sortBy: SortBy) = applyFilters(uiState.value.filters.copy(sortBy = sortBy))
 
+    fun setDiet(diet: DietFilter) = applyFilters(uiState.value.filters.copy(diet = diet))
+
+    fun toggleFavorite(mensaId: String) {
+        viewModelScope.launch {
+            graph.settings.update { s -> s.copy(favorites = if (mensaId in s.favorites) s.favorites - mensaId else s.favorites + mensaId) }
+        }
+    }
+
+    fun setHidden(mensaId: String, hidden: Boolean) {
+        viewModelScope.launch {
+            graph.settings.update { s -> s.copy(hidden = if (hidden) s.hidden + mensaId else s.hidden - mensaId) }
+        }
+    }
+
     fun setCellType(type: MensaCellType) {
         viewModelScope.launch { graph.settings.update { it.copy(mensaCellType = type) } }
     }
@@ -196,3 +228,15 @@ class MensaListViewModel(private val graph: AppGraph) : ViewModel() {
     }
 
 }
+
+/** The meals of [weekday] that fit the diet, for the EXPANDED cell style. */
+private fun mealLines(mensa: Mensa, weekday: Int, settings: Settings): List<MealLine> =
+    mensa.mealTimesOn(weekday).flatMap { it.meals }
+        .filter { it.fits(settings.diet) }
+        .mapNotNull { meal ->
+            val name = meal.name ?: meal.title?.let(MealText::displayTitle) ?: return@mapNotNull null
+            MealLine(name, formatPrice(meal.price, settings.priceType))
+        }
+        // The same dish at lunch and dinner is listed once.
+        .distinct()
+

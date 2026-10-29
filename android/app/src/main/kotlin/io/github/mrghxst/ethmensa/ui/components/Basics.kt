@@ -173,4 +173,7 @@ object Icons {
     val check = Lucide.drawable.lucide_ic_check
     val reset = Lucide.drawable.lucide_ic_rotate_ccw
     val languages = Lucide.drawable.lucide_ic_languages
+    val star = Lucide.drawable.lucide_ic_star
+    val eyeOff = Lucide.drawable.lucide_ic_eye_off
+    val externalLink = Lucide.drawable.lucide_ic_external_link
 }
