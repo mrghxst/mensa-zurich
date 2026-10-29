@@ -1,24 +1,19 @@
-# Mensa Zürich: Android port of the ETH Mensa iOS app
+# Mensa Zürich
 
-This is a private fork (github.com/mrghxst/ethmensa) of the GPLv3 ETH Mensa iOS app by Alexandre Reol (github.com/alexandrereol/ethmensa).
-The Swift sources in `ethmensa/`, `watchos/`, `widget/` and `clip/` are the reference implementation. Don't change them.
-The Android port lives in `android/` and follows `ANDROID_PORT_PROMPT.md`. Read that file before doing any Android work.
+Unofficial Android app (Kotlin, Jetpack Compose) for the ETH Zürich and UZH mensa menus. It is a GPLv3 port of ETH Mensa for iOS by Alexandre Reol (github.com/alexandrereol/ethmensa), which is the behavioral reference. `docs/port-spec.md` is the specification the port was built from, and `docs/PARITY.md` tracks parity with the iOS app.
 
-## Machine setup (Windows 11, already installed on 2026-10-28)
+## Layout
 
-- JDK: Eclipse Temurin 21 at `C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot` (`JAVA_HOME` is set machine-wide)
-- Android SDK: `C:\Users\ghst\AppData\Local\Android\Sdk` (`ANDROID_HOME` is set for the user). Installed: platform-tools, emulator, cmdline-tools/latest, platforms android-36 and android-37.0, build-tools 37.0.0, Google Play x86_64 system images for API 36 and 37.0
-- Android CLI: `android` (winget `Google.AndroidCLI`, 1.1.x). Metrics are off via `%USERPROFILE%\.androidrc`
-- Android Studio 2026.2.1 "Rabbit" at `C:\Program Files\Android\Android Studio`
-- Emulators: `Pixel_API_37` (Pixel 9, API 37) and `medium_phone` (API 36). WHPX acceleration works.
-- `.claude/settings.local.json` sets `JAVA_HOME` and `ANDROID_HOME` for Claude Code shells, because the app may have started before those variables existed.
-- If `android`, `adb` or `emulator` are not on `PATH` in a shell, use the full paths: `%LOCALAPPDATA%\Microsoft\WinGet\Links\android.exe`, `%ANDROID_HOME%\platform-tools\adb.exe` and `%ANDROID_HOME%\emulator\emulator.exe`.
-- The npm-installed `claude` CLI on this machine is broken ("native binary not installed"). Don't rely on `claude plugin ...` from a shell.
-- Windows paths over 260 characters break git and the JDK. Keep temp work in short paths such as `C:\Users\ghst\AppData\Local\Temp\<name>`.
+- `app/` phone app, `wear/` Wear OS app, `core/` shared domain and data layer (with its unit tests), `baselineprofile/` startup profile generator.
+- `tools/` Python scripts that generate resources. Generated files say so in a header comment; edit the script, not the output:
+  - `xcstrings_to_android.py` turns `tools/ios/Localizable.xcstrings` (the iOS app's translations) into `app/src/main/res/values*/strings.xml`.
+  - `android_strings.py` writes the Android-only strings (`strings_android.xml`), `wear_strings.py` copies the watch's subset.
+  - `make_icons.py` and `make_shortcut_icons.py` draw the icons from Lucide vectors.
 
-## Android conventions
+## Conventions
 
-- Gradle project root is `android/`. Run `./gradlew` from there (`gradlew.bat` in PowerShell).
-- Secrets go in `android/local.properties` (git-ignored), never in the repo. The release signing key is `%USERPROFILE%\.android\mensa-zurich-release.jks`; its passwords are in `android/local.properties` (`RELEASE_*`). Never print them or commit them. Releases follow the README's "Releasing" section. `ZFV_API_KEY` (the shared public ZFV key, also listed in `ANDROID_PORT_PROMPT.md` §5.3) enables the UZH mensas.
-- Verify UI on the emulator with `android run` / `./gradlew installDebug`, then `android screen capture` and read the PNG.
-- Project skills for Android, Compose and Kotlin are in `.claude/skills/` (see its README).
+- Run Gradle from the repository root: `./gradlew test lint assembleDebug`.
+- Secrets and signing config live in `local.properties` (git-ignored), never in the repo. `ZFV_API_KEY` overrides the shared public ZFV key in `build.gradle.kts`. Never print or commit the `RELEASE_*` passwords.
+- The app and watch versions come from `appVersionCode` and `appVersionName` in the root `build.gradle.kts`. Releases follow the README's "Releasing" section; the tag is `v<appVersionName>`.
+- Don't add links to ethmensa.ch or the iOS author's contacts. Incoming ethmensa.ch share links are still handled for interop with the iOS app.
+- Verify UI changes on an emulator in light and dark mode before committing. Commits use conventional messages (`feat:`, `fix:`, `docs:` …).

@@ -1,1 +1,0 @@
-- Fonctionnalité générale de l'application

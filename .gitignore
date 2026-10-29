@@ -1,25 +1,20 @@
-.DS_Store
-ETH Mensa.doccarchive
-ethmensa.xcodeproj/project.xcworkspace/xcuserdata
-ethmensa.xcodeproj/xcuserdata
-xcschememanagement.plist
-Config/Secrets.xcconfig
-# Android (android/)
-android/local.properties
-android/.gradle/
-android/.kotlin/
-android/build/
-android/**/build/
-android/.idea/
-android/*.iml
-android/**/*.iml
-android/captures/
-android/app/release/
+# Gradle and Android Studio
+.gradle/
+.kotlin/
+build/
+.idea/
+*.iml
+captures/
+local.properties
+
+# Signing keys
 *.keystore
 *.jks
 
-# Claude Code, machine-specific
-.claude/settings.local.json
+# OS
+.DS_Store
+Thumbs.db
 
-# Scratch emulator screenshots
-.screens/
+# Claude Code: skills and machine notes stay on the developer's machine
+.claude/
+CLAUDE.local.md
