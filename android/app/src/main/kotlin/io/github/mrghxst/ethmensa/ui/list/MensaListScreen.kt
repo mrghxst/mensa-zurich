@@ -49,7 +49,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -62,6 +61,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.Lifecycle
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.ui.isWideWindow
 import io.github.mrghxst.ethmensa.data.StoreEvent
 import io.github.mrghxst.ethmensa.domain.ActiveFilter
 import io.github.mrghxst.ethmensa.domain.model.Campus
@@ -104,7 +104,7 @@ fun MensaListScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val wide = LocalConfiguration.current.screenWidthDp >= 600
+    val wide = isWideWindow()
     val gutter = if (wide) Spacing.gutterWide else Spacing.gutter
     val cellType = if (wide && state.cellType == MensaCellType.LARGE) MensaCellType.STANDARD else state.cellType
     val listState = rememberLazyListState()

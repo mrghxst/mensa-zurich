@@ -75,7 +75,6 @@ STRINGS = {
     "language_applies_now": ("Applies immediately.", "Wird sofort übernommen.", "S’applique immédiatement.", "Si applica subito."),
     "irreversible": ("These actions can’t be undone.", "Diese Aktionen können nicht rückgängig gemacht werden.", "Ces actions sont irréversibles.", "Queste azioni non possono essere annullate."),
     "reset_confirm_title": ("%1$s?", "%1$s?", "%1$s ?", "%1$s?"),
-    "reset_done": ("Done", "Erledigt", "Terminé", "Fatto"),
     "about_section": ("About", "Über", "À propos", "Info"),
     "about_app": ("ETH Mensa for Android", "ETH Mensa für Android", "ETH Mensa pour Android", "ETH Mensa per Android"),
     "version": ("Version %1$s (%2$d)", "Version %1$s (%2$d)", "Version %1$s (%2$d)", "Versione %1$s (%2$d)"),
@@ -84,7 +83,6 @@ STRINGS = {
     "source_code": ("Source code", "Quellcode", "Code source", "Codice sorgente"),
     "source_code_private": ("github.com/mrghxst/ethmensa (private repository)", "github.com/mrghxst/ethmensa (privates Repository)", "github.com/mrghxst/ethmensa (dépôt privé)", "github.com/mrghxst/ethmensa (repository privato)"),
     "license": ("License", "Lizenz", "Licence", "Licenza"),
-    "license_gpl": ("GNU General Public License v3", "GNU General Public License v3", "GNU General Public License v3", "GNU General Public License v3"),
     "open_source_licenses": ("Open-source licenses", "Open-Source-Lizenzen", "Licences open source", "Licenze open source"),
     "privacy": ("Privacy", "Datenschutz", "Confidentialité", "Privacy"),
     "privacy_statement": ("No tracking or analytics. The app only loads menus from ETH Zürich and ZFV, mensa photos, and nothing else. Your settings stay on your device and in your own Android backup.", "Kein Tracking, keine Analyse. Die App lädt nur Menüs von der ETH Zürich und vom ZFV sowie Mensa-Fotos, sonst nichts. Deine Einstellungen bleiben auf deinem Gerät und in deiner eigenen Android-Sicherung.", "Aucun suivi ni analyse. L’app ne charge que les menus de l’ETH Zurich et du ZFV ainsi que les photos des mensas, rien d’autre. Vos réglages restent sur votre appareil et dans votre propre sauvegarde Android.", "Nessun tracciamento né analisi. L’app carica solo i menu dell’ETH di Zurigo e di ZFV e le foto delle mense, nient’altro. Le impostazioni restano sul dispositivo e nel tuo backup Android."),
@@ -123,7 +121,6 @@ STRINGS = {
 
 NON_TRANSLATABLE = {
     "app_name": "ETH Mensa",
-    "map_attribution": "© OpenFreeMap © OpenStreetMap contributors",
 }
 
 

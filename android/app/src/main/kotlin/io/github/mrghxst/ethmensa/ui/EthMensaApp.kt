@@ -16,7 +16,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -122,7 +121,7 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
         calculatePaneScaffoldDirective(adaptiveInfo).copy(horizontalPartitionSpacerSize = 0.dp)
     }
     val listDetail = rememberListDetailSceneStrategy<NavKey>(directive = directive)
-    val twoPane = LocalConfiguration.current.screenWidthDp >= 600
+    val twoPane = isWideWindow()
     var linkNotFound by rememberSaveable { mutableStateOf(false) }
 
     // Links, app shortcuts and the Quick Settings tile (§8, §10.8).
@@ -181,7 +180,7 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                             onOpenMensa = { backStack.openMensa(it.id) },
                             onOpenSettings = { backStack.add(SettingsRoute) },
                             onOpenLegi = { backStack.add(LegiRoute) },
-                            imageModifier = { mensa -> if (twoPane) Modifier else sharedImage(mensa.id) },
+                            imageModifier = { mensa -> if (twoPane) Modifier else Modifier.sharedImage(mensa.id) },
                         )
                     }
                     entry<DetailRoute>(metadata = ListDetailSceneStrategy.detailPane()) { route ->
@@ -193,7 +192,7 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                             viewModel = vm,
                             onBack = { backStack.removeLastOrNull() },
                             onOpenImage = { backStack.add(ImageRoute(it)) },
-                            heroModifier = if (twoPane) Modifier else sharedImage(route.mensaId),
+                            heroModifier = if (twoPane) Modifier else Modifier.sharedImage(route.mensaId),
                         )
                     }
                     entry<ImageRoute> { route ->
@@ -233,11 +232,11 @@ private fun settingsViewModel(graph: AppGraph): SettingsViewModel =
 /** Shared element between the list thumbnail and the detail hero. */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-private fun sharedImage(mensaId: String): Modifier {
-    val shared = LocalSharedTransitionScope.current ?: return Modifier
+private fun Modifier.sharedImage(mensaId: String): Modifier {
+    val shared = LocalSharedTransitionScope.current ?: return this
     val animated = LocalNavAnimatedContentScope.current
     return with(shared) {
-        Modifier.sharedBounds(rememberSharedContentState("image-$mensaId"), animated)
+        this@sharedImage.sharedBounds(rememberSharedContentState("image-$mensaId"), animated)
     }
 }
 

@@ -4,7 +4,7 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 
 | # | iOS feature | Android implementation | Status |
 |---|---|---|---|
-| 1 | ETH and UZH mensas with weekly menus, cached then fresh | `MensaRepository` flow, `WeeklyJsonCache` | [x] data layer |
+| 1 | ETH and UZH mensas with weekly menus, cached then fresh | `MensaRepository` flow, `WeeklyJsonCache` | [x] |
 | 2 | Three list cell styles | `MensaRow` variants + Layout option in the filter sheet | [x] |
 | 3 | Open/closed status dot | `StatusDot` with a TalkBack label | [x] |
 | 4 | Search by mensa name | Search field in the floating dock | [x] |
@@ -55,6 +55,26 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 
 - Reminders use an inexact 10-minute window, so no exact-alarm permission is needed. The Android-only footer under the time says so.
 
+- Release build: R8 needs `-keep class androidx.core.splashscreen.**` (core-splashscreen 1.2.0). Without it the system splash window stays on top on API 37 while the app runs underneath.
+
+- Accessibility: TalkBack labels on all icon-only controls, touch targets of at least 48 dp, and rows that wrap their value or price under the title at 200 % font size.
+
 ## Not ported
 
-Filled in during Phase 8.
+| iOS feature | Why |
+|---|---|
+| App Clip | No Android equivalent for a private sideloaded app (Instant Apps are retired). |
+| SharedWithYou | Apple-only framework. Shared links open the app through the `ethmensa.ch` and `ethmensa://` links instead. |
+| Handoff | Apple-only (continuity between Apple devices). |
+| "What's new" sheet | Tied to App Store releases; a private build has no release notes to show. |
+| Version gate (`api.ethmensa.ch/v1/app/version`) | Compares iOS build numbers (§5.5), so it doesn't apply to this build. |
+| App Store review and share-the-app prompts | No store listing. |
+| ETH Video promotion | An iOS promo row unrelated to menus. |
+| WhatsApp and email support | Those contacts belong to the iOS app's maintainer; this unofficial port must not route its users there. |
+| Siri, Shortcuts, Spotlight | Covered by the static app shortcuts and the Quick Settings tile. |
+| Map tiles (MapLibre + OpenFreeMap) | MapLibre Compose 0.20.0 fails to load its native library, so the detail shows the §9.6 static pin that opens a maps app. |
+| Watch app, widget | Optional Phase 9. |
+
+## Screenshots
+
+`docs/screenshots/` holds the release build in light and dark: onboarding, list, detail, photo viewer, filters, settings, notifications and the Legi card (login page).

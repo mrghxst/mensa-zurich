@@ -4,6 +4,7 @@ package io.github.mrghxst.ethmensa.ui.settings
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -169,13 +170,15 @@ fun SettingsRow(
             LucideIcon(icon, null, tint = Eth.colors.textSecondary, size = 20.dp)
             Spacer(Modifier.width(14.dp))
         }
-        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(title, style = Eth.type.body, color = titleColor)
-            if (subtitle != null) Text(subtitle, style = Eth.type.caption.copy(fontStyle = null), color = Eth.colors.textSecondary)
-        }
-        if (value != null) {
-            Spacer(Modifier.width(8.dp))
-            Text(value, style = Eth.type.body, color = Eth.colors.textSecondary)
+        // The value moves under the title when both don't fit (large font sizes).
+        FlowRow(Modifier.weight(1f), horizontalArrangement = Arrangement.SpaceBetween) {
+            Column(Modifier.align(Alignment.CenterVertically).padding(end = 8.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(title, style = Eth.type.body, color = titleColor)
+                if (subtitle != null) Text(subtitle, style = Eth.type.caption.copy(fontStyle = null), color = Eth.colors.textSecondary)
+            }
+            if (value != null) {
+                Text(value, style = Eth.type.body, color = Eth.colors.textSecondary, modifier = Modifier.align(Alignment.CenterVertically))
+            }
         }
         if (chevron) {
             Spacer(Modifier.width(6.dp))

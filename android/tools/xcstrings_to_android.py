@@ -87,7 +87,11 @@ def main() -> None:
                 lines.append(f'    <string name="{name}">{convert_value(loc["stringUnit"]["value"])}</string>')
             elif "variations" in loc and "plural" in loc["variations"]:
                 lines.append(f'    <plurals name="{name}">')
-                for quantity, item in loc["variations"]["plural"].items():
+                plural = dict(loc["variations"]["plural"])
+                # French and Italian also have a "many" category (1 000 000 de …); iOS doesn't ship one.
+                if lang in ("fr", "it") and "many" not in plural and "other" in plural:
+                    plural["many"] = plural["other"]
+                for quantity, item in plural.items():
                     text = convert_value(item["stringUnit"]["value"])
                     lines.append(f'        <item quantity="{quantity}">{text}</item>')
                 lines.append("    </plurals>")

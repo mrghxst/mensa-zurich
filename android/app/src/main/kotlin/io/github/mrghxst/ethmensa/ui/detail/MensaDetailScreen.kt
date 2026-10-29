@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package io.github.mrghxst.ethmensa.ui.detail
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,7 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.ui.isWideWindow
 import io.github.mrghxst.ethmensa.domain.model.Mensa
 import io.github.mrghxst.ethmensa.ui.components.BorderedCard
 import io.github.mrghxst.ethmensa.ui.components.EmptyState
@@ -85,7 +86,7 @@ fun MensaDetailScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val mensa = state.mensa
     val context = LocalContext.current
-    val gutter = if (LocalConfiguration.current.screenWidthDp >= 600) Spacing.gutterWide else Spacing.gutter
+    val gutter = if (isWideWindow()) Spacing.gutterWide else Spacing.gutter
     val glass = rememberGlassSources()
     val listState = rememberLazyListState()
     val density = LocalDensity.current
@@ -205,6 +206,8 @@ fun MensaDetailScreen(
     }
 }
 
+// heroModifier carries the shared-element bounds for the photo only, not for the whole hero.
+@SuppressLint("ModifierParameter")
 @Composable
 private fun Hero(mensa: Mensa, gutter: Dp, heroModifier: Modifier) {
     val bg = Eth.colors.background

@@ -14,6 +14,7 @@ import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings as AndroidSettings
+import androidx.core.net.toUri
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -75,7 +76,7 @@ object Reminders {
     }
 
     private fun rawUri(context: Context, res: Int): Uri =
-        Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/$res")
+        "${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/$res".toUri()
 
     fun canPost(context: Context): Boolean =
         NotificationManagerCompat.from(context).areNotificationsEnabled() &&
@@ -96,7 +97,7 @@ object Reminders {
         val settings = PendingIntent.getActivity(
             context,
             1,
-            Intent(Intent.ACTION_VIEW, Uri.parse("ethmensa://notifications"), context, MainActivity::class.java)
+            Intent(Intent.ACTION_VIEW, "ethmensa://notifications".toUri(), context, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )

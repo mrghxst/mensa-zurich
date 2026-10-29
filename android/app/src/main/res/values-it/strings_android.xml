@@ -58,7 +58,6 @@
     <string name="language_applies_now">Si applica subito.</string>
     <string name="irreversible">Queste azioni non possono essere annullate.</string>
     <string name="reset_confirm_title">%1$s?</string>
-    <string name="reset_done">Fatto</string>
     <string name="about_section">Info</string>
     <string name="about_app">ETH Mensa per Android</string>
     <string name="version">Versione %1$s (%2$d)</string>
@@ -67,7 +66,6 @@
     <string name="source_code">Codice sorgente</string>
     <string name="source_code_private">github.com/mrghxst/ethmensa (repository privato)</string>
     <string name="license">Licenza</string>
-    <string name="license_gpl">GNU General Public License v3</string>
     <string name="open_source_licenses">Licenze open source</string>
     <string name="privacy">Privacy</string>
     <string name="privacy_statement">Nessun tracciamento né analisi. L’app carica solo i menu dell’ETH di Zurigo e di ZFV e le foto delle mense, nient’altro. Le impostazioni restano sul dispositivo e nel tuo backup Android.</string>

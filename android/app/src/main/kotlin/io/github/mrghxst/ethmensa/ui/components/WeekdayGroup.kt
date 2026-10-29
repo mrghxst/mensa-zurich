@@ -89,6 +89,6 @@ fun WeekdayGroup(
 /** Localized weekday name for an ISO weekday, capitalized. */
 @Composable
 fun weekdayName(weekday: Int, style: TextStyle): String {
-    val locale = LocalConfiguration.current.locales[0] ?: Locale.getDefault()
+    val locale = LocalConfiguration.current.locales[0] ?: Locale.ROOT
     return DayOfWeek.of(weekday).getDisplayName(style, locale).replaceFirstChar { it.titlecase(locale) }
 }

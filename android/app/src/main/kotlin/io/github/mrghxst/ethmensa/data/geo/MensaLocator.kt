@@ -39,15 +39,19 @@ class MensaLocator(
     @Serializable
     private data class Point(val lat: Double, val lng: Double)
 
-    private val bundled: Map<String, LatLng> by lazy {
+    @Volatile
+    private var bundledPoints: Map<String, LatLng>? = null
+
+    // Read off the main thread: callers include MensaStore on the main-thread app scope.
+    private suspend fun bundled(): Map<String, LatLng> = bundledPoints ?: withContext(Dispatchers.IO) {
         bundledJson()
             ?.let { runCatching { ApiJson.decodeFromString<Map<String, Point>>(it) }.getOrNull() }
             ?.mapValues { LatLng(it.value.lat, it.value.lng) }
             .orEmpty()
-    }
+    }.also { bundledPoints = it }
 
     suspend fun locate(mensa: Mensa): LatLng? {
-        bundled[mensa.id]?.let { return it }
+        bundled()[mensa.id]?.let { return it }
         val address = mensa.location?.geocodingQuery() ?: return null
         val key = stringPreferencesKey(address)
         cache.data.first()[key]?.let { cached ->

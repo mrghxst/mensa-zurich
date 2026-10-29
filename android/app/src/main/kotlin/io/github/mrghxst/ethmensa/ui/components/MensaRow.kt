@@ -140,7 +140,7 @@ private fun RowText(name: String, hoursToday: String?, state: OpeningState?, mod
         Text(name, style = Eth.type.rowTitle, color = Eth.colors.textPrimary, maxLines = 2, overflow = TextOverflow.Ellipsis)
         if (!hoursToday.isNullOrEmpty()) {
             Spacer(Modifier.height(2.dp))
-            Text(hoursToday, style = Eth.type.mono, color = Eth.colors.textTertiary, maxLines = 1)
+            Text(hoursToday, style = Eth.type.mono, color = Eth.colors.textTertiary, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
     }
     StatusDot(state)

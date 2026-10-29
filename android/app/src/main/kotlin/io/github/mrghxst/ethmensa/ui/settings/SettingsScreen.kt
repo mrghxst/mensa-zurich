@@ -3,9 +3,9 @@ package io.github.mrghxst.ethmensa.ui.settings
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings as AndroidSettings
+import androidx.core.net.toUri
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -273,13 +273,13 @@ private fun languageName(code: String): String {
 }
 
 fun openUrl(context: Context, url: String) {
-    runCatching { CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, Uri.parse(url)) }
-        .onFailure { runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } }
+    runCatching { CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, url.toUri()) }
+        .onFailure { runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) } }
 }
 
 /** Android 12+ needs the user to allow ethmensa.ch links once (unverified App Links, §8). */
 private fun openLinkSettings(context: Context) {
-    val pkg = Uri.parse("package:${context.packageName}")
+    val pkg = "package:${context.packageName}".toUri()
     val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         Intent(AndroidSettings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, pkg)
     } else {

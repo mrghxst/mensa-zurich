@@ -33,6 +33,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -53,6 +54,9 @@ import io.github.mrghxst.ethmensa.notifications.Reminders
 import io.github.mrghxst.ethmensa.ui.components.Icons
 import io.github.mrghxst.ethmensa.ui.theme.Eth
 import java.time.LocalTime
+import java.util.concurrent.atomic.AtomicReference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -267,15 +271,20 @@ private fun TimeDialog(initial: LocalTime, onConfirm: (LocalTime) -> Unit, onDis
     )
 }
 
-/** Plays a short preview of a reminder sound, stopping the previous one. */
+/** Plays a short preview of a reminder sound, stopping the previous one. Off the main thread: play() prepares a MediaPlayer. */
 @Composable
 private fun rememberSoundPreview(context: Context): (NotificationSound) -> Unit {
-    val playing = remember { arrayOfNulls<Ringtone>(1) }
-    DisposableEffect(Unit) { onDispose { playing[0]?.stop() } }
+    val scope = rememberCoroutineScope()
+    val playing = remember { AtomicReference<Ringtone?>(null) }
+    DisposableEffect(Unit) { onDispose { playing.getAndSet(null)?.stop() } }
     return remember {
         { sound ->
-            playing[0]?.stop()
-            playing[0] = RingtoneManager.getRingtone(context, Reminders.soundUri(context, sound))?.also { it.play() }
+            scope.launch(Dispatchers.IO) {
+                playing.getAndSet(null)?.stop()
+                val ringtone = RingtoneManager.getRingtone(context, Reminders.soundUri(context, sound)) ?: return@launch
+                playing.set(ringtone)
+                ringtone.play()
+            }
         }
     }
 }

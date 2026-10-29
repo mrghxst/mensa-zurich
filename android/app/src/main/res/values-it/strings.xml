@@ -6,6 +6,7 @@
     <plurals name="lld_allergens_selected">
         <item quantity="one">%1$d allergene selezionato</item>
         <item quantity="other">%1$d allergeni selezionati</item>
+        <item quantity="many">%1$d allergeni selezionati</item>
     </plurals>
     <string name="about">Informazioni su %1$s</string>
     <string name="access_legi_card_in_app">Accedi alla tua Legi Card nell\'app</string>

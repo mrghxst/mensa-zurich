@@ -4,6 +4,7 @@ package io.github.mrghxst.ethmensa.ui.components
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.core.net.toUri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,6 +18,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.mrghxst.ethmensa.R
 import io.github.mrghxst.ethmensa.domain.model.LatLng
@@ -45,16 +48,17 @@ fun MapThumbnail(point: LatLng?, name: String, modifier: Modifier = Modifier) {
         Box(
             Modifier
                 .fillMaxSize()
-                .clickable(role = Role.Button, onClickLabel = label) { openInMaps(context, point, name) },
+                .clickable(role = Role.Button, onClickLabel = label) { openInMaps(context, point, name) }
+                .semantics { contentDescription = label },
         )
     }
 }
 
 fun openInMaps(context: Context, point: LatLng?, name: String) {
     val uri = if (point != null) {
-        Uri.parse("geo:${point.lat},${point.lng}?q=${point.lat},${point.lng}(${Uri.encode(name)})")
+        "geo:${point.lat},${point.lng}?q=${point.lat},${point.lng}(${Uri.encode(name)})".toUri()
     } else {
-        Uri.parse("geo:0,0?q=${Uri.encode(name)}")
+        "geo:0,0?q=${Uri.encode(name)}".toUri()
     }
     runCatching { context.startActivity(Intent.createChooser(Intent(Intent.ACTION_VIEW, uri), name)) }
 }

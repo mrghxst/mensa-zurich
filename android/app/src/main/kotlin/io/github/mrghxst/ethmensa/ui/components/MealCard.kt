@@ -7,6 +7,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -87,16 +88,16 @@ fun MealCard(
             ),
     ) {
         Column(Modifier.fillMaxWidth().padding(16.dp).animateContentSize()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+            // The price moves under the station name when both don't fit (large font sizes).
+            FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(Modifier.align(Alignment.CenterVertically).padding(end = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                     meal.title?.let {
                         Text(MealText.displayTitle(it), style = Eth.type.mealTitle, color = Eth.colors.textPrimary, modifier = Modifier.weight(1f, fill = false))
                     }
                     DietIcons(meal.mealTypes, meal.meatTypes, Modifier.padding(start = 8.dp))
                 }
                 formatPrice(meal.price, priceType)?.let {
-                    Spacer(Modifier.width(12.dp))
-                    Text(it, style = Eth.type.mono, color = Eth.colors.textSecondary, textAlign = TextAlign.End)
+                    Text(it, style = Eth.type.mono, color = Eth.colors.textSecondary, textAlign = TextAlign.End, modifier = Modifier.align(Alignment.CenterVertically))
                 }
             }
             Spacer(Modifier.height(8.dp))

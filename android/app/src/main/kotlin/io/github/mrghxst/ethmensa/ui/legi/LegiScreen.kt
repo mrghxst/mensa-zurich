@@ -5,13 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.view.WindowManager
 import android.webkit.CookieManager
+import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.net.toUri
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
@@ -31,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -66,7 +68,7 @@ private val IN_APP_HOSTS = listOf("ethz.ch", "switch.ch", "eduid.ch", "microsoft
 
 /** The card app on eduapp.ethz.ch. Its Keycloak login lives on the same host under /keycloak/. */
 internal fun isCardPage(url: String?): Boolean {
-    val uri = Uri.parse(url.orEmpty())
+    val uri = url.orEmpty().toUri()
     return uri.host == LEGI_HOST && uri.path?.startsWith("/keycloak/") != true
 }
 
@@ -89,8 +91,10 @@ fun LegiScreen(onClose: () -> Unit) {
     var loaded by remember { mutableStateOf(false) }
     var failed by remember { mutableStateOf(false) }
     var canGoBack by remember { mutableStateOf(false) }
+    // A crashed or killed renderer leaves the WebView unusable: a new generation builds a fresh one.
+    var generation by remember { mutableIntStateOf(0) }
 
-    val webView = remember {
+    val webView = remember(generation) {
         createLegiWebView(
             context = context,
             css = { currentCss },
@@ -98,6 +102,11 @@ fun LegiScreen(onClose: () -> Unit) {
             onPageFinished = { loaded = true },
             onMainFrameError = { failed = true },
             onHistoryChanged = { canGoBack = it },
+            onRendererGone = {
+                loaded = false
+                failed = true
+                generation++
+            },
         )
     }
     DisposableEffect(webView) {
@@ -141,7 +150,7 @@ fun LegiScreen(onClose: () -> Unit) {
                     onAction = {
                         failed = false
                         loaded = false
-                        webView.reload()
+                        webView.loadUrl(LEGI_URL)
                     },
                 )
                 !loaded -> LoadingIndicator(Modifier.align(Alignment.Center), color = colors.accent)
@@ -199,6 +208,7 @@ private fun createLegiWebView(
     onPageFinished: () -> Unit,
     onMainFrameError: () -> Unit,
     onHistoryChanged: (canGoBack: Boolean) -> Unit,
+    onRendererGone: () -> Unit,
 ): WebView = WebView(context).apply webView@{
     // White like a browser: the ETH login pages have no background of their own.
     setBackgroundColor(android.graphics.Color.WHITE)
@@ -252,6 +262,11 @@ private fun createLegiWebView(
 
         override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
             if (request.isForMainFrame) onMainFrameError()
+        }
+
+        override fun onRenderProcessGone(view: WebView, detail: RenderProcessGoneDetail): Boolean {
+            onRendererGone()
+            return true
         }
     }
 }

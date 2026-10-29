@@ -31,13 +31,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.ui.isWideWindow
 import io.github.mrghxst.ethmensa.ui.components.Icons
 import io.github.mrghxst.ethmensa.ui.components.LucideIcon
 import io.github.mrghxst.ethmensa.ui.components.PillButton
@@ -47,7 +47,7 @@ import io.github.mrghxst.ethmensa.ui.theme.Eth
 @Composable
 fun OnboardingScreen(onContinue: () -> Unit) {
     var privacy by rememberSaveable { mutableStateOf(false) }
-    val wide = LocalConfiguration.current.screenWidthDp >= 600
+    val wide = isWideWindow()
     Column(Modifier.fillMaxSize().background(Eth.colors.background).safeDrawingPadding()) {
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
             if (wide) {
