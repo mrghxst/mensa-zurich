@@ -88,4 +88,15 @@
     <string name="allergen_lupin">Lupin</string>
     <string name="allergen_molluscs">Mollusques</string>
     <string name="allergen_wheat">Blé</string>
+    <string name="sound_system">Par défaut du système</string>
+    <string name="sound_click">Clic</string>
+    <string name="channel_reminder_system">Rappel du menu (son du système)</string>
+    <string name="channel_reminder_default">Rappel du menu (son ETH Mensa)</string>
+    <string name="channel_reminder_click">Rappel du menu (son clic)</string>
+    <string name="notifications_denied_message">Les notifications sont désactivées pour ETH Mensa. Active-les dans les réglages du système.</string>
+    <string name="location_denied_message">Les notifications basées sur la position nécessitent l’accès « Toujours autoriser ».</string>
+    <string name="background_location_title">Autoriser la position en permanence</string>
+    <string name="background_location_message">Pour te notifier seulement sur le campus, Android doit accéder à ta position en permanence. À l’écran suivant, choisis « Toujours autoriser ».</string>
+    <string name="notification_time_footer_android">Les rappels arrivent en semaine dans les dix minutes suivant cette heure.</string>
+    <string name="locations_based_notifications_footer_android">Notifications seulement près d’ETH Zentrum, Hönggerberg ou Irchel. Android prévient l’app uniquement quand tu entres sur un campus ou le quittes (geofencing). Tout se passe sur ton appareil, ta position ne le quitte jamais.</string>
 </resources>

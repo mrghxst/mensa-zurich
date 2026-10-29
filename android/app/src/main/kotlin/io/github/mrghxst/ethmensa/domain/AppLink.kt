@@ -12,6 +12,9 @@ sealed interface AppLink {
     /** `ethmensa://legi` and the `legi` shortcut. */
     data object Legi : AppLink
 
+    /** `ethmensa://notifications`: the reminder's Settings action and the system notification settings. */
+    data object NotificationSettings : AppLink
+
     /** `ethmensa://action/currently_open`: open mensas only, other filters cleared. */
     data object CurrentlyOpen : AppLink
 
@@ -34,6 +37,7 @@ sealed interface AppLink {
                 "ethmensa" -> when (host) {
                     "s" -> mensa("/s$path")
                     "legi" -> Legi
+                    "notifications" -> NotificationSettings
                     "action" -> action(path.trim('/'))
                     else -> null
                 }

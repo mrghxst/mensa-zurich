@@ -29,8 +29,8 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 23 | Settings | Settings screens on DataStore, reset actions with confirmation | [x] notifications row wired in Phase 7 |
 | 24 | In-app language en/de/fr/it | Per-app language (AppCompat) + picker, `locales_config.xml` | [x] |
 | 25 | Allergen settings | Settings > Allergens, allergen-friendly chip | [x] |
-| 26 | Notifications | Alarm reminder + geofences | [ ] |
-| 27 | Opening the app clears delivered reminders | `cancelAll` on resume | [ ] |
+| 26 | Notifications | Channel per sound, `AlarmManager.setWindow` weekday reminder, boot/time/update receivers, campus geofences | [x] |
+| 27 | Opening the app clears delivered reminders | `Reminders.clearDelivered` in `MainActivity.onResume` | [x] |
 | 28 | Offline state | Banner + full-screen state | [x] |
 | 29 | Settings sync over iCloud | Android Auto Backup of DataStore (caches excluded) | [x] |
 | 30 | Tablet split view | Navigation 3 list-detail scene | [x] |
@@ -50,6 +50,10 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 - Legi: the ETH login (Keycloak) lives on `eduapp.ethz.ch/keycloak/`, the same host as the card. Our CSS applies only outside `/keycloak/`, and non-card pages get a white WebView background, so the login form stays readable in dark mode.
 
 - Shortcuts: Android allows more, but the Pixel Launcher shows four static shortcuts. The Legi card is first, so Irchel is the one hidden there.
+
+- Location-based reminders use all three campuses (iOS: Zentrum and Hönggerberg) and pass latitude and longitude in the right order (iOS swaps them in `GeofencingManager.makeGeoRegion`).
+
+- Reminders use an inexact 10-minute window, so no exact-alarm permission is needed. The Android-only footer under the time says so.
 
 ## Not ported
 

@@ -2,6 +2,7 @@
 package io.github.mrghxst.ethmensa
 
 import android.app.Application
+import io.github.mrghxst.ethmensa.notifications.ReminderCoordinator
 
 class EthMensaApplication : Application() {
     lateinit var graph: AppGraph
@@ -10,5 +11,6 @@ class EthMensaApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         graph = AppGraph(this)
+        ReminderCoordinator.start(this, graph)
     }
 }

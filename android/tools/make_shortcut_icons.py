@@ -86,7 +86,9 @@ def main() -> None:
         (RES / f"ic_shortcut_{shortcut}_foreground.xml").write_text(foreground(data), encoding="utf-8", newline="\n")
         (RES / f"ic_shortcut_{shortcut}.xml").write_text(adaptive(f"ic_shortcut_{shortcut}_foreground"), encoding="utf-8", newline="\n")
     (RES / "ic_tile_legi.xml").write_text(tile(paths(lucide_dir, "id_card")), encoding="utf-8", newline="\n")
-    print("wrote", len(SHORTCUTS) * 2 + 1, "drawables to", RES)
+    # Notification small icon: the app's fork and knife.
+    (RES / "ic_notification.xml").write_text(tile(paths(lucide_dir, "utensils")), encoding="utf-8", newline="\n")
+    print("wrote", len(SHORTCUTS) * 2 + 2, "drawables to", RES)
 
 
 if __name__ == "__main__":

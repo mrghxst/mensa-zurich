@@ -60,6 +60,7 @@ import io.github.mrghxst.ethmensa.domain.AppLink
 import io.github.mrghxst.ethmensa.domain.ListFilters
 import io.github.mrghxst.ethmensa.domain.model.MensaShowType
 import io.github.mrghxst.ethmensa.ui.legi.LegiScreen
+import io.github.mrghxst.ethmensa.ui.settings.NotificationsScreen
 import io.github.mrghxst.ethmensa.ui.theme.Eth
 import kotlinx.coroutines.flow.first
 
@@ -83,6 +84,9 @@ data class TextRoute(val asset: String, val title: String) : NavKey
 
 @Serializable
 data object LegiRoute : NavKey
+
+@Serializable
+data object NotificationsRoute : NavKey
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope?> { null }
@@ -131,6 +135,11 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                 if (state.mensa(link.mensaId) != null) backStack.openMensa(link.mensaId) else linkNotFound = true
             }
             AppLink.Legi -> if (backStack.lastOrNull() != LegiRoute) backStack.add(LegiRoute)
+            AppLink.NotificationSettings -> {
+                backStack.popToList()
+                backStack.add(SettingsRoute)
+                backStack.add(NotificationsRoute)
+            }
             AppLink.CurrentlyOpen -> {
                 backStack.popToList()
                 graph.listSession.apply(ListFilters(showType = MensaShowType.OPEN))
@@ -195,7 +204,7 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                             viewModel = settingsViewModel(graph),
                             onBack = { backStack.removeLastOrNull() },
                             onOpenAllergens = { backStack.add(AllergensRoute) },
-                            onOpenNotifications = {},
+                            onOpenNotifications = { backStack.add(NotificationsRoute) },
                             onOpenText = { asset, title -> backStack.add(TextRoute(asset, title)) },
                         )
                     }
@@ -204,6 +213,9 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                     }
                     entry<TextRoute> { route ->
                         TextScreen(route.asset, route.title, onBack = { backStack.removeLastOrNull() })
+                    }
+                    entry<NotificationsRoute> {
+                        NotificationsScreen(settingsViewModel(graph), onBack = { backStack.removeLastOrNull() })
                     }
                     entry<LegiRoute> {
                         LegiScreen(onClose = { backStack.removeLastOrNull() })

@@ -119,6 +119,7 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.navigation3)
     implementation(libs.telephoto.zoomable.image.coil3)
     implementation(libs.telephoto.flick)
+    implementation(libs.play.services.location)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

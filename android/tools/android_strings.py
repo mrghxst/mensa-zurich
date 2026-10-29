@@ -107,6 +107,18 @@ STRINGS = {
     "allergen_lupin": ("Lupin", "Lupinen", "Lupin", "Lupini"),
     "allergen_molluscs": ("Molluscs", "Weichtiere", "Mollusques", "Molluschi"),
     "allergen_wheat": ("Wheat", "Weizen", "Blé", "Frumento"),
+    # Notifications
+    "sound_system": ("System default", "Systemstandard", "Par défaut du système", "Predefinito di sistema"),
+    "sound_click": ("Click", "Klick", "Clic", "Clic"),
+    "channel_reminder_system": ("Menu reminder (system sound)", "Menü-Erinnerung (Systemton)", "Rappel du menu (son du système)", "Promemoria menu (suono di sistema)"),
+    "channel_reminder_default": ("Menu reminder (ETH Mensa sound)", "Menü-Erinnerung (ETH-Mensa-Ton)", "Rappel du menu (son ETH Mensa)", "Promemoria menu (suono ETH Mensa)"),
+    "channel_reminder_click": ("Menu reminder (click sound)", "Menü-Erinnerung (Klickton)", "Rappel du menu (son clic)", "Promemoria menu (suono clic)"),
+    "notifications_denied_message": ("Notifications are off for ETH Mensa. Turn them on in the system settings.", "Benachrichtigungen sind für ETH Mensa ausgeschaltet. Schalte sie in den Systemeinstellungen ein.", "Les notifications sont désactivées pour ETH Mensa. Active-les dans les réglages du système.", "Le notifiche sono disattivate per ETH Mensa. Attivale nelle impostazioni di sistema."),
+    "location_denied_message": ("Location-based notifications need location access “Allow all the time”.", "Standortbasierte Benachrichtigungen brauchen den Standortzugriff „Immer zulassen“.", "Les notifications basées sur la position nécessitent l’accès « Toujours autoriser ».", "Le notifiche basate sulla posizione richiedono l’accesso «Consenti sempre»."),
+    "background_location_title": ("Allow location all the time", "Standort immer zulassen", "Autoriser la position en permanence", "Consenti sempre la posizione"),
+    "background_location_message": ("To notify you only on campus, Android needs location access all the time. On the next screen, choose “Allow all the time”.", "Damit du nur auf dem Campus Benachrichtigungen bekommst, braucht Android immer Zugriff auf den Standort. Wähle im nächsten Bildschirm „Immer zulassen“.", "Pour te notifier seulement sur le campus, Android doit accéder à ta position en permanence. À l’écran suivant, choisis « Toujours autoriser ».", "Per avvisarti solo al campus, Android ha bisogno dell’accesso alla posizione sempre. Nella schermata successiva scegli «Consenti sempre»."),
+    "notification_time_footer_android": ("Reminders arrive on weekdays within ten minutes of this time.", "Erinnerungen kommen an Wochentagen innerhalb von zehn Minuten nach dieser Zeit.", "Les rappels arrivent en semaine dans les dix minutes suivant cette heure.", "I promemoria arrivano nei giorni feriali entro dieci minuti da quest’ora."),
+    "locations_based_notifications_footer_android": ("Only get notifications near ETH Zentrum, Hönggerberg or Irchel. Android tells the app only when you enter or leave a campus (geofencing). This runs on your device, and your location never leaves it.", "Benachrichtigungen nur in der Nähe von ETH Zentrum, Hönggerberg oder Irchel. Android meldet der App nur, wenn du einen Campus betrittst oder verlässt (Geofencing). Das läuft auf deinem Gerät, dein Standort verlässt es nie.", "Notifications seulement près d’ETH Zentrum, Hönggerberg ou Irchel. Android prévient l’app uniquement quand tu entres sur un campus ou le quittes (geofencing). Tout se passe sur ton appareil, ta position ne le quitte jamais.", "Notifiche solo vicino a ETH Zentrum, Hönggerberg o Irchel. Android avvisa l’app solo quando entri o esci da un campus (geofencing). Tutto avviene sul tuo dispositivo, la tua posizione non lo lascia mai."),
 }
 
 NON_TRANSLATABLE = {

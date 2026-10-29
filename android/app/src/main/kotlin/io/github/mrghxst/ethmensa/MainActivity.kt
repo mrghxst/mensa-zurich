@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package io.github.mrghxst.ethmensa
 
+import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import io.github.mrghxst.ethmensa.domain.AppLink
+import io.github.mrghxst.ethmensa.notifications.Reminders
 import io.github.mrghxst.ethmensa.domain.model.Settings
 import io.github.mrghxst.ethmensa.ui.EthMensaApp
 import io.github.mrghxst.ethmensa.ui.LocalAppGraph
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             settingsLoaded = true
         }
         // A recreated activity has already handled its launch intent.
-        if (savedInstanceState == null) pendingLink.value = AppLink.parse(intent?.dataString)
+        if (savedInstanceState == null) pendingLink.value = linkOf(intent)
         setContent {
             val settings by graph.settings.settings.collectAsStateWithLifecycle(initialValue = Settings())
             val link by pendingLink.collectAsStateWithLifecycle()
@@ -53,6 +55,18 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        AppLink.parse(intent.dataString)?.let { pendingLink.value = it }
+        linkOf(intent)?.let { pendingLink.value = it }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Opening the app clears our delivered reminders, as on iOS.
+        Reminders.clearDelivered(this)
+    }
+
+    private fun linkOf(intent: Intent?): AppLink? = when {
+        intent == null -> null
+        intent.hasCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES) -> AppLink.NotificationSettings
+        else -> AppLink.parse(intent.dataString)
     }
 }

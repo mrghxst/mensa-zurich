@@ -19,6 +19,7 @@ class AppLinkTest {
     fun `custom scheme links`() {
         assertEquals(AppLink.OpenMensa("eth/9"), AppLink.parse("ethmensa://s/eth/9"))
         assertEquals(AppLink.Legi, AppLink.parse("ethmensa://legi"))
+        assertEquals(AppLink.NotificationSettings, AppLink.parse("ethmensa://notifications"))
         assertEquals(AppLink.Legi, AppLink.parse("ethmensa://action/legi"))
         assertEquals(AppLink.CurrentlyOpen, AppLink.parse("ethmensa://action/currently_open"))
         assertEquals(AppLink.ShowCampus(Campus.ZENTRUM), AppLink.parse("ethmensa://action/zentrum"))
