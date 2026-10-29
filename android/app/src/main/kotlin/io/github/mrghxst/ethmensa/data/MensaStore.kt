@@ -41,6 +41,9 @@ data class LoadState(
     fun mensa(id: String): Mensa? = mensas?.firstOrNull { it.id == id }
 }
 
+/** Next week's menus, loaded on demand from the detail (Phase 9). */
+data class NextWeekState(val loading: Boolean = false, val mensas: List<Mensa>? = null, val key: String? = null)
+
 sealed interface StoreEvent {
     /** Fresh data couldn't be loaded for these providers. */
     data class UpdateFailed(val providers: List<Provider>) : StoreEvent
@@ -60,6 +63,22 @@ class MensaStore(
 
     private var job: Job? = null
     private var campusJob: Job? = null
+
+    private val _nextWeek = MutableStateFlow(NextWeekState())
+    val nextWeek: StateFlow<NextWeekState> = _nextWeek.asStateFlow()
+    private var nextWeekJob: Job? = null
+
+    /** Loads next week once per [key] (language and week); a failed load can be retried. */
+    fun loadNextWeek(key: String) {
+        val current = _nextWeek.value
+        if (current.key == key && (current.loading || !current.mensas.isNullOrEmpty())) return
+        nextWeekJob?.cancel()
+        nextWeekJob = scope.launch {
+            _nextWeek.value = NextWeekState(loading = true, mensas = null, key = key)
+            val mensas = repository.nextWeek()
+            _nextWeek.value = NextWeekState(loading = false, mensas = mensas, key = key)
+        }
+    }
 
     fun refresh() {
         job?.cancel()

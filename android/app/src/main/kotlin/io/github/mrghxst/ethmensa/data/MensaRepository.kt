@@ -19,6 +19,7 @@ import io.github.mrghxst.ethmensa.domain.model.Provider
 import io.github.mrghxst.ethmensa.domain.mondayOf
 import io.github.mrghxst.ethmensa.domain.today
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -164,6 +165,33 @@ class MensaRepository(
             }
         }
     }.flowOn(Dispatchers.Default)
+
+    /**
+     * Next week's menus (Phase 9). ETH: the rotas request already spans two weeks, so the cached
+     * answer is mapped with a date in next week. ZFV: one request with `week(week: "next")`.
+     * A provider that fails contributes nothing.
+     */
+    suspend fun nextWeek(): List<Mensa> = withContext(Dispatchers.Default) {
+        val labels = labels()
+        val eth = async { runCatching { ethNextWeek(labels) }.onFailure(::rethrowCancellation).getOrNull().orEmpty() }
+        val zfv = async { runCatching { zfvNextWeek(labels) }.onFailure(::rethrowCancellation).getOrNull().orEmpty() }
+        eth.await() + zfv.await()
+    }
+
+    private suspend fun ethNextWeek(labels: MensaLabels): List<Mensa> {
+        val lang = ethLanguage()
+        val today = today(clock)
+        val directory = ethDirectoryCache.read(lang) ?: ethApi.directory(lang)
+        val rotas = ethRotasCache.read(lang) ?: ethApi.weeklyRotas(lang, mondayOf(today))
+        return convertEth(directory, rotas, today.plusWeeks(1), labels).orEmpty()
+    }
+
+    private suspend fun zfvNextWeek(labels: MensaLabels): List<Mensa> {
+        if (!zfvApi.isConfigured) return emptyList()
+        val answer = parseZfv(zfvApi.outlets(zfvLocale(), nextWeek = true)) ?: return emptyList()
+        if (!answer.errors.isNullOrEmpty()) return emptyList()
+        return ZfvMapper.toMensas(answer.data?.outlets.orEmpty(), outletInfo.cached(), labels.zfv())
+    }
 
     suspend fun clearCaches() {
         ethDirectoryCache.clear()

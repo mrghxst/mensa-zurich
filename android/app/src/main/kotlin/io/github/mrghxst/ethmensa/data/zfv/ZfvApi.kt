@@ -21,8 +21,10 @@ class ZfvApi(
 ) {
     val isConfigured: Boolean get() = apiKey.isNotBlank()
 
-    suspend fun outlets(locale: String): String {
-        val body = buildJsonObject { put("query", query()) }
+    /** All outlets with this week's menus, or next week's with [nextWeek] (`week(week: "next")`, checked live 2026-10-29). */
+    suspend fun outlets(locale: String, nextWeek: Boolean = false): String {
+        val text = query().let { if (nextWeek) it.replaceFirst("week {", "week(week: \"next\") {") else it }
+        val body = buildJsonObject { put("query", text) }
         val request = Request.Builder()
             .url(url)
             .header("api-key", apiKey)

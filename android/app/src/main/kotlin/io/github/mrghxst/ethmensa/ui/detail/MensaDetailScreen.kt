@@ -50,6 +50,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import io.github.mrghxst.ethmensa.R
+import io.github.mrghxst.ethmensa.ui.settings.openUrl
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SegmentedButton
 import io.github.mrghxst.ethmensa.ui.list.dietLabel
 import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import io.github.mrghxst.ethmensa.ui.isWideWindow
@@ -151,10 +157,14 @@ fun MensaDetailScreen(
                                     }
                                 }
                                 item(key = "info") { InfoCard(mensa, state, gutter) }
+                                item(key = "week") {
+                                    WeekToggle(state.nextWeek, viewModel::setNextWeek, Modifier.padding(horizontal = gutter))
+                                }
                                 item(key = "days") {
                                     WeekdayGroup(
                                         selected = state.selectedWeekday,
-                                        today = state.today,
+                                        // No "today" mark on next week.
+                                        today = if (state.nextWeek) 0 else state.today,
                                         onSelect = viewModel::selectWeekday,
                                         enabled = !state.weekdayLocked,
                                         modifier = Modifier.padding(horizontal = gutter),
@@ -209,6 +219,10 @@ fun MensaDetailScreen(
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f).padding(horizontal = 12.dp).graphicsLayer { alpha = if (hasHero) collapse else 0f },
                     )
+                    mensa?.webUrl?.let { url ->
+                        GlassIconButton(Icons.externalLink, stringResource(R.string.open_website), { openUrl(context, url) })
+                        Spacer(Modifier.width(10.dp))
+                    }
                     if (mensa != null) GlassIconButton(Icons.share, stringResource(R.string.share), { shareMensa(context, mensa) })
                 }
             }
@@ -285,6 +299,14 @@ private fun LazyListScope.meals(
 ) {
     val sections = state.sections
     when {
+        state.nextWeekLoading -> item(key = "nextloading") {
+            Box(Modifier.fillMaxWidth().padding(vertical = 48.dp), contentAlignment = Alignment.Center) {
+                LoadingIndicator(color = Eth.colors.accent)
+            }
+        }
+        state.nextWeek && sections.isEmpty() -> item(key = "nonext") {
+            EmptyState(Icons.calendar, stringResource(R.string.no_menu), stringResource(R.string.next_week_unavailable))
+        }
         sections.isEmpty() -> item(key = "nomenu") {
             EmptyState(Icons.cookingPot, stringResource(R.string.no_menu), stringResource(R.string.no_menu_on_this_day))
         }
@@ -340,3 +362,30 @@ private fun NotLoaded(notFound: Boolean, top: Dp) {
     }
 }
 
+/** This week / next week (Phase 9, from MensaZH). */
+@Composable
+private fun WeekToggle(nextWeek: Boolean, onChange: (Boolean) -> Unit, modifier: Modifier = Modifier) {
+    val haptics = LocalHapticFeedback.current
+    val options = listOf(false to stringResource(R.string.this_week), true to stringResource(R.string.next_week))
+    SingleChoiceSegmentedButtonRow(modifier.fillMaxWidth()) {
+        options.forEachIndexed { index, (value, label) ->
+            SegmentedButton(
+                selected = nextWeek == value,
+                onClick = {
+                    haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
+                    onChange(value)
+                },
+                shape = SegmentedButtonDefaults.itemShape(index, options.size),
+                colors = SegmentedButtonDefaults.colors(
+                    activeContainerColor = Eth.colors.accentSoft,
+                    activeContentColor = Eth.colors.accent,
+                    inactiveContainerColor = Eth.colors.surface,
+                    inactiveContentColor = Eth.colors.textPrimary,
+                    activeBorderColor = Eth.colors.border,
+                    inactiveBorderColor = Eth.colors.border,
+                ),
+                label = { Text(label, style = Eth.type.label) },
+            )
+        }
+    }
+}

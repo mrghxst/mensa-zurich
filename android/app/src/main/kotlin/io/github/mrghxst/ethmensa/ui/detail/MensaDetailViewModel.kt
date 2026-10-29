@@ -2,6 +2,9 @@
 package io.github.mrghxst.ethmensa.ui.detail
 
 import androidx.compose.runtime.Immutable
+import io.github.mrghxst.ethmensa.domain.isoWeekKey
+import io.github.mrghxst.ethmensa.data.NextWeekState
+import io.github.mrghxst.ethmensa.data.AppLanguage
 import io.github.mrghxst.ethmensa.domain.fits
 import io.github.mrghxst.ethmensa.domain.model.DietFilter
 import androidx.lifecycle.ViewModel
@@ -47,6 +50,9 @@ data class MensaDetailUiState(
     val priceType: PriceType = PriceType.ALL,
     val showAllergens: Boolean = false,
     val refreshing: Boolean = false,
+    /** Showing next week's menus (Phase 9). */
+    val nextWeek: Boolean = false,
+    val nextWeekLoading: Boolean = false,
 )
 
 class MensaDetailViewModel(private val graph: AppGraph, private val mensaId: String) : ViewModel() {
@@ -56,18 +62,21 @@ class MensaDetailViewModel(private val graph: AppGraph, private val mensaId: Str
     private val selectedDay = MutableStateFlow(graph.listSession.state.value.weekdayOverride ?: today)
     private val location = MutableStateFlow<LatLng?>(null)
     private val userRefreshing = MutableStateFlow(false)
+    private val showNextWeek = MutableStateFlow(false)
 
     val uiState: StateFlow<MensaDetailUiState> = combine(
         graph.mensaStore.state,
         graph.settings.settings,
         graph.listSession.state,
         selectedDay,
-        combine(location, userRefreshing) { a, b -> a to b },
-    ) { load, settings, session, day, (point, refreshing) ->
+        combine(location, userRefreshing, showNextWeek, graph.mensaStore.nextWeek) { a, b, c, d -> DetailExtras(a, b, c, d) },
+    ) { load, settings, session, day, extras ->
         val mensa = load.mensa(mensaId)
         val weekday = session.weekdayOverride ?: day
         val friendly = session.allergenFriendly && settings.allergens.isNotEmpty()
-        val mealTimes = mensa?.mealTimesOn(weekday).orEmpty()
+        // Next week: menus and hours from next week's data; name, photo and address stay from this week.
+        val menuSource = if (extras.nextWeek) extras.next.mensas?.firstOrNull { it.id == mensaId } else mensa
+        val mealTimes = menuSource?.mealTimesOn(weekday).orEmpty()
         MensaDetailUiState(
             mensa = mensa,
             notFound = mensa == null && load.allProvidersUpToDate,
@@ -87,10 +96,12 @@ class MensaDetailViewModel(private val graph: AppGraph, private val mensaId: Str
                     hiddenByDiet = safe.isNotEmpty() && meals.isEmpty(),
                 )
             },
-            location = point,
+            location = extras.location,
             priceType = settings.priceType,
             showAllergens = settings.showAllergens,
-            refreshing = refreshing && load.loading,
+            refreshing = extras.refreshing && load.loading,
+            nextWeek = extras.nextWeek,
+            nextWeekLoading = extras.nextWeek && extras.next.loading,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MensaDetailUiState(today = today, selectedWeekday = selectedDay.value))
 
@@ -108,8 +119,15 @@ class MensaDetailViewModel(private val graph: AppGraph, private val mensaId: Str
         selectedDay.value = day
     }
 
+    fun setNextWeek(on: Boolean) {
+        showNextWeek.value = on
+        if (on) graph.mensaStore.loadNextWeek("${AppLanguage.current()}-${isoWeekKey(io.github.mrghxst.ethmensa.domain.today(graph.clock).plusWeeks(1))}")
+    }
+
     fun refresh() {
         userRefreshing.value = true
         graph.mensaStore.refresh()
     }
 }
+
+private data class DetailExtras(val location: LatLng?, val refreshing: Boolean, val nextWeek: Boolean, val next: NextWeekState)
