@@ -35,7 +35,7 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 29 | Settings sync over iCloud | Android Auto Backup of DataStore (caches excluded) | [x] |
 | 30 | Tablet split view | Navigation 3 list-detail scene | [x] |
 | 31 | Dark mode | Theme + System/Light/Dark setting, optional wallpaper colors | [x] |
-| 32 | Watch app | Optional Phase 9 | — |
+| 32 | Watch app | `:wear` Wear OS app (Compose Material 3): mensa list with state and hours, today's menu, filter (status, location, sort), price setting; standalone, settings kept on the watch | [x] Phase 9 |
 | 32a | (Android extra) Nutrition values | `Nutrition` on `Meal`, collapsible row in the meal card | [x] |
 | 32b | (Android extra) Placeholder meals hidden | `MealText.isPlaceholder` | [x] |
 | 32c | (Android extra, Phase 9) Favorites and hidden mensas | Long-press menu, favorites pinned on top, Settings > Favorites and hidden | [x] |
@@ -78,8 +78,11 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | WhatsApp and email support | Those contacts belong to the iOS app's maintainer; this unofficial port must not route its users there. |
 | Siri, Shortcuts, Spotlight | Covered by the static app shortcuts and the Quick Settings tile. |
 | Map tiles (MapLibre + OpenFreeMap) | MapLibre Compose 0.20.0 fails to load its native library, so the detail shows the §9.6 static pin that opens a maps app. |
-| Watch app | Optional Phase 9. |
+
+## Modules
+
+- `:app` the phone app, `:wear` the Wear OS app, `:core` the shared domain rules and data layer (APIs, caches, settings, unit tests).
 
 ## Screenshots
 
-`docs/screenshots/` holds the release build in light and dark: onboarding, list, detail, photo viewer, filters, settings, notifications and the Legi card (login page).
+`docs/screenshots/` holds the release build in light and dark: onboarding, list, detail, photo viewer, filters, settings, notifications and the Legi card (login page), plus the watch list and menu (`09-wear-*`).
