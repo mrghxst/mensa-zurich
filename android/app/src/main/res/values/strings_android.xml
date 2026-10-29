@@ -105,6 +105,12 @@
     <string name="show_again">Show again</string>
     <string name="no_diet_meal">No matching meal</string>
     <string name="no_diet_meal_message">No meal on this day fits your diet filter.</string>
+    <string name="widget_name">Today’s menu</string>
+    <string name="widget_description">Today’s meals at your favorite or most-opened mensa</string>
+    <string name="widget_open">Open</string>
+    <string name="widget_closed">Closed</string>
+    <string name="widget_more">+%1$d more</string>
+    <string name="widget_loading">Loading menus…</string>
     <string name="open_website">Open website</string>
     <string name="this_week">This week</string>
     <string name="next_week">Next week</string>

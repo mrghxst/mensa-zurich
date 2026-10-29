@@ -43,7 +43,7 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | 32e | (Android extra, Phase 9) "Menus" list style | Fourth cell style with the day's meals and prices under each mensa | [x] |
 | 32f | (Android extra, Phase 9) Next week | This week / next week switch in the detail: ETH from the two-week rotas, UZH with `week(week: "next")` | [x] ETH publishes next week late in the week; until then its dishes are placeholders and are dropped |
 | 32g | (Android extra, Phase 9) Open website | Glass button in the detail header, from the ETH directory `web` field | [x] |
-| 33 | Widget | Optional Phase 9 | — |
+| 33 | Widget (iOS: only the Legi control) | Glance "Today's menu" widget: favorite or most opened mensa, state, hours, meals; refreshed after app reloads and every 4 h | [x] Phase 9 |
 | — | Not ported | See below | |
 
 ## Notes
@@ -78,7 +78,7 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | WhatsApp and email support | Those contacts belong to the iOS app's maintainer; this unofficial port must not route its users there. |
 | Siri, Shortcuts, Spotlight | Covered by the static app shortcuts and the Quick Settings tile. |
 | Map tiles (MapLibre + OpenFreeMap) | MapLibre Compose 0.20.0 fails to load its native library, so the detail shows the §9.6 static pin that opens a maps app. |
-| Watch app, widget | Optional Phase 9. |
+| Watch app | Optional Phase 9. |
 
 ## Screenshots
 

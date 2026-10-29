@@ -104,6 +104,12 @@
     <string name="show_again">Afficher à nouveau</string>
     <string name="no_diet_meal">Aucun menu correspondant</string>
     <string name="no_diet_meal_message">Aucun menu de ce jour ne correspond à ton filtre de régime.</string>
+    <string name="widget_name">Menu du jour</string>
+    <string name="widget_description">Les menus du jour de ta mensa favorite ou la plus consultée</string>
+    <string name="widget_open">Ouvert</string>
+    <string name="widget_closed">Fermé</string>
+    <string name="widget_more">+%1$d de plus</string>
+    <string name="widget_loading">Chargement des menus…</string>
     <string name="open_website">Ouvrir le site web</string>
     <string name="this_week">Cette semaine</string>
     <string name="next_week">Semaine prochaine</string>

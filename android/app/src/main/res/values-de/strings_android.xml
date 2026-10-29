@@ -104,6 +104,12 @@
     <string name="show_again">Wieder anzeigen</string>
     <string name="no_diet_meal">Kein passendes Menü</string>
     <string name="no_diet_meal_message">An diesem Tag passt kein Menü zu deinem Ernährungsfilter.</string>
+    <string name="widget_name">Menü heute</string>
+    <string name="widget_description">Die heutigen Menüs deiner Lieblingsmensa oder der am häufigsten geöffneten</string>
+    <string name="widget_open">Geöffnet</string>
+    <string name="widget_closed">Geschlossen</string>
+    <string name="widget_more">+%1$d weitere</string>
+    <string name="widget_loading">Menüs werden geladen…</string>
     <string name="open_website">Webseite öffnen</string>
     <string name="this_week">Diese Woche</string>
     <string name="next_week">Nächste Woche</string>
