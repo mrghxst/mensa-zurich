@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.haze.blur.materials)
     implementation(libs.backdrop)
     implementation(libs.lucide.icons)
+    implementation(libs.androidx.navigationevent.compose)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)

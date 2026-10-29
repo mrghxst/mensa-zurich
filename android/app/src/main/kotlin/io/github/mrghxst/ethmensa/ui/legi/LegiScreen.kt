@@ -14,7 +14,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.net.toUri
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -51,6 +50,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import io.github.mrghxst.ethmensa.R
@@ -122,7 +124,12 @@ fun LegiScreen(onClose: () -> Unit) {
     }
 
     FullBrightness()
-    BackHandler(enabled = canGoBack) { webView.goBack() }
+    // Back steps through the WebView's history first; at its start, Navigation 3 closes the card.
+    NavigationBackHandler(
+        state = rememberNavigationEventState(currentInfo = NavigationEventInfo.None),
+        isBackEnabled = canGoBack,
+        onBackCompleted = { webView.goBack() },
+    )
 
     val contentAlpha by animateFloatAsState(if (loaded && !failed) 1f else 0f, label = "legi-alpha")
     Column(Modifier.fillMaxSize().background(colors.background)) {
