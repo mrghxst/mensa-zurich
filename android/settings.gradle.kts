@@ -31,3 +31,4 @@ rootProject.name = "ethmensa-android"
 include(":app")
 include(":core")
 include(":wear")
+include(":baselineprofile")
