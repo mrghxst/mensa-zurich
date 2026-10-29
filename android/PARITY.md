@@ -69,7 +69,7 @@ Checklist from `ANDROID_PORT_PROMPT.md` §7. `[x]` done, `[~]` partly done (see 
 | iOS feature | Why |
 |---|---|
 | App Clip | No Android equivalent for a private sideloaded app (Instant Apps are retired). |
-| SharedWithYou | Apple-only framework. Shared links open the app through the `ethmensa.ch` and `ethmensa://` links instead. |
+| SharedWithYou | Apple-only framework. Sharing sends the name, hours and dishes as text; `ethmensa.ch` links from the iOS app still open the mensa. |
 | Handoff | Apple-only (continuity between Apple devices). |
 | "What's new" sheet | Tied to App Store releases; a private build has no release notes to show. |
 | Version gate (`api.ethmensa.ch/v1/app/version`) | Compares iOS build numbers (§5.5), so it doesn't apply to this build. |

@@ -1,4 +1,4 @@
-# ETH Mensa: iOS app plus an Android port in progress
+# Mensa Zürich: Android port of the ETH Mensa iOS app
 
 This is a private fork (github.com/mrghxst/ethmensa) of the GPLv3 ETH Mensa iOS app by Alexandre Reol (github.com/alexandrereol/ethmensa).
 The Swift sources in `ethmensa/`, `watchos/`, `widget/` and `clip/` are the reference implementation. Don't change them.
@@ -19,6 +19,6 @@ The Android port lives in `android/` and follows `ANDROID_PORT_PROMPT.md`. Read 
 ## Android conventions
 
 - Gradle project root is `android/`. Run `./gradlew` from there (`gradlew.bat` in PowerShell).
-- Secrets go in `android/local.properties` (git-ignored), never in the repo. `ZFV_API_KEY` (the shared public ZFV key, also listed in `ANDROID_PORT_PROMPT.md` §5.3) enables the UZH mensas.
+- Secrets go in `android/local.properties` (git-ignored), never in the repo. The release signing key is `%USERPROFILE%\.android\mensa-zurich-release.jks`; its passwords are in `android/local.properties` (`RELEASE_*`). Never print them or commit them. Releases follow the README's "Releasing" section. `ZFV_API_KEY` (the shared public ZFV key, also listed in `ANDROID_PORT_PROMPT.md` §5.3) enables the UZH mensas.
 - Verify UI on the emulator with `android run` / `./gradlew installDebug`, then `android screen capture` and read the PNG.
 - Project skills for Android, Compose and Kotlin are in `.claude/skills/` (see its README).
