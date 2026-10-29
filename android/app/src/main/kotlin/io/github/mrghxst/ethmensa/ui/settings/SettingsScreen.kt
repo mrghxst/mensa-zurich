@@ -285,7 +285,7 @@ fun openUrl(context: Context, url: String) {
         .onFailure { runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) } }
 }
 
-/** Android 12+ needs the user to allow ethmensa.ch links once (unverified App Links, §8). */
+/** Android 12+ needs the user to allow the iOS app's shared links once (unverified App Links, §8). */
 private fun openLinkSettings(context: Context) {
     val pkg = "package:${context.packageName}".toUri()
     val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = ROOT / "android" / "app" / "src" / "test" / "resources" / "fixtures"
 OUT = ROOT / "android" / "app" / "src" / "main" / "assets" / "mensa_coordinates.json"
-UA = "ETHMensa-Android/1.0.0 one-off geocoding (+https://github.com/mrghxst/ethmensa)"
+UA = "MensaZurich-Android/1.0.0 one-off geocoding (+https://github.com/mrghxst/ethmensa)"
 ZURICH_BOX = (47.32, 47.45, 8.44, 8.63)  # lat min, lat max, lng min, lng max
 
 # Hand fixes for addresses Nominatim can't resolve as delivered.

@@ -37,6 +37,8 @@ def android_name(key: str) -> str:
 
 
 def convert_value(value: str) -> str:
+    # The iOS strings name the iOS app; this app is Mensa Zürich.
+    value = value.replace("ETH Mensa", "Mensa Zürich")
     count = len(PLACEHOLDER.findall(value))
     index = 0
 

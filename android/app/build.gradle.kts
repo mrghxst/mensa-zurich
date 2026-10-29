@@ -7,6 +7,9 @@ plugins {
 
 // Shared public ZFV key (ANDROID_PORT_PROMPT.md §5.3), read in the root build.
 val zfvApiKey: String by rootProject.extra
+val appVersionCode: Int by rootProject.extra
+val appVersionName: String by rootProject.extra
+val releaseSigning: Map<String, String> by rootProject.extra
 
 android {
     namespace = "io.github.mrghxst.ethmensa"
@@ -16,10 +19,21 @@ android {
         applicationId = "io.github.mrghxst.ethmensa"
         minSdk = 29
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "ZFV_API_KEY", "\"$zfvApiKey\"")
+    }
+
+    signingConfigs {
+        if (releaseSigning.isNotEmpty()) {
+            create("release") {
+                storeFile = file(releaseSigning.getValue("RELEASE_STORE_FILE"))
+                storePassword = releaseSigning.getValue("RELEASE_STORE_PASSWORD")
+                keyAlias = releaseSigning.getValue("RELEASE_KEY_ALIAS")
+                keyPassword = releaseSigning.getValue("RELEASE_KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
@@ -27,8 +41,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            // Private sideload build: sign with the local debug keystore.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
         }
     }
 

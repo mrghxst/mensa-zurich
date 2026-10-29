@@ -26,9 +26,22 @@ data class Mensa(
 ) {
     /** For example "eth/9" or "uzh/1". */
     val id: String get() = "${provider.id}/$facilityId"
-    val shareUrl: String get() = "https://ethmensa.ch/s/$id"
 
     fun mealTimesOn(weekday: Int): List<MealTime> = mealTimes.filter { it.weekday == weekday }
+
+    /** Plain-text share: the name, then each of the day's serving times with its dishes. */
+    fun shareText(weekday: Int): String = buildString {
+        append(name)
+        for (time in mealTimesOn(weekday)) {
+            val hours = if (time.start != null && time.end != null) "${time.start}–${time.end}" else null
+            val header = listOfNotNull(time.type, hours).joinToString(" · ")
+            val dishes = time.meals.mapNotNull { it.name ?: it.title }
+            if (header.isEmpty() && dishes.isEmpty()) continue
+            append("\n")
+            if (header.isNotEmpty()) append("\n").append(header)
+            dishes.forEach { append("\n– ").append(it) }
+        }
+    }
 }
 
 @Immutable

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ANDROID = ROOT / "android"
 OUT = ANDROID / "app" / "src" / "test" / "resources" / "fixtures"
 ASSETS = ANDROID / "app" / "src" / "main" / "assets"
-UA = "ETHMensa-Android/1.0.0 (+https://github.com/mrghxst/ethmensa) fixture-capture"
+UA = "MensaZurich-Android/1.0.0 (+https://github.com/mrghxst/ethmensa) fixture-capture"
 MAPPING_URL = (
     "https://raw.githubusercontent.com/alexandrereol/ethmensa/refs/heads/main/"
     "ethmensa/Data/API/ZFV/zfv_uzh_mapping.json"

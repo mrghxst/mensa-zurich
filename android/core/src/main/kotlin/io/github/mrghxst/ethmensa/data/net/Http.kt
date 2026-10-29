@@ -23,7 +23,7 @@ val ApiJson = Json {
     isLenient = true
 }
 
-fun userAgent(versionName: String) = "ETHMensa-Android/$versionName (+https://github.com/mrghxst/ethmensa)"
+fun userAgent(versionName: String) = "MensaZurich-Android/$versionName (+https://github.com/mrghxst/ethmensa)"
 
 /** One shared client: 15 s timeouts, our User-Agent and a 10 MB HTTP cache. */
 fun createHttpClient(cacheDir: File?, versionName: String): OkHttpClient = OkHttpClient.Builder()

@@ -1,4 +1,4 @@
-ETH Mensa for Android uses these third-party works. Thank you.
+Mensa Zürich uses these third-party works. Thank you.
 
 ETH Mensa for iOS
   Alexandre Reol, GNU GPL v3. https://github.com/alexandrereol/ethmensa.

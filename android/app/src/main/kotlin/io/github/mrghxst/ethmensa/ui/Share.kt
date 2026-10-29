@@ -4,9 +4,12 @@ package io.github.mrghxst.ethmensa.ui
 import android.content.Context
 import android.content.Intent
 import io.github.mrghxst.ethmensa.domain.model.Mensa
+import io.github.mrghxst.ethmensa.domain.todayWeekday
+import io.github.mrghxst.ethmensa.domain.zurichClock
 
-/** Opens the Sharesheet with the mensa link and its name as the title. */
-fun shareMensa(context: Context, mensa: Mensa) = shareText(context, mensa.shareUrl, mensa.name)
+/** Opens the Sharesheet with the mensa's name, today's hours and dishes as text. */
+fun shareMensa(context: Context, mensa: Mensa) =
+    shareText(context, mensa.shareText(todayWeekday(zurichClock())), mensa.name)
 
 fun shareText(context: Context, text: String, title: String? = null) {
     val send = Intent(Intent.ACTION_SEND).apply {

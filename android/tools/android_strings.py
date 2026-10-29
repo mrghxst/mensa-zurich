@@ -69,14 +69,14 @@ STRINGS = {
     "wallpaper_colors_footer": ("Use colors from your wallpaper instead of the ETH blue.", "Farben aus deinem Hintergrundbild statt ETH-Blau verwenden.", "Utiliser les couleurs de votre fond d’écran au lieu du bleu ETH.", "Usa i colori dello sfondo invece del blu ETH."),
     "backup": ("Backup", "Sicherung", "Sauvegarde", "Backup"),
     "backup_footer": ("Your settings are saved with your Android device backup and restored on a new phone.", "Deine Einstellungen werden mit der Android-Gerätesicherung gespeichert und auf einem neuen Telefon wiederhergestellt.", "Vos réglages sont inclus dans la sauvegarde de votre appareil Android et restaurés sur un nouveau téléphone.", "Le impostazioni vengono salvate con il backup del dispositivo Android e ripristinate su un nuovo telefono."),
-    "open_links": ("Open ethmensa.ch links in the app", "ethmensa.ch-Links in der App öffnen", "Ouvrir les liens ethmensa.ch dans l’app", "Apri i link ethmensa.ch nell’app"),
-    "open_links_footer": ("Android asks once: tap “Add link” and select ethmensa.ch.", "Android fragt einmal: Tippe auf „Link hinzufügen“ und wähle ethmensa.ch.", "Android le demande une fois : touchez « Ajouter un lien » et choisissez ethmensa.ch.", "Android lo chiede una volta: tocca “Aggiungi link” e scegli ethmensa.ch."),
+    "open_links": ("Open shared mensa links in the app", "Geteilte Mensa-Links in der App öffnen", "Ouvrir les liens de mensa partagés dans l’app", "Apri i link delle mense condivisi nell’app"),
+    "open_links_footer": ("Links from the iPhone app. Android asks once: tap “Add link” and select the links shown.", "Links aus der iPhone-App. Android fragt einmal: Tippe auf „Link hinzufügen“ und wähle die angezeigten Links.", "Liens de l’app iPhone. Android le demande une fois : touchez « Ajouter un lien » et choisissez les liens affichés.", "Link dall’app per iPhone. Android lo chiede una volta: tocca “Aggiungi link” e scegli i link mostrati."),
     "language_system": ("System default", "Systemstandard", "Langue du système", "Predefinita di sistema"),
     "language_applies_now": ("Applies immediately.", "Wird sofort übernommen.", "S’applique immédiatement.", "Si applica subito."),
     "irreversible": ("These actions can’t be undone.", "Diese Aktionen können nicht rückgängig gemacht werden.", "Ces actions sont irréversibles.", "Queste azioni non possono essere annullate."),
     "reset_confirm_title": ("%1$s?", "%1$s?", "%1$s ?", "%1$s?"),
     "about_section": ("About", "Über", "À propos", "Info"),
-    "about_app": ("ETH Mensa for Android", "ETH Mensa für Android", "ETH Mensa pour Android", "ETH Mensa per Android"),
+    "about_app": ("Mensa Zürich for Android", "Mensa Zürich für Android", "Mensa Zürich pour Android", "Mensa Zürich per Android"),
     "version": ("Version %1$s (%2$d)", "Version %1$s (%2$d)", "Version %1$s (%2$d)", "Versione %1$s (%2$d)"),
     "based_on": ("Based on ETH Mensa for iOS by Alexandre Reol", "Basiert auf ETH Mensa für iOS von Alexandre Reol", "Basé sur ETH Mensa pour iOS d’Alexandre Reol", "Basato su ETH Mensa per iOS di Alexandre Reol"),
     "unofficial": ("Unofficial port, not affiliated with the original app.", "Inoffizielle Portierung, nicht mit der Original-App verbunden.", "Portage non officiel, sans lien avec l’app originale.", "Port non ufficiale, non collegato all’app originale."),
@@ -137,9 +137,9 @@ STRINGS = {
     "sound_system": ("System default", "Systemstandard", "Par défaut du système", "Predefinito di sistema"),
     "sound_click": ("Click", "Klick", "Clic", "Clic"),
     "channel_reminder_system": ("Menu reminder (system sound)", "Menü-Erinnerung (Systemton)", "Rappel du menu (son du système)", "Promemoria menu (suono di sistema)"),
-    "channel_reminder_default": ("Menu reminder (ETH Mensa sound)", "Menü-Erinnerung (ETH-Mensa-Ton)", "Rappel du menu (son ETH Mensa)", "Promemoria menu (suono ETH Mensa)"),
+    "channel_reminder_default": ("Menu reminder (app sound)", "Menü-Erinnerung (App-Ton)", "Rappel du menu (son de l’app)", "Promemoria menu (suono dell’app)"),
     "channel_reminder_click": ("Menu reminder (click sound)", "Menü-Erinnerung (Klickton)", "Rappel du menu (son clic)", "Promemoria menu (suono clic)"),
-    "notifications_denied_message": ("Notifications are off for ETH Mensa. Turn them on in the system settings.", "Benachrichtigungen sind für ETH Mensa ausgeschaltet. Schalte sie in den Systemeinstellungen ein.", "Les notifications sont désactivées pour ETH Mensa. Active-les dans les réglages du système.", "Le notifiche sono disattivate per ETH Mensa. Attivale nelle impostazioni di sistema."),
+    "notifications_denied_message": ("Notifications are off for Mensa Zürich. Turn them on in the system settings.", "Benachrichtigungen sind für Mensa Zürich ausgeschaltet. Schalte sie in den Systemeinstellungen ein.", "Les notifications sont désactivées pour Mensa Zürich. Active-les dans les réglages du système.", "Le notifiche sono disattivate per Mensa Zürich. Attivale nelle impostazioni di sistema."),
     "location_denied_message": ("Location-based notifications need location access “Allow all the time”.", "Standortbasierte Benachrichtigungen brauchen den Standortzugriff „Immer zulassen“.", "Les notifications basées sur la position nécessitent l’accès « Toujours autoriser ».", "Le notifiche basate sulla posizione richiedono l’accesso «Consenti sempre»."),
     "background_location_title": ("Allow location all the time", "Standort immer zulassen", "Autoriser la position en permanence", "Consenti sempre la posizione"),
     "background_location_message": ("To notify you only on campus, Android needs location access all the time. On the next screen, choose “Allow all the time”.", "Damit du nur auf dem Campus Benachrichtigungen bekommst, braucht Android immer Zugriff auf den Standort. Wähle im nächsten Bildschirm „Immer zulassen“.", "Pour te notifier seulement sur le campus, Android doit accéder à ta position en permanence. À l’écran suivant, choisis « Toujours autoriser ».", "Per avvisarti solo al campus, Android ha bisogno dell’accesso alla posizione sempre. Nella schermata successiva scegli «Consenti sempre»."),
@@ -157,7 +157,7 @@ PLURALS = {
 }
 
 NON_TRANSLATABLE = {
-    "app_name": "ETH Mensa",
+    "app_name": "Mensa Zürich",
 }
 
 
