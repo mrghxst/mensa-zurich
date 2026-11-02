@@ -45,8 +45,7 @@ Mensa Zürich isn't on Google Play. Install it from the [releases](https://githu
 
 1. In Obtainium, tap *Add app* and enter `https://github.com/mrghxst/mensa-zurich`.
 2. Set *Filter APKs by regular expression* to `^mensa-zurich-\d` so it picks the phone app and not the watch app.
-3. While the repository is private, also paste a GitHub [personal access token](https://github.com/settings/personal-access-tokens/new) with read-only access to this repository's *Contents*.
-4. Tap *Add*, then *Install*.
+3. Tap *Add*, then *Install*.
 
 ### Manually
 

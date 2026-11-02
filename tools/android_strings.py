@@ -81,7 +81,7 @@ STRINGS = {
     "based_on": ("Based on ETH Mensa for iOS by Alexandre Reol", "Basiert auf ETH Mensa für iOS von Alexandre Reol", "Basé sur ETH Mensa pour iOS d’Alexandre Reol", "Basato su ETH Mensa per iOS di Alexandre Reol"),
     "unofficial": ("Unofficial port, not affiliated with the original app.", "Inoffizielle Portierung, nicht mit der Original-App verbunden.", "Portage non officiel, sans lien avec l’app originale.", "Port non ufficiale, non collegato all’app originale."),
     "source_code": ("Source code", "Quellcode", "Code source", "Codice sorgente"),
-    "source_code_private": ("github.com/mrghxst/mensa-zurich (private repository)", "github.com/mrghxst/mensa-zurich (privates Repository)", "github.com/mrghxst/mensa-zurich (dépôt privé)", "github.com/mrghxst/mensa-zurich (repository privato)"),
+    "source_code_link": ("github.com/mrghxst/mensa-zurich", "github.com/mrghxst/mensa-zurich", "github.com/mrghxst/mensa-zurich", "github.com/mrghxst/mensa-zurich"),
     "license": ("License", "Lizenz", "Licence", "Licenza"),
     "open_source_licenses": ("Open-source licenses", "Open-Source-Lizenzen", "Licences open source", "Licenze open source"),
     "privacy": ("Privacy", "Datenschutz", "Confidentialité", "Privacy"),

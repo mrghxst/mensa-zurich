@@ -64,7 +64,7 @@
     <string name="based_on">Basiert auf ETH Mensa für iOS von Alexandre Reol</string>
     <string name="unofficial">Inoffizielle Portierung, nicht mit der Original-App verbunden.</string>
     <string name="source_code">Quellcode</string>
-    <string name="source_code_private">github.com/mrghxst/mensa-zurich (privates Repository)</string>
+    <string name="source_code_link">github.com/mrghxst/mensa-zurich</string>
     <string name="license">Lizenz</string>
     <string name="open_source_licenses">Open-Source-Lizenzen</string>
     <string name="privacy">Datenschutz</string>

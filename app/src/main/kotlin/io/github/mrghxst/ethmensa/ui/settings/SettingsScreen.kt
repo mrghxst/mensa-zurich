@@ -176,7 +176,7 @@ fun SettingsScreen(
             RowDivider()
             SettingsRow(
                 title = stringResource(R.string.source_code),
-                subtitle = stringResource(R.string.source_code_private),
+                subtitle = stringResource(R.string.source_code_link),
                 onClick = { openUrl(context, "https://github.com/mrghxst/mensa-zurich") },
             )
             RowDivider()
