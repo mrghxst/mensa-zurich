@@ -69,7 +69,9 @@
     <string name="license">License</string>
     <string name="open_source_licenses">Open-source licenses</string>
     <string name="privacy">Privacy</string>
-    <string name="privacy_statement">No tracking or analytics. The app only loads menus from ETH Zürich and ZFV, mensa photos, and nothing else. Your settings stay on your device and in your own Android backup.</string>
+    <string name="privacy_statement">No tracking or analytics. The app only talks to the mensas’ servers, the map service and, for the Legi card, ETH. Your settings stay on your device and in your own Android backup.</string>
+    <string name="full_privacy_policy">Full privacy policy</string>
+    <string name="terms_of_use">Terms of use</string>
     <string name="onboarding_legi_description">The ETH Zürich Legi Card is digital. Open it in the app, from the Quick Settings tile or by long-pressing the app icon. Works at any ETH and UZH Mensa.</string>
     <string name="onboarding_privacy">No tracking or analytics whatsoever.</string>
     <string name="allergen_gluten">Gluten</string>

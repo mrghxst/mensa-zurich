@@ -1,11 +1,14 @@
 # Privacy
 
+The published privacy policy is at **https://mrghxst.github.io/mensa/privacy/** (source: [site/privacy/index.html](site/privacy/index.html)), with the terms of use at https://mrghxst.github.io/mensa/terms/. This file is the short technical summary; keep both in sync.
+
 Mensa Zürich has no accounts, ads, analytics, crash reporting or tracking. The developer receives no data from the app.
 
 ## What stays on your device
 
 - Settings, favorites, hidden mensas and how often you open each mensa (for smart sorting)
 - Downloaded menus, cached for the current week
+- The login session of ETH's Legi card page (cookies in the app's web view), only if you sign in there. Clearing the app's storage signs you out.
 - Your location, if you allow it. The app uses it to sort mensas by distance and, if you turn on location-based reminders, to let Android tell it when you enter or leave a campus (geofencing). The location is never sent anywhere by the app.
 
 Android's own backup may include the settings if you have device backup turned on.

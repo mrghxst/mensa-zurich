@@ -68,7 +68,9 @@
     <string name="license">Lizenz</string>
     <string name="open_source_licenses">Open-Source-Lizenzen</string>
     <string name="privacy">Datenschutz</string>
-    <string name="privacy_statement">Kein Tracking, keine Analyse. Die App lädt nur Menüs von der ETH Zürich und vom ZFV sowie Mensa-Fotos, sonst nichts. Deine Einstellungen bleiben auf deinem Gerät und in deiner eigenen Android-Sicherung.</string>
+    <string name="privacy_statement">Kein Tracking, keine Analyse. Die App spricht nur mit den Servern der Mensen, dem Kartendienst und, für die Legi, mit der ETH. Deine Einstellungen bleiben auf deinem Gerät und in deiner eigenen Android-Sicherung.</string>
+    <string name="full_privacy_policy">Vollständige Datenschutzerklärung</string>
+    <string name="terms_of_use">Nutzungsbedingungen</string>
     <string name="onboarding_legi_description">Die Legi der ETH Zürich ist digital. Öffne sie in der App, über die Schnelleinstellungen oder durch langes Drücken auf das App-Symbol. Funktioniert in jeder ETH- und UZH-Mensa.</string>
     <string name="onboarding_privacy">Keinerlei Tracking oder Analyse.</string>
     <string name="allergen_gluten">Gluten</string>

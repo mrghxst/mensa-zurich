@@ -196,6 +196,10 @@ fun SettingsScreen(
 
         settingsGroup("privacy", { stringResource(R.string.privacy) }, footerText = { stringResource(R.string.privacy_statement) }) {
             SettingsRow(stringResource(R.string.onboarding_privacy), icon = Icons.shieldCheck, onClick = null)
+            RowDivider()
+            SettingsRow(stringResource(R.string.privacy_policy), onClick = { openUrl(context, PRIVACY_POLICY_URL) })
+            RowDivider()
+            SettingsRow(stringResource(R.string.terms_of_use), onClick = { openUrl(context, TERMS_URL) })
         }
     }
 
@@ -279,6 +283,10 @@ private fun languageName(code: String): String {
     val locale = Locale.forLanguageTag(code)
     return locale.getDisplayLanguage(locale).replaceFirstChar { it.titlecase(locale) }
 }
+
+/** The privacy policy and terms on the app's website (site/ in this repository). */
+const val PRIVACY_POLICY_URL = "https://mrghxst.github.io/mensa/privacy/"
+const val TERMS_URL = "https://mrghxst.github.io/mensa/terms/"
 
 fun openUrl(context: Context, url: String) {
     runCatching { CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, url.toUri()) }

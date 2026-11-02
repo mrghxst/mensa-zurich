@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
@@ -38,6 +39,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.github.mrghxst.ethmensa.R
 import io.github.mrghxst.ethmensa.ui.isWideWindow
+import io.github.mrghxst.ethmensa.ui.settings.PRIVACY_POLICY_URL
+import io.github.mrghxst.ethmensa.ui.settings.openUrl
 import io.github.mrghxst.ethmensa.ui.components.Icons
 import io.github.mrghxst.ethmensa.ui.components.LucideIcon
 import io.github.mrghxst.ethmensa.ui.components.PillButton
@@ -47,6 +50,7 @@ import io.github.mrghxst.ethmensa.ui.theme.Eth
 @Composable
 fun OnboardingScreen(onContinue: () -> Unit) {
     var privacy by rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
     val wide = isWideWindow()
     Column(Modifier.fillMaxSize().background(Eth.colors.background).safeDrawingPadding()) {
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
@@ -89,6 +93,11 @@ fun OnboardingScreen(onContinue: () -> Unit) {
             title = { Text(stringResource(R.string.privacy_policy), style = Eth.type.screenTitle) },
             text = { Text(stringResource(R.string.privacy_statement), style = Eth.type.body, color = Eth.colors.textSecondary) },
             confirmButton = { TextButton(onClick = { privacy = false }) { Text(stringResource(R.string.close), color = Eth.colors.accent) } },
+            dismissButton = {
+                TextButton(onClick = { openUrl(context, PRIVACY_POLICY_URL) }) {
+                    Text(stringResource(R.string.full_privacy_policy), color = Eth.colors.accent)
+                }
+            },
             containerColor = Eth.colors.surface,
         )
     }

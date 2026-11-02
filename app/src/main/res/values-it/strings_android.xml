@@ -68,7 +68,9 @@
     <string name="license">Licenza</string>
     <string name="open_source_licenses">Licenze open source</string>
     <string name="privacy">Privacy</string>
-    <string name="privacy_statement">Nessun tracciamento né analisi. L’app carica solo i menu dell’ETH di Zurigo e di ZFV e le foto delle mense, nient’altro. Le impostazioni restano sul dispositivo e nel tuo backup Android.</string>
+    <string name="privacy_statement">Nessun tracciamento né analisi. L’app comunica solo con i server delle mense, il servizio mappe e, per la Legi, l’ETH. Le impostazioni restano sul dispositivo e nel tuo backup Android.</string>
+    <string name="full_privacy_policy">Informativa completa sulla privacy</string>
+    <string name="terms_of_use">Termini d’uso</string>
     <string name="onboarding_legi_description">La Legi Card dell’ETH di Zurigo è digitale. Aprila nell’app, dalle Impostazioni rapide o tenendo premuta l’icona dell’app. Funziona in ogni Mensa ETH e UZH.</string>
     <string name="onboarding_privacy">Nessun tracciamento né analisi, di alcun tipo.</string>
     <string name="allergen_gluten">Glutine</string>

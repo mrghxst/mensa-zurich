@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mensa Zürich: ETH and UZH mensa menus for Android</title>
+<meta name="description" content="This week's menus of every ETH Zürich and UZH mensa on Android, with prices, allergens, opening hours and the Legi card. Free, open source, no tracking.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:title" content="Mensa Zürich">
+<meta property="og:description" content="This week's menus of every ETH Zürich and UZH mensa on Android. Free, open source, no tracking.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mrghxst.github.io/mensa/">
+<meta property="og:image" content="https://mrghxst.github.io/mensa/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://mrghxst.github.io/mensa/">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/geist-medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/geist-regular.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Dark unless the visitor picked light before. Runs before paint so nothing flashes.
+  try { if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light"; } catch (e) {}
+  document.documentElement.classList.add("js");
+</script>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="wordmark" href="./" aria-label="Mensa Zürich, home">
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11"/><g transform="translate(10 10) scale(1.1667)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3,2v7c0,1.1 0.9,2 2,2h4a2,2 0 0,0 2,-2V2"/><path d="M7,2v20"/><path d="M21,15V2a5,5 0 0,0 -5,5v6c0,1.1 0.9,2 2,2h3Zm0,0v7"/></g></svg>
+    Mensa Zürich
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="#today">Today's lunch</a>
+    <a href="#features" class="opt">Features</a>
+    <a href="#mensas" class="opt">Mensas</a>
+    <a href="privacy/">Privacy</a>
+    <div class="nav-end">
+      <button class="theme-toggle" type="button" aria-label="Switch to light mode" data-theme-toggle>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+      <a class="btn small" href="#get">Get the app</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">This week's menus, every mensa.</h1>
+      <p class="hero-lead">Mensa Zürich shows what's cooking at all ETH Zürich and UZH mensas on your Android phone, with prices, allergens and opening hours. Free, open source, no tracking.</p>
+      <div class="hero-actions">
+        <!-- Replace with <a class="btn" href="PLAY STORE URL"> once the listing is live. -->
+        <span class="btn" role="link" aria-disabled="true">Coming soon to Google Play</span>
+        <a class="link-arrow" href="#today">See today's lunch <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="stage-phones">
+        <div class="phone" data-ui><video data-tour src="img/tour-dark.mp4" poster="img/list-dark.webp" width="600" height="1346" autoplay muted loop playsinline preload="auto"></video></div>
+        <div class="phone" data-ui><img data-shot="menu" src="img/menu-dark.webp" width="720" height="1616" alt="" fetchpriority="high"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="today" class="section" aria-labelledby="today-title">
+    <div class="section-head reveal">
+      <h2 id="today-title" data-today-title>Today's lunch at ETH</h2>
+      <p>The real menu, loaded live from the same ETH source the app uses. Pick a mensa and your price, and hide what you can't eat.</p>
+    </div>
+
+    <div class="demo reveal">
+      <div class="demo-menu" aria-live="polite">
+        <div class="demo-head">
+          <strong data-demo-mensa>Mensa Polyterrasse</strong>
+          <span data-demo-when>Lunch, Monday 2 November, 11:15–14:00</span>
+        </div>
+        <ul class="meals" data-demo-list>
+          <li class="meal" data-allergens="gluten,eggs,milk,nuts,celery,sulphites" data-prices="9.90,11.90,15.90">
+            <div><div class="meal-top"><span class="meal-line">Street</span><span class="meal-price">CHF 9.90</span></div><p class="meal-name">Emilian Lasagna</p><p class="meal-desc">Ground beef, béchamel sauce, tomato sauce, basil pesto</p><p class="meal-desc">Contains gluten, eggs, milk, nuts, celery, sulphites</p></div>
+            <img src="https://idapps.ethz.ch/cookpit-pub-services/v1/images/77912?client-id=ethz-wcms" width="72" height="72" alt="Emilian Lasagna" loading="lazy">
+          </li>
+          <li class="meal" data-allergens="gluten,soy,celery,sesame" data-prices="8.50,13.00,16.00">
+            <div><div class="meal-top"><span class="meal-line">Vegan</span><span class="meal-price">CHF 8.50</span></div><p class="meal-name">Fried Gyoza</p><p class="meal-desc">Wheat noodles, teriyaki sauce, gyoza, wok-fried vegetables, cilantro</p><p class="meal-desc">Contains gluten, soy, celery, sesame</p></div>
+            <img src="https://idapps.ethz.ch/cookpit-pub-services/v1/images/77913?client-id=ethz-wcms" width="72" height="72" alt="Fried Gyoza" loading="lazy">
+          </li>
+          <li class="meal" data-allergens="gluten,celery,sulphites" data-prices="7.00,11.50,14.50">
+            <div><div class="meal-top"><span class="meal-line">Garden</span><span class="meal-price">CHF 7.00</span></div><p class="meal-name">Red Lentil Dal</p><p class="meal-desc">Vegetables, couscous, peas, cilantro, caramelized onions, naan bread</p><p class="meal-desc">Contains gluten, celery, sulphites</p></div>
+            <img src="https://idapps.ethz.ch/cookpit-pub-services/v1/images/77914?client-id=ethz-wcms" width="72" height="72" alt="Red Lentil Dal" loading="lazy">
+          </li>
+          <li class="meal" data-allergens="gluten,eggs,celery,mustard" data-prices="8.50,12.50,15.50">
+            <div><div class="meal-top"><span class="meal-line">Home</span><span class="meal-price">CHF 8.50</span></div><p class="meal-name">Chicken Nuggets</p><p class="meal-desc">Cocktail sauce, risolées, salad platter</p><p class="meal-desc">Contains gluten, eggs, celery, mustard</p></div>
+            <img src="https://idapps.ethz.ch/cookpit-pub-services/v1/images/77915?client-id=ethz-wcms" width="72" height="72" alt="Chicken Nuggets" loading="lazy">
+          </li>
+          <li class="meal" data-allergens="celery" data-prices="4.90,4.90,5.40">
+            <div><div class="meal-top"><span class="meal-line">Soup of the day</span><span class="meal-price">CHF 4.90</span></div><p class="meal-name">Pumpkin and Carrot Soup</p><p class="meal-desc">Try our homemade soup of the day!</p><p class="meal-desc">Contains celery</p></div>
+            <img src="https://idapps.ethz.ch/cookpit-pub-services/v1/images/78198?client-id=ethz-wcms" width="72" height="72" alt="Pumpkin and Carrot Soup" loading="lazy">
+          </li>
+        </ul>
+        <p class="meals-note" data-demo-note>Menu of Monday, 2 November 2026.</p>
+      </div>
+
+      <form class="demo-controls" data-demo-controls>
+        <div class="row">
+          <label for="c-mensa">Mensa</label>
+          <select id="c-mensa" data-c-mensa>
+            <option value="9" selected>Mensa Polyterrasse</option>
+          </select>
+        </div>
+        <div class="row">
+          <span id="c-price-label">Your price</span>
+          <div class="seg" role="radiogroup" aria-labelledby="c-price-label">
+            <label><input type="radio" name="tier" value="0" checked><span>Student</span></label>
+            <label><input type="radio" name="tier" value="1"><span>Staff</span></label>
+            <label><input type="radio" name="tier" value="2"><span>Guest</span></label>
+          </div>
+        </div>
+        <fieldset>
+          <legend>Hide dishes with</legend>
+          <div class="row"><label for="a-gluten">Gluten</label><span class="switch"><input type="checkbox" id="a-gluten" value="gluten"><span></span></span></div>
+          <div class="row"><label for="a-milk">Milk</label><span class="switch"><input type="checkbox" id="a-milk" value="milk"><span></span></span></div>
+          <div class="row opt-row"><label for="a-eggs">Eggs</label><span class="switch"><input type="checkbox" id="a-eggs" value="eggs"><span></span></span></div>
+          <div class="row opt-row"><label for="a-nuts">Nuts</label><span class="switch"><input type="checkbox" id="a-nuts" value="nuts"><span></span></span></div>
+          <div class="row opt-row"><label for="a-soy">Soy</label><span class="switch"><input type="checkbox" id="a-soy" value="soy"><span></span></span></div>
+          <div class="row opt-row"><label for="a-celery">Celery</label><span class="switch"><input type="checkbox" id="a-celery" value="celery"><span></span></span></div>
+        </fieldset>
+        <button class="more-toggle" type="button" data-more>More allergens</button>
+        <p class="demo-foot">The app knows all 15 allergens, the UZH mensas and next week's menus.</p>
+      </form>
+    </div>
+    <p class="demo-after">Menus and photos: ETH Zürich gastronomy. Always check allergens with the mensa staff.</p>
+  </section>
+
+  <section id="features" class="section" aria-labelledby="features-title">
+    <div class="section-head reveal">
+      <h2 id="features-title">Everything lunch needs</h2>
+    </div>
+    <div class="cells reveal">
+      <article class="cell">
+        <div class="cell-text"><h3>All mensas, one list</h3><p>Every ETH and UZH mensa with its photo and today's hours. A dot shows whether it's open now, and the ones you open most move to the top.</p></div>
+        <div class="frag tall"><img data-shot="rows" src="img/rows-dark.webp" width="760" height="887" alt="The list of mensas with opening hours" loading="lazy"></div>
+      </article>
+      <article class="cell frag-first">
+        <div class="frag short"><img data-shot="meal" src="img/meal-dark.webp" width="760" height="320" alt="A dish with its photo and three prices" loading="lazy"></div>
+        <div class="cell-text"><h3>Dishes with prices and photos</h3><p>Each dish with its photo, allergens and nutrition, priced for students, staff and guests. Pick your group once and see only your price.</p></div>
+      </article>
+      <article class="cell">
+        <div class="cell-text"><h3>Address, hours and a map</h3><p>Where each mensa is and when it serves lunch and dinner, with a small map. Tap it and your maps app takes you there.</p></div>
+        <div class="frag short"><img data-shot="info" src="img/info-dark.webp" width="760" height="253" alt="Address, opening hours and a small map of Mensa Polyterrasse" loading="lazy"></div>
+      </article>
+      <article class="cell frag-first">
+        <div class="frag short"><img data-shot="week" src="img/week-dark.webp" width="760" height="211" alt="This week and next week, with the weekdays" loading="lazy"></div>
+        <div class="cell-text"><h3>This week and next week</h3><p>Flip through the weekdays, and see next week's menus as soon as the mensas publish them. What you loaded stays readable offline.</p></div>
+      </article>
+      <article class="cell">
+        <div class="cell-text"><h3>Campus, day and diet</h3><p>Show only open mensas, one campus or one day. Keep to vegetarian or vegan dishes, and hide meals with your allergens.</p></div>
+        <div class="frag tall"><img data-shot="filters" src="img/filters-dark.webp" width="760" height="1281" alt="Filters for status, location, day, diet and sorting" loading="lazy"></div>
+      </article>
+      <article class="cell frag-first">
+        <div class="frag tall"><img data-shot="settings" src="img/settings-dark.webp" width="760" height="671" alt="Appearance settings with theme and price" loading="lazy"></div>
+        <div class="cell-text"><h3>Yours to set up</h3><p>Light or dark, four languages, reminders before lunch, a home screen widget, your Legi card one tap away and an app for Wear OS.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="mensas" class="section" aria-labelledby="mensas-title">
+    <div class="section-head reveal">
+      <h2 id="mensas-title">Where you can eat</h2>
+      <p>The mensas in the app and their lunch hours on weekdays. The app always has the current hours, holidays included.</p>
+    </div>
+    <div class="places reveal">
+      <div class="places-col">
+        <h3>ETH Zürich</h3>
+        <div class="group"><p class="group-name">Zentrum</p><ul>
+          <li class="place" data-eth="9"><span class="dot"></span><span class="place-name">Mensa Polyterrasse</span><span class="place-hours">11:15–14:00</span></li>
+          <li class="place" data-eth="8"><span class="dot"></span><span class="place-name">Archimedes</span><span class="place-hours">11:00–14:00</span></li>
+          <li class="place" data-eth="3"><span class="dot"></span><span class="place-name">Clausiusbar</span><span class="place-hours">11:00–14:00</span></li>
+          <li class="place" data-eth="5"><span class="dot"></span><span class="place-name">Dozentenfoyer</span><span class="place-hours">11:30–13:30</span></li>
+          <li class="place" data-eth="7"><span class="dot"></span><span class="place-name">food&amp;lab</span><span class="place-hours">11:30–13:30</span></li>
+          <li class="place" data-eth="10"><span class="dot"></span><span class="place-name">Polysnack</span><span class="place-hours">11:30–14:00</span></li>
+          <li class="place" data-eth="11"><span class="dot"></span><span class="place-name">Tannenbar</span><span class="place-hours">11:30–13:30</span></li>
+        </ul></div>
+        <div class="group"><p class="group-name">Hönggerberg</p><ul>
+          <li class="place" data-eth="19"><span class="dot"></span><span class="place-name">food market</span><span class="place-hours">11:15–13:45</span></li>
+          <li class="place" data-eth="20"><span class="dot"></span><span class="place-name">FUSION meal</span><span class="place-hours">11:00–14:00</span></li>
+          <li class="place" data-eth="14"><span class="dot"></span><span class="place-name">Alumni quattro Lounge</span><span class="place-hours">11:00–16:00</span></li>
+          <li class="place" data-eth="16"><span class="dot"></span><span class="place-name">Mendokoro</span><span class="place-hours">11:15–14:00</span></li>
+          <li class="place" data-eth="22"><span class="dot"></span><span class="place-name">Rice Up!</span><span class="place-hours">11:00–14:00</span></li>
+        </ul></div>
+        <div class="group"><p class="group-name">Oerlikon and Basel</p><ul>
+          <li class="place" data-eth="23"><span class="dot"></span><span class="place-name">Octavo</span><span class="place-hours">11:30–13:30</span></li>
+          <li class="place" data-eth="28"><span class="dot"></span><span class="place-name">Flavour Kitchen, Basel</span><span class="place-hours">11:30–13:30</span></li>
+          <li class="place" data-eth="27"><span class="dot"></span><span class="place-name">Science Lounge, Basel</span><span class="place-hours">11:30–13:30</span></li>
+        </ul></div>
+      </div>
+      <div class="places-col">
+        <h3>University of Zurich</h3>
+        <div class="group"><p class="group-name">Zentrum</p><ul>
+          <li class="place" data-hours="11:00-14:30"><span class="dot"></span><span class="place-name">Untere Mensa</span><span class="place-hours">11:00–14:30</span></li>
+          <li class="place" data-hours="11:00-14:30"><span class="dot"></span><span class="place-name">Obere Mensa</span><span class="place-hours">11:00–14:30</span></li>
+          <li class="place" data-hours="07:30-15:00"><span class="dot"></span><span class="place-name">Rämi 59</span><span class="place-hours">07:30–15:00</span></li>
+          <li class="place" data-hours="11:00-13:30"><span class="dot"></span><span class="place-name">Platte 14</span><span class="place-hours">11:00–13:30</span></li>
+          <li class="place" data-hours="11:00-13:45"><span class="dot"></span><span class="place-name">Zentrum für Zahnmedizin</span><span class="place-hours">11:00–13:45</span></li>
+          <li class="place"><span class="dot"></span><span class="place-name">Lichthof Rondell</span><span class="place-hours">In the app</span></li>
+        </ul></div>
+        <div class="group"><p class="group-name">Irchel</p><ul>
+          <li class="place" data-hours="11:00-14:00"><span class="dot"></span><span class="place-name">Mensa UZH Irchel</span><span class="place-hours">11:00–14:00</span></li>
+          <li class="place" data-hours="07:30-16:00"><span class="dot"></span><span class="place-name">Cafeteria Seerose</span><span class="place-hours">07:30–16:00</span></li>
+        </ul></div>
+        <div class="group"><p class="group-name">Oerlikon and elsewhere</p><ul>
+          <li class="place" data-hours="07:45-14:30"><span class="dot"></span><span class="place-name">Mensa UZH Binzmühle</span><span class="place-hours">07:45–14:30</span></li>
+          <li class="place" data-hours="09:00-14:30"><span class="dot"></span><span class="place-name">Cafeteria Cityport</span><span class="place-hours">09:00–14:30</span></li>
+          <li class="place" data-hours="06:30-16:30"><span class="dot"></span><span class="place-name">Cafeteria Tierspital</span><span class="place-hours">06:30–16:30</span></li>
+          <li class="place" data-hours="08:00-17:00"><span class="dot"></span><span class="place-name">Cafeteria Botanischer Garten</span><span class="place-hours">08:00–17:00</span></li>
+          <li class="place" data-hours="11:00-14:00"><span class="dot"></span><span class="place-name">Green Kitchen Lab</span><span class="place-hours">11:00–14:00</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <p class="places-legend"><span class="dot" aria-hidden="true"></span> <span data-open-count>Open right now in Zürich</span></p>
+  </section>
+
+  <section class="letter reveal" aria-labelledby="letter-title">
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11"/><g transform="translate(10 10) scale(1.1667)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3,2v7c0,1.1 0.9,2 2,2h4a2,2 0 0,0 2,-2V2"/><path d="M7,2v20"/><path d="M21,15V2a5,5 0 0,0 -5,5v6c0,1.1 0.9,2 2,2h3Zm0,0v7"/></g></svg>
+    <h2 id="letter-title" class="h2">Why this app exists</h2>
+    <p>ETH Mensa by Alexandre Reol is the nicest way to check lunch at ETH and UZH, and it's open source. It runs on iPhone, iPad, Mac and Apple Watch, but not on Android.</p>
+    <p>Mensa Zürich brings it to Android as a native app, built with the same care for the small things: menus that load fast, a Legi card one tap away, and last week's habits turning into this week's sorting.</p>
+    <p>It has <span class="marker">no account, no ads and no analytics</span>. Your settings stay on your phone, and the app only talks to the mensas' own servers. It's free and released under the GPLv3, like the app it's based on.</p>
+    <p>If something is wrong or missing, tell me.</p>
+    <div class="sign"><em>mrghxst</em><span>Developer of Mensa Zürich</span></div>
+  </section>
+
+  <section id="get" class="closing" aria-labelledby="get-title">
+    <div class="closing-copy reveal">
+      <h2 id="get-title">See you at lunch.</h2>
+      <p>Mensa Zürich is coming to Google Play. It's free and runs on Android 10 or later, with a companion app for Wear OS.</p>
+      <!-- Replace with <a class="btn" href="PLAY STORE URL">Get it on Google Play</a> once the listing is live. -->
+      <span class="btn" role="link" aria-disabled="true">Coming soon to Google Play</span>
+    </div>
+    <div class="closing-phone">
+      <div class="phone" data-ui><img data-shot="detail" src="img/detail-dark.webp" width="720" height="1616" alt="Mensa Polyterrasse in the app, with its address, map and Monday's menu" loading="lazy"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="tiles">
+  <div class="tile t-statement">
+    <p>An unofficial app, not affiliated with ETH Zürich, the University of Zurich or ZFV.</p>
+    <p class="legal">© 2026 mrghxst. Released under the GPLv3. Menus and photos from ETH Zürich and ZFV.</p>
+  </div>
+  <nav class="tile t-nav" aria-label="Footer">
+    <a href="#today">Today's lunch</a>
+    <a href="#features">Features</a>
+    <a href="#mensas">Mensas</a>
+    <a href="privacy/">Privacy policy</a>
+    <a href="terms/">Terms of use</a>
+  </nav>
+  <div class="tile t-time">
+    <p>Zürich</p>
+    <div><span class="clock" data-clock>12:00</span><p data-clock-note>Lunch from 11:00 on weekdays</p></div>
+  </div>
+  <div class="tile t-contact">
+    <p>Questions, bugs, a missing mensa</p>
+    <a href="https://github.com/mrghxst/mensa/issues">Open an issue on GitHub</a>
+  </div>
+  <div class="tile t-word" aria-hidden="true"><span>Mensa Zürich</span></div>
+  <a class="tile t-get" href="#get">
+    <strong>Get the app</strong>
+    <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M14 42 42 14M20 14h22v22"/></svg>
+  </a>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>

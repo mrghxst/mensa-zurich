@@ -9,6 +9,7 @@ Unofficial Android app (Kotlin, Jetpack Compose) for the ETH Zürich and UZH men
   - `xcstrings_to_android.py` turns `tools/ios/Localizable.xcstrings` (the iOS app's translations) into `app/src/main/res/values*/strings.xml`.
   - `android_strings.py` writes the Android-only strings (`strings_android.xml`), `wear_strings.py` copies the watch's subset.
   - `make_icons.py` and `make_shortcut_icons.py` draw the icons from Lucide vectors.
+- `site/` is the website with the privacy policy and terms (GitHub Pages, published by `tools/publish_site.py` to the public repo mrghxst/mensa). The app links to its `/privacy/` and `/terms/` URLs.
 
 ## Conventions
 

@@ -64,7 +64,7 @@ The phone app needs Android 10 or later, the watch app Wear OS 3 or later. Relea
 
 ## Privacy
 
-No accounts, no ads, no analytics, no tracking. Your settings stay on your device. See [PRIVACY.md](PRIVACY.md) for every server the app talks to.
+No accounts, no ads, no analytics, no tracking. Your settings stay on your device. Read the [privacy policy](https://mrghxst.github.io/mensa/privacy/) and the [terms of use](https://mrghxst.github.io/mensa/terms/); [PRIVACY.md](PRIVACY.md) lists every server the app talks to.
 
 ## Build from source
 
@@ -89,6 +89,7 @@ The UZH menus come from the ZFV API. The build includes the shared public key; t
 | `core/` | Shared domain logic and data layer (ETH and ZFV APIs, caching, settings), with most unit tests |
 | `baselineprofile/` | Generates the startup profile |
 | `tools/` | Python scripts that generate strings and icons |
+| `site/` | The website with the privacy policy and terms, published to [mrghxst.github.io/mensa](https://mrghxst.github.io/mensa/) |
 | `docs/` | [Feature parity with the iOS app](docs/PARITY.md), the [original port specification](docs/port-spec.md), screenshots |
 
 ### Releasing
@@ -103,6 +104,16 @@ Release builds are signed with the key named in `local.properties` (`RELEASE_STO
 ```bash
 gh release create v1.0.1 mensa-zurich-1.0.1.apk mensa-zurich-wear-1.0.1.apk --title "Mensa Zürich 1.0.1" --notes-file notes.md
 ```
+
+### Website
+
+`site/` is a static website (no build step) with the landing page, the privacy policy and the terms of use. GitHub Pages serves it from the public repository [mrghxst/mensa](https://github.com/mrghxst/mensa), which only holds the contents of `site/`. To preview it, run `python -m http.server 8765 --directory site`. To publish a change, commit it here and run:
+
+```bash
+python tools/publish_site.py --push
+```
+
+The policy and terms are linked from the app (Settings → Privacy, and the first-launch screen), so keep their URLs stable.
 
 ## Contributing
 

@@ -68,7 +68,9 @@
     <string name="license">Licence</string>
     <string name="open_source_licenses">Licences open source</string>
     <string name="privacy">Confidentialité</string>
-    <string name="privacy_statement">Aucun suivi ni analyse. L’app ne charge que les menus de l’ETH Zurich et du ZFV ainsi que les photos des mensas, rien d’autre. Vos réglages restent sur votre appareil et dans votre propre sauvegarde Android.</string>
+    <string name="privacy_statement">Aucun suivi ni analyse. L’app ne communique qu’avec les serveurs des mensas, le service de cartes et, pour la Legi, l’ETH. Vos réglages restent sur votre appareil et dans votre propre sauvegarde Android.</string>
+    <string name="full_privacy_policy">Politique de confidentialité complète</string>
+    <string name="terms_of_use">Conditions d’utilisation</string>
     <string name="onboarding_legi_description">La carte Legi de l’ETH Zurich est numérique. Ouvrez-la dans l’app, depuis les Réglages rapides ou par un appui long sur l’icône de l’app. Fonctionne dans toutes les Mensas ETH et UZH.</string>
     <string name="onboarding_privacy">Aucun suivi ni analyse, d’aucune sorte.</string>
     <string name="allergen_gluten">Gluten</string>
