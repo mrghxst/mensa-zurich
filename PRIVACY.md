@@ -18,6 +18,7 @@ Android's own backup may include the settings if you have device backup turned o
 | `api.zfv.ch` | UZH mensa menus (ZFV) |
 | `ziuzhnowweb.uzh.ch` and the image hosts named by the ETH and ZFV data | Mensa and dish photos |
 | `raw.githubusercontent.com` | Updated UZH opening hours and addresses from the [ETH Mensa for iOS](https://github.com/alexandrereol/ethmensa) repository, every three days |
+| `tiles.openfreemap.org` | Map tiles around a mensa when you open it, cached on the device. The request reveals the area of the mensa, not your location |
 | `eduapp.ethz.ch` and the ETH login pages | Only when you open the Legi card; you sign in directly with ETH |
 | Android's geocoder | Looks up a mensa's address once if its coordinates aren't built in |
 

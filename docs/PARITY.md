@@ -50,7 +50,7 @@ Checklist from `docs/port-spec.md` §7. `[x]` done, `[~]` partly done (see note)
 
 - The filter sheet uses an opaque background instead of glass: a `ModalBottomSheet` draws in its own window, so neither Haze nor Backdrop can sample the list behind it.
 
-- The map thumbnail is the §9.6 fallback: MapLibre Compose 0.20.0 crashed on Android with `UnsatisfiedLinkError: jniMaplibreNativeC`, so the tile shows a pin and opens a maps app at the bundled coordinates. No map tiles are downloaded.
+- The map thumbnail doesn't use MapLibre: MapLibre Compose 0.20.0 crashed on Android with `UnsatisfiedLinkError: jniMaplibreNativeC`. Instead, the app decodes the OpenFreeMap vector tiles itself (`core/.../data/map/`) and draws water, green areas, buildings and roads in the app's grays, without labels. It falls back to a pin when there are no coordinates or no tiles. A tap opens a maps app at the coordinates.
 
 - Legi: the ETH login (Keycloak) lives on `eduapp.ethz.ch/keycloak/`, the same host as the card. Our CSS applies only outside `/keycloak/`, and non-card pages get a white WebView background, so the login form stays readable in dark mode.
 
@@ -77,7 +77,6 @@ Checklist from `docs/port-spec.md` §7. `[x]` done, `[~]` partly done (see note)
 | ETH Video promotion | An iOS promo row unrelated to menus. |
 | WhatsApp and email support | Those contacts belong to the iOS app's maintainer; this unofficial port must not route its users there. |
 | Siri, Shortcuts, Spotlight | Covered by the static app shortcuts and the Quick Settings tile. |
-| Map tiles (MapLibre + OpenFreeMap) | MapLibre Compose 0.20.0 fails to load its native library, so the detail shows the §9.6 static pin that opens a maps app. |
 
 ## Modules
 

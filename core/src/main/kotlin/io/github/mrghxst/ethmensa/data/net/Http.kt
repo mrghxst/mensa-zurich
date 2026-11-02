@@ -62,3 +62,12 @@ suspend fun OkHttpClient.fetchText(request: Request): String {
         it.body.string()
     }
 }
+
+/** Returns the response body as bytes, throwing [HttpException] for non-2xx codes. */
+suspend fun OkHttpClient.fetchBytes(request: Request): ByteArray {
+    val response = newCall(request).await()
+    return response.use {
+        if (!it.isSuccessful) throw HttpException(it.code, it.message)
+        it.body.bytes()
+    }
+}

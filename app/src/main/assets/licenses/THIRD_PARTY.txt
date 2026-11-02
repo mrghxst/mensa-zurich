@@ -18,6 +18,12 @@ Mensa coordinates
   Geocoded once with Nominatim. Data (c) OpenStreetMap contributors,
   Open Database License (ODbL). https://www.openstreetmap.org/copyright.
 
+Map
+  Map data (c) OpenStreetMap contributors, Open Database License (ODbL).
+  https://www.openstreetmap.org/copyright.
+  Vector tiles from OpenFreeMap, https://openfreemap.org, in the OpenMapTiles
+  schema (c) OpenMapTiles, https://openmaptiles.org.
+
 Apache License 2.0
   AndroidX and Jetpack Compose (Google), Kotlin and kotlinx.coroutines and
   kotlinx.serialization (JetBrains), OkHttp (Square), Coil (Coil Contributors),

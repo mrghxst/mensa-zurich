@@ -3,7 +3,10 @@ package io.github.mrghxst.ethmensa.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import io.github.mrghxst.ethmensa.ui.theme.pressScale
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -88,12 +91,16 @@ fun MensaRow(
     val favoriteActionLabel = stringResource(if (favorite) R.string.unfavorite else R.string.favorite)
     val hideLabel = stringResource(R.string.hide_mensa)
     val type = if (cellType == MensaCellType.LARGE && mensa.imageUrl == null) MensaCellType.MINIMAL else cellType
+    val interaction = remember { MutableInteractionSource() }
     Box(modifier) {
         BorderedCard(
             Modifier
                 .fillMaxWidth()
+                .pressScale(interaction)
                 .clip(EthShapes.card)
                 .combinedClickable(
+                    interactionSource = interaction,
+                    indication = LocalIndication.current,
                     onClick = onOpen,
                     onLongClick = {
                         haptics.performHapticFeedback(HapticFeedbackType.LongPress)

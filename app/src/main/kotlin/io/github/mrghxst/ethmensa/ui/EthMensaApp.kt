@@ -4,6 +4,22 @@ package io.github.mrghxst.ethmensa.ui
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.EnterExitState
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.runtime.Stable
+import androidx.navigationevent.NavigationEventTransitionState
+import androidx.navigationevent.compose.LocalNavigationEventDispatcherOwner
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.keyframes
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.navigation3.runtime.NavEntryDecorator
+import io.github.mrghxst.ethmensa.ui.theme.ScreenMotion
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
@@ -164,16 +180,22 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
         )
     }
 
+    val backGesture = rememberBackGestureLatch()
     SharedTransitionLayout(Modifier.fillMaxSize()) {
-        CompositionLocalProvider(LocalSharedTransitionScope provides this) {
+        CompositionLocalProvider(LocalSharedTransitionScope provides this, LocalBackGesture provides backGesture) {
             NavDisplay(
                 backStack = backStack,
                 onBack = { backStack.removeLastOrNull() },
                 sceneStrategies = listOf(listDetail),
+                sharedTransitionScope = this,
                 entryDecorators = listOf(
                     rememberSaveableStateHolderNavEntryDecorator(),
                     rememberViewModelStoreNavEntryDecorator(),
+                    rememberCardDuringBackDecorator(),
                 ),
+                transitionSpec = { ScreenMotion.push() },
+                popTransitionSpec = { ScreenMotion.pop() },
+                predictivePopTransitionSpec = { edge -> ScreenMotion.predictivePop(edge) },
                 entryProvider = entryProvider {
                     entry<ListRoute>(
                         metadata = ListDetailSceneStrategy.listPane(detailPlaceholder = { NoMensaSelected() }),
@@ -197,9 +219,10 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                             onBack = { backStack.removeLastOrNull() },
                             onOpenImage = { backStack.add(ImageRoute(it)) },
                             heroModifier = if (twoPane) Modifier else Modifier.sharedImage(route.mensaId),
+                            chromeModifier = if (twoPane) Modifier else Modifier.aboveSharedImage(),
                         )
                     }
-                    entry<ImageRoute> { route ->
+                    entry<ImageRoute>(metadata = overlayMotion) { route ->
                         ImageViewerScreen(route.url, onClose = { backStack.removeLastOrNull() })
                     }
                     entry<SettingsRoute> {
@@ -224,7 +247,11 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
                     entry<NotificationsRoute> {
                         NotificationsScreen(settingsViewModel(graph), onBack = { backStack.removeLastOrNull() })
                     }
-                    entry<LegiRoute> {
+                    entry<LegiRoute>(
+                        metadata = NavDisplay.transitionSpec { ScreenMotion.sheetIn() } +
+                            NavDisplay.popTransitionSpec { ScreenMotion.sheetOut() } +
+                            NavDisplay.predictivePopTransitionSpec { ScreenMotion.overlayPredictiveOut() },
+                    ) {
                         LegiScreen(onClose = { backStack.removeLastOrNull() })
                     }
                 },
@@ -237,14 +264,106 @@ fun EthMensaApp(pendingLink: AppLink?, onLinkHandled: () -> Unit) {
 private fun settingsViewModel(graph: AppGraph): SettingsViewModel =
     viewModel(factory = viewModelFactory { initializer { SettingsViewModel(graph) } })
 
-/** Shared element between the list thumbnail and the detail hero. */
+private val overlayMotion = NavDisplay.transitionSpec { ScreenMotion.overlayIn() } +
+    NavDisplay.popTransitionSpec { ScreenMotion.overlayOut() } +
+    NavDisplay.predictivePopTransitionSpec { ScreenMotion.overlayPredictiveOut() }
+
+/**
+ * Rounds the corners of a screen while it leaves, so the back gesture shrinks it into a card
+ * (see [ScreenMotion.predictivePop]). Push and pop fade the leaving screen out before the corners show.
+ */
+@Composable
+private fun rememberCardDuringBackDecorator(): NavEntryDecorator<NavKey> = remember {
+    NavEntryDecorator { entry ->
+        val transition = LocalNavAnimatedContentScope.current.transition
+        val corner by transition.animateDp(
+            transitionSpec = {
+                keyframes {
+                    durationMillis = ScreenMotion.PredictiveMillis
+                    ScreenMotion.PredictiveCorner at ScreenMotion.PredictiveMillis / 4
+                }
+            },
+            label = "screen-corner",
+        ) { if (it == EnterExitState.PostExit) ScreenMotion.PredictiveCorner else 0.dp }
+        Box(
+            Modifier.fillMaxSize().graphicsLayer {
+                shape = RoundedCornerShape(corner)
+                clip = corner > 0.dp
+            },
+        ) { entry.Content() }
+    }
+}
+
+/** True from the start of a back gesture until the screens it moved have settled. */
+@Stable
+private class BackGestureLatch {
+    var active by mutableStateOf(false)
+}
+
+private val LocalBackGesture = staticCompositionLocalOf { BackGestureLatch() }
+
+@Composable
+private fun rememberBackGestureLatch(): BackGestureLatch {
+    val latch = remember { BackGestureLatch() }
+    val dispatcher = LocalNavigationEventDispatcherOwner.current?.navigationEventDispatcher
+    LaunchedEffect(dispatcher) {
+        dispatcher?.transitionState?.collectLatest { state ->
+            if (state is NavigationEventTransitionState.InProgress) {
+                latch.active = true
+            } else {
+                // Let the commit or cancel animation finish before shared elements come back.
+                delay(ScreenMotion.PredictiveMillis + 100L)
+                latch.active = false
+            }
+        }
+    }
+    return latch
+}
+
+/**
+ * Shared element between the list thumbnail and the detail hero. It's off during the back
+ * gesture: the photo then shrinks with the rest of the detail instead of leaving the card.
+ */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun Modifier.sharedImage(mensaId: String): Modifier {
     val shared = LocalSharedTransitionScope.current ?: return this
     val animated = LocalNavAnimatedContentScope.current
+    val backGesture = LocalBackGesture.current
     return with(shared) {
-        this@sharedImage.sharedBounds(rememberSharedContentState("image-$mensaId"), animated)
+        val config = remember(backGesture) {
+            object : SharedTransitionScope.SharedContentConfig {
+                override val SharedTransitionScope.SharedContentState.isEnabled: Boolean
+                    get() = !backGesture.active
+            }
+        }
+        // sharedElement, not sharedBounds: both ends show the same cropped photo, so one image
+        // morphs between the two sizes instead of two copies crossfading.
+        this@sharedImage.sharedElement(
+            rememberSharedContentState("image-$mensaId", config),
+            animated,
+            boundsTransform = ScreenMotion.sharedBounds,
+        )
+    }
+}
+
+/**
+ * Draws the detail's hero gradient, title and top bar above the flying photo, fading them in
+ * as it lands. Without this, the photo covers them until the transition ends and they pop in.
+ */
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun Modifier.aboveSharedImage(): Modifier {
+    val shared = LocalSharedTransitionScope.current ?: return this
+    val animated = LocalNavAnimatedContentScope.current
+    // During the back gesture the whole screen shrinks and fades as one card.
+    val exit = if (LocalBackGesture.current.active) ExitTransition.None else fadeOut(tween(90))
+    return with(shared) {
+        with(animated) {
+            this@aboveSharedImage
+                .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
+                .animateEnterExit(enter = fadeIn(tween(200, delayMillis = 60)), exit = exit)
+        }
     }
 }
 

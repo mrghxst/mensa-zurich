@@ -28,7 +28,7 @@
 - **Menus** of all ETH and UZH mensas, with photos, allergens, nutrition and prices for students, staff and external guests
 - **This week and next week**, as soon as the mensas publish it
 - **Smart sorting** by what you open most, filters by campus, opening status and diet, favorites and hidden mensas
-- **Opening hours** and address, one tap to open the mensa in your maps app
+- **Opening hours**, address and a small map, one tap to open the mensa in your maps app
 - **Reminders** before lunch, optionally only when you're on campus
 - **Legi card** in the app, from a Quick Settings tile or by long-pressing the app icon
 - **Widget** with today's menu of your favorite mensa
@@ -57,7 +57,7 @@ Download `mensa-zurich-<version>.apk` from the [latest release](https://github.c
 Connect the watch with [wireless debugging](https://developer.android.com/training/wearables/get-started/debugging) and run:
 
 ```bash
-adb install -r mensa-zurich-wear-1.0.0.apk
+adb install -r mensa-zurich-wear-1.0.1.apk
 ```
 
 The phone app needs Android 10 or later, the watch app Wear OS 3 or later. Releases are signed with the same key, and the signing certificate's SHA-256 fingerprint is in each release's notes.
@@ -113,6 +113,7 @@ Bug reports and pull requests are welcome. Please keep pull requests focused, ru
 Mensa Zürich is a port of **[ETH Mensa for iOS](https://github.com/alexandrereol/ethmensa)** by Alexandre Reol and its contributors, licensed under GPLv3. Its features, texts and translations, the UZH mensa data and the reminder sound come from that app, and its history is preserved in this repository.
 
 - Menus: [ETH Zürich](https://ethz.ch) and [ZFV](https://www.zfv.ch) (UZH mensas)
+- Map: tiles from [OpenFreeMap](https://openfreemap.org), data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
 - Icons: [Lucide](https://lucide.dev) (ISC). Font: [Geist](https://vercel.com/font) (SIL OFL 1.1)
 - The other open-source libraries are listed in the app under *Settings → Open-source licenses*.
 

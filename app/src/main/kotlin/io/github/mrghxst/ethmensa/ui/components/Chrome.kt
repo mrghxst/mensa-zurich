@@ -45,6 +45,9 @@ import io.github.mrghxst.ethmensa.R
 import io.github.mrghxst.ethmensa.ui.theme.Eth
 import io.github.mrghxst.ethmensa.ui.theme.EthShapes
 import io.github.mrghxst.ethmensa.ui.theme.rememberReducedMotion
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import io.github.mrghxst.ethmensa.ui.theme.pressScale
 
 /** Circular liquid-glass icon button for floating chrome. 48 dp touch target. */
 @Composable
@@ -54,12 +57,20 @@ fun GlassIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val interaction = remember { MutableInteractionSource() }
     Box(
         modifier
             .size(44.dp)
+            .pressScale(interaction, pressedScale = 0.9f)
             .glass(GlassStyle.LIQUID, CircleShape)
             .clip(CircleShape)
-            .clickable(role = Role.Button, onClickLabel = contentDescription, onClick = onClick)
+            .clickable(
+                interactionSource = interaction,
+                indication = LocalIndication.current,
+                role = Role.Button,
+                onClickLabel = contentDescription,
+                onClick = onClick,
+            )
             .semantics { this.contentDescription = contentDescription },
         contentAlignment = Alignment.Center,
     ) { LucideIcon(icon, null, size = 20.dp) }

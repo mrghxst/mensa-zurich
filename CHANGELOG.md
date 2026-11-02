@@ -2,6 +2,13 @@
 
 All notable changes to Mensa Zürich. Versions match the release tags (`v<version>`).
 
+## 1.0.1 (2026-11-02)
+
+- The mensa detail shows a real map around the mensa, drawn in the app's grays from OpenFreeMap tiles, in light and dark mode
+- Smoother navigation: screens slide and fade through each other, and the back gesture shrinks the screen into a card that follows your finger
+- The mensa photo morphs between the list and the detail in both directions, with the title and buttons staying on top
+- Switching day or week crossfades the menus, and rows and buttons give a little when pressed
+
 ## 1.0.0 (2026-10-29)
 
 First release.

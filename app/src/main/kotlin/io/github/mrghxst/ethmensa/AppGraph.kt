@@ -27,6 +27,7 @@ import io.github.mrghxst.ethmensa.domain.zurichClock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import io.github.mrghxst.ethmensa.data.map.MapTileRepository
 import okhttp3.OkHttpClient
 import java.time.Clock
 import java.util.Locale
@@ -49,6 +50,9 @@ class AppGraph(context: Context) {
     val settings = SettingsRepository(appContext.settingsStore)
     val clickCounts = ClickCountStore(appContext.clickStore)
     val connectivity = Connectivity(appContext)
+
+    /** Vector tiles for the map thumbnails in the mensa detail. */
+    val mapTiles: MapTileRepository by lazy { MapTileRepository(httpClient) }
 
     val locator: MensaLocator by lazy {
         MensaLocator(

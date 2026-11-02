@@ -90,6 +90,7 @@ fun MensaDetailScreen(
     onOpenImage: (String) -> Unit,
     modifier: Modifier = Modifier,
     heroModifier: Modifier = Modifier,
+    chromeModifier: Modifier = Modifier,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val mensa = state.mensa
@@ -145,7 +146,7 @@ fun MensaDetailScreen(
                                 verticalArrangement = Arrangement.spacedBy(Spacing.cardGap),
                             ) {
                                 if (hasHero) {
-                                    item(key = "hero") { Hero(mensa, gutter, heroModifier) }
+                                    item(key = "hero") { Hero(mensa, gutter, heroModifier, chromeModifier) }
                                 } else {
                                     item(key = "title") {
                                         Text(
@@ -195,7 +196,7 @@ fun MensaDetailScreen(
             }
 
             // Top chrome: frosted bar (fades in) + liquid-glass back and share buttons.
-            Box(Modifier.fillMaxWidth()) {
+            Box(chromeModifier.fillMaxWidth()) {
                 Box(
                     Modifier
                         .matchParentSize()
@@ -230,10 +231,11 @@ fun MensaDetailScreen(
     }
 }
 
-// heroModifier carries the shared-element bounds for the photo only, not for the whole hero.
+// heroModifier carries the shared element for the photo only; chromeModifier keeps the gradient
+// and title above the photo while it flies in from the list.
 @SuppressLint("ModifierParameter")
 @Composable
-private fun Hero(mensa: Mensa, gutter: Dp, heroModifier: Modifier) {
+private fun Hero(mensa: Mensa, gutter: Dp, heroModifier: Modifier, chromeModifier: Modifier) {
     val bg = Eth.colors.background
     Box(Modifier.fillMaxWidth().height(HeroHeight)) {
         AsyncImage(
@@ -242,25 +244,27 @@ private fun Hero(mensa: Mensa, gutter: Dp, heroModifier: Modifier) {
             contentScale = ContentScale.Crop,
             modifier = heroModifier.fillMaxSize().background(Eth.colors.surfaceMuted),
         )
-        // Fades the photo into the background and keeps the title legible.
-        Box(
-            Modifier.fillMaxSize().background(
-                Brush.verticalGradient(
-                    0f to Color.Black.copy(alpha = 0.45f),
-                    0.3f to Color.Transparent,
-                    0.6f to bg.copy(alpha = 0.55f),
-                    1f to bg,
+        Box(chromeModifier.fillMaxSize()) {
+            // Fades the photo into the background and keeps the title legible.
+            Box(
+                Modifier.fillMaxSize().background(
+                    Brush.verticalGradient(
+                        0f to Color.Black.copy(alpha = 0.45f),
+                        0.3f to Color.Transparent,
+                        0.6f to bg.copy(alpha = 0.55f),
+                        1f to bg,
+                    ),
                 ),
-            ),
-        )
-        Text(
-            mensa.name,
-            style = Eth.type.largeTitle,
-            color = Eth.colors.textPrimary,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.align(Alignment.BottomStart).padding(horizontal = gutter).semantics { heading() },
-        )
+            )
+            Text(
+                mensa.name,
+                style = Eth.type.largeTitle,
+                color = Eth.colors.textPrimary,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.align(Alignment.BottomStart).padding(horizontal = gutter).semantics { heading() },
+            )
+        }
     }
 }
 
@@ -298,49 +302,52 @@ private fun LazyListScope.meals(
     onOpenImage: (String) -> Unit,
 ) {
     val sections = state.sections
+    // Keys carry the day, so switching day or week crossfades the menus instead of swapping them in place.
+    val day = "${if (state.nextWeek) "next" else "this"}-${state.selectedWeekday}"
     when {
         state.nextWeekLoading -> item(key = "nextloading") {
-            Box(Modifier.fillMaxWidth().padding(vertical = 48.dp), contentAlignment = Alignment.Center) {
+            Box(Modifier.animateItem().fillMaxWidth().padding(vertical = 48.dp), contentAlignment = Alignment.Center) {
                 LoadingIndicator(color = Eth.colors.accent)
             }
         }
         state.nextWeek && sections.isEmpty() -> item(key = "nonext") {
-            EmptyState(Icons.calendar, stringResource(R.string.no_menu), stringResource(R.string.next_week_unavailable))
+            EmptyState(Icons.calendar, stringResource(R.string.no_menu), stringResource(R.string.next_week_unavailable), Modifier.animateItem())
         }
-        sections.isEmpty() -> item(key = "nomenu") {
-            EmptyState(Icons.cookingPot, stringResource(R.string.no_menu), stringResource(R.string.no_menu_on_this_day))
+        sections.isEmpty() -> item(key = "nomenu-$day") {
+            EmptyState(Icons.cookingPot, stringResource(R.string.no_menu), stringResource(R.string.no_menu_on_this_day), Modifier.animateItem())
         }
-        sections.all { it.hiddenByDiet || it.hiddenByAllergens } && sections.any { it.hiddenByDiet } -> item(key = "nodiet") {
-            EmptyState(Icons.leaf, stringResource(R.string.no_diet_meal), stringResource(R.string.no_diet_meal_message))
+        sections.all { it.hiddenByDiet || it.hiddenByAllergens } && sections.any { it.hiddenByDiet } -> item(key = "nodiet-$day") {
+            EmptyState(Icons.leaf, stringResource(R.string.no_diet_meal), stringResource(R.string.no_diet_meal_message), Modifier.animateItem())
         }
-        sections.all { it.hiddenByAllergens } -> item(key = "nofriendly") {
+        sections.all { it.hiddenByAllergens } -> item(key = "nofriendly-$day") {
             EmptyState(
                 Icons.shieldCheck,
                 stringResource(R.string.no_allergen_friendly_meal),
                 stringResource(R.string.no_meal_without_your_allergens_on_this_day),
+                Modifier.animateItem(),
             )
         }
         else -> sections.forEachIndexed { index, section ->
-            item(key = "label$index") {
-                SectionLabel(section.title.orEmpty(), Modifier.padding(horizontal = gutter).padding(top = 12.dp))
+            item(key = "label-$day-$index") {
+                SectionLabel(section.title.orEmpty(), Modifier.animateItem().padding(horizontal = gutter).padding(top = 12.dp))
             }
             if (section.hiddenByAllergens || section.hiddenByDiet) {
-                item(key = "hidden$index") {
+                item(key = "hidden-$day-$index") {
                     Text(
                         stringResource(if (section.hiddenByDiet) R.string.no_diet_meal else R.string.no_allergen_friendly_meal),
                         style = Eth.type.caption,
                         color = Eth.colors.textTertiary,
-                        modifier = Modifier.padding(horizontal = gutter),
+                        modifier = Modifier.animateItem().padding(horizontal = gutter),
                     )
                 }
             }
-            itemsIndexed(section.meals, key = { i, _ -> "meal$index-$i" }) { _, meal ->
+            itemsIndexed(section.meals, key = { i, _ -> "meal-$day-$index-$i" }) { _, meal ->
                 MealCard(
                     meal = meal,
                     priceType = state.priceType,
                     showAllergens = state.showAllergens,
                     onImageClick = onOpenImage,
-                    modifier = Modifier.padding(horizontal = gutter),
+                    modifier = Modifier.animateItem().padding(horizontal = gutter),
                 )
             }
         }

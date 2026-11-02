@@ -22,8 +22,8 @@ val zfvApiKey: String by extra(
 )
 
 // One version for the phone and watch apps. Release tags are v<versionName> (README, "Releasing").
-val appVersionCode: Int by extra(1)
-val appVersionName: String by extra("1.0.0")
+val appVersionCode: Int by extra(2)
+val appVersionName: String by extra("1.0.1")
 
 // Release key from local.properties (RELEASE_STORE_FILE, …). Without it, release builds use the
 // debug key so a fresh checkout still builds.
