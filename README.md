@@ -10,6 +10,13 @@
 </p>
 
 <p align="center">
+  <a href="https://mrghxst.github.io/mensa/"><b>Website</b></a> ·
+  <a href="https://github.com/mrghxst/mensa-zurich/releases/latest">Download</a> ·
+  <a href="https://mrghxst.github.io/mensa/privacy/">Privacy policy</a> ·
+  <a href="https://mrghxst.github.io/mensa/terms/">Terms of use</a>
+</p>
+
+<p align="center">
   <a href="https://github.com/mrghxst/mensa-zurich/releases/latest"><img src="https://img.shields.io/github/v/release/mrghxst/mensa-zurich?label=release&color=111111" alt="Latest release"></a>
   <a href="https://github.com/mrghxst/mensa-zurich/actions/workflows/ci.yml"><img src="https://github.com/mrghxst/mensa-zurich/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPLv3-111111" alt="GPLv3"></a>
