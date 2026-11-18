@@ -1,6 +1,6 @@
 # Privacy
 
-The published privacy policy is at **https://mrghxst.github.io/mensa/privacy/** (source: [site/privacy/index.html](site/privacy/index.html)), with the terms of use at https://mrghxst.github.io/mensa/terms/. This file is the short technical summary; keep both in sync.
+The published privacy policy is at **https://mrghxst.github.io/mensa-zurich/privacy/** (source: [site/privacy/index.html](site/privacy/index.html)), with the terms of use at https://mrghxst.github.io/mensa-zurich/terms/. This file is the short technical summary; keep both in sync.
 
 Mensa Zürich has no accounts, ads, analytics, crash reporting or tracking. The developer receives no data from the app.
 

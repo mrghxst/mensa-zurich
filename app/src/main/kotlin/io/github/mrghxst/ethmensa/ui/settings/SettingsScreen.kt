@@ -285,8 +285,8 @@ private fun languageName(code: String): String {
 }
 
 /** The privacy policy and terms on the app's website (site/ in this repository). */
-const val PRIVACY_POLICY_URL = "https://mrghxst.github.io/mensa/privacy/"
-const val TERMS_URL = "https://mrghxst.github.io/mensa/terms/"
+const val PRIVACY_POLICY_URL = "https://mrghxst.github.io/mensa-zurich/privacy/"
+const val TERMS_URL = "https://mrghxst.github.io/mensa-zurich/terms/"
 
 fun openUrl(context: Context, url: String) {
     runCatching { CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, url.toUri()) }

@@ -1,0 +1,94 @@
+name: Release
+
+# Builds the signed phone and watch APKs for a tag and attaches them to its release.
+# A pushed tag v<version> creates a draft release; running the workflow by hand with an
+# existing tag rebuilds that tag and replaces the APKs of its release.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to build, for example v1.0.2
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v6
+
+      # Up to 1.0.0 the Android project lived in android/.
+      - name: Find the Gradle project
+        run: |
+          if [ -f gradlew ]; then dir=.; else dir=android; fi
+          echo "PROJECT_DIR=$dir" >> "$GITHUB_ENV"
+
+      - name: Write the release key
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          if [ -z "$RELEASE_KEYSTORE_BASE64" ]; then echo "::error::The RELEASE_* secrets are missing"; exit 1; fi
+          keystore="$RUNNER_TEMP/release.p12"
+          echo "$RELEASE_KEYSTORE_BASE64" | base64 --decode > "$keystore"
+          {
+            echo "RELEASE_STORE_FILE=$keystore"
+            echo "RELEASE_STORE_PASSWORD=$RELEASE_STORE_PASSWORD"
+            echo "RELEASE_KEY_ALIAS=$RELEASE_KEY_ALIAS"
+            echo "RELEASE_KEY_PASSWORD=$RELEASE_KEY_PASSWORD"
+          } > "$PROJECT_DIR/local.properties"
+
+      - name: Build
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: ./gradlew :app:assembleRelease :wear:assembleRelease
+
+      - name: Collect the APKs
+        run: |
+          version="${TAG#v}"
+          mkdir dist
+          cp "$PROJECT_DIR"/app/build/outputs/apk/release/*.apk "dist/mensa-zurich-$version.apk"
+          cp "$PROJECT_DIR"/wear/build/outputs/apk/release/*.apk "dist/mensa-zurich-wear-$version.apk"
+          apksigner=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          for apk in dist/*.apk; do "$apksigner" verify "$apk"; done
+          cert=$("$apksigner" verify --print-certs "dist/mensa-zurich-$version.apk" \
+            | sed -n 's/.*certificate SHA-256 digest: //p' | head -1 | sed 's/../&:/g; s/:$//' | tr a-f A-F)
+          echo "CERT_SHA256=$cert" >> "$GITHUB_ENV"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          rm -f "$PROJECT_DIR/local.properties" "$RUNNER_TEMP/release.p12"
+
+      - name: Attach to the release
+        run: |
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            {
+              echo "Files:"
+              echo "- \`mensa-zurich-$VERSION.apk\`: the phone app (Android 10 or later)"
+              echo "- \`mensa-zurich-wear-$VERSION.apk\`: the Wear OS app (Wear OS 3 or later)"
+              echo
+              echo "Signing certificate SHA-256: \`$CERT_SHA256\`"
+            } > notes.md
+            gh release create "$TAG" --draft --verify-tag --title "Mensa Zürich $VERSION" --notes-file notes.md
+          fi
+          gh release upload "$TAG" dist/*.apk --clobber
+          echo "Signing certificate SHA-256: $CERT_SHA256" >> "$GITHUB_STEP_SUMMARY"

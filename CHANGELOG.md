@@ -2,6 +2,11 @@
 
 All notable changes to Mensa Zürich. Versions match the release tags (`v<version>`).
 
+## 1.0.2 (2026-11-18)
+
+- The website, privacy policy and terms moved to https://mrghxst.github.io/mensa-zurich/; the app links there now
+- Signed with a new release key. Uninstall an earlier version before installing this one (Obtainium: remove and add the app again)
+
 ## 1.0.1 (2026-11-02)
 
 - The mensa detail shows a real map around the mensa, drawn in the app's grays from OpenFreeMap tiles, in light and dark mode
