@@ -106,7 +106,7 @@ Releases are built and signed by the [release workflow](.github/workflows/releas
 2. Push the tag `v<version>`, which Obtainium compares with the installed version:
 
 ```bash
-git tag v1.0.2 && git push origin v1.0.2
+git tag v1.0.3 && git push origin v1.0.3
 ```
 
 3. The workflow builds `mensa-zurich-<version>.apk` and `mensa-zurich-wear-<version>.apk` and attaches them to a draft release, with the signing certificate's SHA-256 in the notes. Add the changes to the notes and publish it.
